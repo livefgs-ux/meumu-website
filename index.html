@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuMu Online | Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #0b0d10; /* Fundo preto profundo conforme 4a8c53...webp */
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #b58c2b 0%, #f5c77a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(11, 13, 16, 0.7), rgba(11, 13, 16, 0.9)), 
+                        url('https://images.wallpapersden.com/image/download/mu-online-art_a2puZ2aUmZqaraWkpJRmbmdlrWZlbWU.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .glass-card {
+            background: rgba(17, 19, 24, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(181, 140, 43, 0.2);
+            border-radius: 14px;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #b58c2b 0%, #8a6a20 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(181, 140, 43, 0.5);
+        }
+    </style>
+</head>
+<body>
 
+    <nav class="p-6 flex justify-between items-center max-w-7xl mx-auto">
+        <h1 class="text-2xl font-bold gold-gradient">MEUMU.COM</h1>
+        <div class="space-x-8 text-sm font-medium text-gray-400">
+            <a href="#" class="hover:text-white transition">HOME</a>
+            <a href="#" class="hover:text-white transition">DOWNLOADS</a>
+            <a href="#" class="hover:text-white transition">RANKINGS</a>
+            <a href="#" class="hover:text-white transition">LOJA</a>
+        </div>
+        <button class="px-6 py-2 border border-[#b58c2b] text-[#b58c2b] rounded-full hover:bg-[#b58c2b] hover:text-black transition">
+            LOGIN
+        </button>
+    </nav>
+
+    <header class="hero-section h-[70vh] flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl">
+            <h2 class="text-6xl font-extrabold mb-4 tracking-tighter">UMA NOVA <span class="gold-gradient">ERA MEDIEVAL</span></h2>
+            <p class="text-gray-400 text-lg mb-8">Servidor Season 6 Clássico com a tecnologia que você merece.</p>
+            <div class="flex gap-4 justify-center">
+                <button class="btn-gold px-10 py-4 rounded-lg font-bold text-black uppercase tracking-widest">Baixar Agora</button>
+                <button class="bg-white/10 px-10 py-4 rounded-lg font-bold text-white uppercase tracking-widest hover:bg-white/20 transition">Cadastrar</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto -mt-20 px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-8 text-center">
+            <h3 class="text-gray-500 text-xs uppercase mb-2 tracking-widest">Status</h3>
+            <p class="text-3xl font-bold text-green-500">ONLINE</p>
+        </div>
+        <div class="glass-card p-8 text-center">
+            <h3 class="text-gray-500 text-xs uppercase mb-2 tracking-widest">Jogadores</h3>
+            <p class="text-3xl font-bold">542</p>
+        </div>
+        <div class="glass-card p-8 text-center">
+            <h3 class="text-gray-500 text-xs uppercase mb-2 tracking-widest">Versão</h3>
+            <p class="text-3xl font-bold">S6 EP3</p>
+        </div>
+    </section>
+
+</body>
+</html>
