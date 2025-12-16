@@ -3,177 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuMU Online | Portal Integrado</title>
+    <title>MeuMU Online | Season 19 Part 2-3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        /* CONFIGURAÇÕES GERAIS */
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow: hidden; margin: 0; }
-        .hero-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(to right, #050505 30%, transparent 70%), url('https://images8.alphacoders.com/645/645091.jpg'); background-size: cover; background-position: center right; opacity: 0.6; }
-        .glass-panel { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255, 184, 0, 0.15); }
         
-        /* TRANSIÇÃO SPA */
-        .page-content { display: none; opacity: 0; transform: translateY(20px); filter: blur(10px); transition: all 0.5s ease; }
+        /* FUNDO E PARTÍCULAS */
+        .hero-bg { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+            background: linear-gradient(to right, #050505 30%, transparent 70%), url('https://images8.alphacoders.com/645/645091.jpg'); 
+            background-size: cover; background-position: center right; opacity: 0.6; 
+        }
+        .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; animation: rise 10s infinite ease-in; z-index: 1; }
+        @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-100vh) scale(0.2); opacity: 0; } }
+
+        /* ESTILO GLASS E TRANSIÇÃO */
+        .glass-panel { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255, 184, 0, 0.15); }
+        .page-content { display: none; opacity: 0; transform: translateY(20px); filter: blur(10px); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .page-content.active { display: block; opacity: 1; transform: translateY(0); filter: blur(0px); }
 
-        /* ESTILOS DE RANKING & ABAS */
-        .tab-btn { padding: 10px 20px; font-weight: 800; text-transform: uppercase; font-size: 10px; border-radius: 6px; color: #666; transition: 0.3s; }
-        .tab-btn.active { background: #FFB800; color: black; }
-        .rank-row { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 8px; border-radius: 12px; transition: 0.2s; }
-        .rank-row:hover { border-color: #FFB800; background: rgba(255, 184, 0, 0.05); }
-
+        /* SCROLLBAR */
         #main-viewport::-webkit-scrollbar { width: 4px; }
         #main-viewport::-webkit-scrollbar-thumb { background: #FFB800; border-radius: 10px; }
+
+        /* BOTÕES DE ABA INTERNA (RANKING) */
+        .sub-tab { padding: 8px 16px; font-[900]; font-size: 10px; text-transform: uppercase; border-radius: 4px; transition: 0.3s; color: #555; border: 1px solid transparent; }
+        .sub-tab.active { color: #FFB800; border-color: rgba(255, 184, 0, 0.3); background: rgba(255, 184, 0, 0.05); }
     </style>
 </head>
 <body>
 
     <div class="hero-bg"></div>
+    <div id="particles-container"></div>
 
-    <header class="fixed top-0 w-full z-[100] bg-black/90 border-b border-white/5 py-2 px-8 flex justify-between items-center text-[9px] font-black uppercase">
+    <header class="fixed top-0 w-full z-[100] bg-black/95 border-b border-white/5 py-2 px-8 flex justify-between items-center text-[9px] font-[900] uppercase tracking-widest">
         <div class="flex gap-4">
-            <button class="hover:text-[#FFB800] transition flex items-center gap-1"><img src="https://meumu.com/img/flags/us.gif" class="w-3"> EN</button>
-            <button class="hover:text-[#FFB800] transition flex items-center gap-1"><img src="https://meumu.com/img/flags/br.gif" class="w-3"> BR</button>
+            <button class="flex items-center gap-1.5 hover:text-[#FFB800] transition"><img src="https://meumu.com/img/flags/us.gif" class="w-3"> EN</button>
+            <button class="flex items-center gap-1.5 hover:text-[#FFB800] transition"><img src="https://meumu.com/img/flags/br.gif" class="w-3"> BR</button>
+            <button class="flex items-center gap-1.5 hover:text-[#FFB800] transition"><img src="https://meumu.com/img/flags/es.gif" class="w-3"> ES</button>
         </div>
-        <div class="text-gray-500 italic">Versão: Season 19-2-3</div>
+        <div class="text-gray-500 italic">Servidor Protegido <span class="text-[#FFB800] ml-2">MeuMU Anti-Hack</span></div>
     </header>
 
     <nav class="fixed top-10 w-full z-[90] glass-panel border-x-0 border-t-0 py-4 px-8 flex justify-between items-center">
-        <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
-            <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
-            <h1 class="text-xl font-black uppercase tracking-tighter">MeuMU <span class="text-[#FFB800]">Online</span></h1>
+        <div class="flex items-center gap-3 cursor-pointer group" onclick="showPage('home')">
+            <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-black text-black text-xl shadow-[0_0_20px_rgba(255,184,0,0.4)]">M</div>
+            <div>
+                <h1 class="text-xl font-black uppercase tracking-tighter leading-none text-white transition group-hover:text-[#FFB800]">MeuMU <span class="text-[#FFB800]">Online</span></h1>
+                <p class="text-[8px] font-bold text-gray-500 tracking-[0.2em] mt-1 uppercase">Season 19-2-3</p>
+            </div>
         </div>
-        <div class="hidden lg:flex gap-10 text-[11px] font-black uppercase tracking-widest text-gray-400">
-            <button onclick="showPage('home')" class="hover:text-white transition">Início</button>
-            <button onclick="showPage('rank')" class="hover:text-white transition">Rankings</button>
-            <button onclick="showPage('download')" class="hover:text-white transition">Downloads</button>
-            <button onclick="showPage('events')" class="hover:text-white transition">Eventos</button>
+        <div class="hidden lg:flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
+            <button onclick="showPage('home')" class="hover:text-white transition flex items-center gap-2">🏠 Início</button>
+            <button onclick="showPage('rank')" class="hover:text-white transition flex items-center gap-2">🏆 Rankings</button>
+            <button onclick="showPage('download')" class="hover:text-white transition flex items-center gap-2">📥 Downloads</button>
+            <button onclick="showPage('events')" class="hover:text-white transition flex items-center gap-2">⚔️ Eventos</button>
         </div>
-        <button onclick="showPage('login')" class="bg-[#FFB800] text-black px-8 py-3 rounded-lg font-black text-[10px] uppercase shadow-lg shadow-[#FFB800]/20 transition-all hover:scale-105 active:scale-95">Acessar Conta</button>
+        <button onclick="showPage('login')" class="bg-[#FFB800] text-black px-8 py-3 rounded font-black text-[10px] uppercase shadow-lg shadow-[#FFB800]/20 hover:scale-105 active:scale-95 transition">Painel da Conta</button>
     </nav>
 
-    <aside class="fixed top-40 left-8 z-50 hidden xl:block w-72 glass-panel p-6 rounded-2xl">
-        <h3 class="text-white font-black uppercase italic text-sm mb-4 border-b border-white/5 pb-2">Top Reset</h3>
-        <div class="flex justify-between items-center text-[11px] font-black">
-            <span class="text-[#FFB800]">#1 GodOfWar</span>
-            <span class="text-gray-500">540 Resets</span>
+    <aside class="fixed top-44 left-8 z-50 hidden xl:block w-72 glass-panel p-6 rounded-2xl">
+        <h3 class="text-white font-black uppercase italic text-sm mb-6 border-b border-white/5 pb-2">🏆 Top <span class="text-[#FFB800]">Resets</span></h3>
+        <div class="space-y-4 mb-6">
+            <div class="flex justify-between items-center text-[11px] font-black">
+                <span class="text-[#FFB800] italic">01. GodOfWar</span>
+                <span class="text-gray-500">540 Resets</span>
+            </div>
+            <div class="flex justify-between items-center text-[11px] font-black">
+                <span class="text-white italic">02. ElfaDourada</span>
+                <span class="text-gray-500">512 Resets</span>
+            </div>
+        </div>
+        <h3 class="text-white font-black uppercase italic text-sm mb-4 border-b border-white/5 pb-2">🏰 Top <span class="text-[#FFB800]">Guild</span></h3>
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-white/5 border border-white/10 rounded flex items-center justify-center font-black text-[#FFB800]">G</div>
+            <span class="text-[11px] font-black uppercase">Spartans</span>
         </div>
     </aside>
 
-    <aside class="fixed top-40 right-8 z-50 hidden xl:block w-72 glass-panel p-6 rounded-2xl">
-        <div class="flex justify-between items-center mb-4">
-            <span class="text-[10px] font-black uppercase text-gray-400">Status</span>
-            <span class="text-[#00FF66] font-bold text-[9px] animate-pulse">● ONLINE</span>
+    <aside class="fixed top-44 right-8 z-50 hidden xl:block w-72 glass-panel p-6 rounded-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-white font-black uppercase italic text-sm italic">🖥️ Status</h3>
+            <span class="text-[#00FF66] font-black text-[9px] animate-pulse">● ONLINE</span>
         </div>
-        <div class="space-y-2 text-[10px] font-black uppercase">
-            <div class="flex justify-between p-2 bg-white/5 rounded"><span>EXP</span><span class="text-white">500x</span></div>
-            <div class="flex justify-between p-2 bg-white/5 rounded"><span>DROP</span><span class="text-white">70%</span></div>
-            <div class="flex justify-between p-2 bg-white/5 rounded"><span>PLAYERS</span><span class="text-white">1,250</span></div>
+        <div class="space-y-3 mb-8 text-[10px] font-black uppercase">
+            <div class="flex justify-between p-2.5 bg-white/5 rounded border border-white/5">
+                <span class="text-gray-500">Versão</span><span class="text-white">Season 19</span>
+            </div>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded border border-white/5">
+                <span class="text-gray-500">Experiência</span><span class="text-white">500x</span>
+            </div>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded border border-white/5">
+                <span class="text-gray-500">Drop Rate</span><span class="text-white">70%</span>
+            </div>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded border border-white/5">
+                <span class="text-gray-500">Players Online</span><span class="text-[#FFB800]">1,250</span>
+            </div>
+        </div>
+        <h3 class="text-white font-black uppercase italic text-[10px] mb-4 border-b border-white/5 pb-2">Comunidade</h3>
+        <div class="grid grid-cols-2 gap-2">
+            <a href="#" class="bg-[#5865F2]/10 border border-[#5865F2]/30 py-2.5 rounded text-[9px] font-black text-[#5865F2] text-center hover:bg-[#5865F2] hover:text-white transition uppercase">Discord</a>
+            <a href="#" class="bg-[#25D366]/10 border border-[#25D366]/30 py-2.5 rounded text-[9px] font-black text-[#25D366] text-center hover:bg-[#25D366] hover:text-white transition uppercase">WhatsApp</a>
         </div>
     </aside>
 
     <main id="main-viewport" class="max-w-4xl mx-auto h-screen overflow-y-auto px-6 pt-64 pb-40 relative z-10">
         
-        <section id="home" class="page-content active">
+        <section id="home" class="page-content active text-center md:text-left">
             <div class="mt-20">
-                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-[#FFB800] mb-4 block italic">O Destino de um Guerreiro</span>
-                <h2 class="text-7xl font-black italic uppercase tracking-tighter leading-none text-white mb-8">A LENDA <br><span class="text-[#FFB800]">RECOMEÇA</span></h2>
-                <p class="text-gray-400 text-lg max-w-xl mb-12 leading-relaxed">Prepare seu arco, afie sua espada e domine o continente. A jornada épica recomeça na Season 19 definitiva.</p>
-                <div class="flex gap-4">
-                    <button onclick="showPage('download')" class="bg-[#FFB800] text-black px-12 py-5 rounded-lg font-black uppercase text-xs">Baixar Agora</button>
-                    <button onclick="showPage('events')" class="bg-white/5 border border-white/10 px-12 py-5 rounded-lg font-black uppercase text-xs hover:bg-white/10 transition">Ver Calendário</button>
+                <span class="text-[10px] font-black uppercase tracking-[0.5em] text-[#FFB800] mb-4 block italic underline-offset-8 underline">Bem-vindo ao Continente</span>
+                <h2 class="text-8xl font-black mb-8 italic uppercase tracking-tighter leading-none text-white">A LENDA <br><span class="text-[#FFB800]">RECOMEÇA</span></h2>
+                <p class="text-gray-400 text-lg max-w-xl mb-12 leading-relaxed font-medium">Experimente o equilíbrio perfeito entre o clássico e o novo. A jornada épica recomeça agora com novos desafios e itens lendários.</p>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <button onclick="showPage('download')" class="bg-[#FFB800] text-black px-12 py-5 rounded font-black uppercase text-xs tracking-widest shadow-xl shadow-[#FFB800]/20 hover:-translate-y-1 transition">Baixar Agora</button>
+                    <button onclick="showPage('events')" class="bg-white/5 border border-white/10 hover:bg-white/10 px-12 py-5 rounded font-black uppercase text-xs tracking-widest transition">Ver Cronograma</button>
                 </div>
             </div>
         </section>
 
         <section id="rank" class="page-content">
-            <h2 class="text-5xl font-black italic uppercase text-white mb-8 text-center">Hall da <span class="text-[#FFB800]">Glória</span></h2>
-            <div class="flex justify-center gap-2 mb-10 bg-white/5 p-1 rounded-xl">
-                <button class="tab-btn active">Top Level</button>
-                <button class="tab-btn">Top Guilds</button>
-                <button class="tab-btn">Top Killers</button>
+            <h2 class="text-5xl font-black italic uppercase text-white mb-8">Hall da <span class="text-[#FFB800]">Fama</span></h2>
+            <div class="flex flex-wrap gap-2 mb-10 bg-white/5 p-2 rounded-xl">
+                <button class="sub-tab active">Geral</button>
+                <button class="sub-tab">Guilds</button>
+                <button class="sub-tab">Dark Knight</button>
+                <button class="sub-tab">Dark Wizard</button>
+                <button class="sub-tab">Fairy Elf</button>
+                <button class="sub-tab">PVP Killers</button>
             </div>
-            <div class="space-y-3">
-                <div class="rank-row p-5 flex justify-between items-center border-l-4 border-[#FFB800]">
-                    <div class="flex items-center gap-4 text-white">
-                        <span class="text-2xl font-black italic text-[#FFB800]">#1</span>
+            <div class="space-y-2">
+                <div class="glass-panel p-4 flex justify-between items-center rounded-xl hover:border-[#FFB800] transition group">
+                    <div class="flex items-center gap-6">
+                        <span class="text-3xl font-black italic text-[#FFB800]/20 group-hover:text-[#FFB800] transition">01</span>
                         <div>
-                            <p class="text-lg font-black italic tracking-tighter">GOD_OF_WAR</p>
-                            <p class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Dark Knight</p>
+                            <p class="font-black italic text-lg uppercase tracking-tighter">GodOfWar</p>
+                            <span class="text-[9px] font-black text-gray-500 uppercase">Resets: 540 | Level: 400</span>
                         </div>
                     </div>
-                    <div class="text-right"><p class="text-2xl font-black text-[#FFB800]">540</p><span class="text-[9px] font-bold text-gray-600 uppercase">Resets</span></div>
+                    <div class="w-12 h-12 bg-white/5 rounded-full border border-white/10 flex items-center justify-center font-black text-xs">DK</div>
                 </div>
-                </div>
+            </div>
         </section>
 
         <section id="download" class="page-content">
             <h2 class="text-5xl font-black italic uppercase text-white mb-10">Área de <span class="text-[#FFB800]">Download</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-panel p-10 rounded-2xl text-center border-white/10">
-                    <h3 class="text-2xl font-black uppercase italic mb-2">Cliente <span class="text-[#FFB800]">Completo</span></h3>
-                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-8">Versão Season 19 | 2.5 GB</p>
-                    <a href="#" class="bg-[#FFB800] text-black w-full block py-4 rounded-lg font-black uppercase text-xs">Link Direto (Mega)</a>
-                </div>
-                <div class="glass-panel p-10 rounded-2xl text-center border-white/10">
-                    <h3 class="text-2xl font-black uppercase italic mb-2">Drivers <span class="text-[#FFB800]">Essenciais</span></h3>
-                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-8">DirectX & VC++ Redist</p>
-                    <a href="#" class="bg-white/5 border border-white/10 hover:bg-white/10 w-full block py-4 rounded-lg font-black uppercase text-xs transition">Download Drivers</a>
+                <div class="glass-panel p-10 rounded-2xl border-white/5 hover:border-[#FFB800] transition">
+                    <h3 class="text-2xl font-black uppercase italic mb-2">📥 Cliente <span class="text-[#FFB800]">Completo</span></h3>
+                    <p class="text-[9px] text-gray-500 font-bold mb-8 italic uppercase tracking-widest">Tamanho: 2.5 GB | Versão: S19</p>
+                    <a href="#" class="bg-[#FFB800] text-black w-full block py-4 rounded font-black uppercase text-xs text-center shadow-lg shadow-[#FFB800]/10">Download (Mega.nz)</a>
                 </div>
             </div>
         </section>
 
         <section id="events" class="page-content">
-            <h2 class="text-5xl font-black italic uppercase text-white mb-10">Cronograma <span class="text-[#FFB800]">Eventos</span></h2>
-            <div class="glass-panel overflow-hidden rounded-2xl">
-                <table class="w-full text-left text-[11px] font-bold uppercase">
+            <h2 class="text-5xl font-black italic uppercase text-white mb-10">⚔️ Próximos <span class="text-[#FFB800]">Eventos</span></h2>
+            <div class="glass-panel overflow-hidden rounded-2xl border-white/5">
+                <table class="w-full text-left text-[11px] font-black uppercase">
                     <thead class="bg-white/5 text-[#FFB800]">
-                        <tr><th class="p-6">Evento</th><th class="p-6">Horário</th><th class="p-6">Status</th></tr>
+                        <tr><th class="p-6">Nome do Evento</th><th class="p-6">Horário</th><th class="p-6 text-right">Status</th></tr>
                     </thead>
-                    <tbody class="text-gray-300">
-                        <tr class="border-t border-white/5"><td class="p-6">Blood Castle</td><td class="p-6">A cada 2 horas</td><td class="p-6 text-green-500">Pronto</td></tr>
-                        <tr class="border-t border-white/5"><td class="p-6">Devil Square</td><td class="p-6">A cada 3 horas</td><td class="p-6 text-[#FFB800]">Em espera</td></tr>
+                    <tbody class="text-gray-400">
+                        <tr class="border-t border-white/5"><td class="p-6">Blood Castle</td><td class="p-6 italic">Em 00:45:12</td><td class="p-6 text-right text-green-500">Aberto</td></tr>
+                        <tr class="border-t border-white/5"><td class="p-6">Devil Square</td><td class="p-6 italic">Em 01:15:00</td><td class="p-6 text-right text-gray-600">Aguardando</td></tr>
                     </tbody>
                 </table>
             </div>
         </section>
 
         <section id="login" class="page-content text-center">
-            <h2 class="text-5xl font-black italic uppercase text-white mb-10">Minha <span class="text-[#FFB800]">Conta</span></h2>
+            <h2 class="text-5xl font-black italic uppercase text-white mb-10">🔑 Acessar <span class="text-[#FFB800]">Portal</span></h2>
             <div class="max-w-sm mx-auto glass-panel p-10 rounded-2xl">
-                <input type="text" placeholder="NOME DE USUÁRIO" class="w-full bg-white/5 border border-white/10 p-4 rounded mb-4 outline-none focus:border-[#FFB800] text-xs font-bold text-center">
-                <input type="password" placeholder="SENHA" class="w-full bg-white/5 border border-white/10 p-4 rounded mb-6 outline-none focus:border-[#FFB800] text-xs font-bold text-center">
-                <button class="w-full bg-[#FFB800] text-black py-4 rounded font-black uppercase text-xs mb-4">Entrar Agora</button>
-                <a href="#" class="text-[9px] font-bold text-gray-500 uppercase hover:text-white transition">Esqueceu a senha?</a>
+                <div class="space-y-4">
+                    <input type="text" placeholder="USUÁRIO" class="w-full bg-white/5 border border-white/10 p-4 rounded outline-none focus:border-[#FFB800] text-xs font-black text-center tracking-widest uppercase">
+                    <input type="password" placeholder="SENHA" class="w-full bg-white/5 border border-white/10 p-4 rounded outline-none focus:border-[#FFB800] text-xs font-black text-center tracking-widest uppercase">
+                    <button class="w-full bg-[#FFB800] text-black py-4 rounded font-black uppercase text-xs tracking-widest">Login</button>
+                </div>
+                <div class="mt-6 flex justify-between text-[9px] font-black text-gray-500 uppercase">
+                    <a href="#" class="hover:text-white transition">Criar Conta</a>
+                    <a href="#" class="hover:text-white transition">Esqueci a Senha</a>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="fixed bottom-0 w-full z-[100] bg-black/95 border-t border-white/5 py-4 px-8 flex justify-between items-center text-[10px] font-bold text-gray-600 uppercase">
-        <p>&copy; 2025 <span class="text-[#FFB800]">MeuMU Online</span></p>
+    <footer class="fixed bottom-0 w-full z-[100] bg-black/95 border-t border-white/5 py-4 px-8 flex justify-between items-center text-[10px] font-black text-gray-600 uppercase">
+        <p>&copy; 2025 <span class="text-[#FFB800]">MeuMU Online</span> | Desenvolvido por <span class="text-white italic">SeuNome</span></p>
         <div class="flex gap-8 italic font-black">
-            <a href="#" class="hover:text-white transition">REGRAS</a>
-            <a href="#" class="hover:text-white transition">SUPORTE</a>
-            <a href="#" class="hover:text-white transition">TERMOS</a>
+            <a href="#" class="hover:text-white transition">📜 REGRAS</a>
+            <a href="#" class="hover:text-white transition">🛡️ TERMOS</a>
+            <a href="#" class="hover:text-white transition">💬 SUPORTE</a>
         </div>
     </footer>
 
     <script>
+        // Gerador de Partículas
+        const pContainer = document.getElementById('particles-container');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 3 + 1 + 'px';
+            p.style.width = size; p.style.height = size;
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = Math.random() * 5 + 7 + 's';
+            p.style.animationDelay = Math.random() * 8 + 's';
+            pContainer.appendChild(p);
+        }
+
+        // Lógica de Troca de Página (SPA)
         function showPage(pageId) {
             const viewport = document.getElementById('main-viewport');
             const sections = document.querySelectorAll('.page-content');
-            
-            // Dispara animação de saída
             sections.forEach(s => s.classList.remove('active'));
-
             setTimeout(() => {
                 const target = document.getElementById(pageId);
                 if(target) {
                     target.classList.add('active');
-                    // Garante que a "página" comece do topo
                     viewport.scrollTop = 0;
                 }
-            }, 100); 
+            }, 50); 
         }
     </script>
 
