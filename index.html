@@ -3,140 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuMU | Portal Profissional</title>
+    <title>MeuMU | Premium Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --gold: #FFB800;
-            --red: #CC0000;
-            --green: #28A745;
-            --glass: rgba(10, 10, 10, 0.85);
-        }
+        :root { --gold: #FFB800; --red: #CC0000; --green: #28A745; }
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
 
-        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-
-        /* BACKGROUND DINÂMICO */
+        /* FUNDO IMERSIVO (Referência StellarMU) */
         .hero-bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            background: linear-gradient(to bottom, transparent 30%, #050505 100%),
+            background: linear-gradient(to bottom, transparent 40%, #050505 100%),
                         url('https://mu.templstock.com/static/img/products/full/mufire-game-template.jpg');
-            background-size: cover; background-position: center 20%; filter: brightness(0.7);
+            background-size: cover; background-position: center 20%;
         }
 
         .heading-font { font-family: 'Cinzel', serif; }
 
-        /* BARRA DE AÇÕES (CTA BAR) */
-        .cta-container { display: flex; width: 100%; max-width: 1100px; margin: 0 auto; gap: 2px; }
-        .cta-btn { 
-            flex: 1; height: 90px; display: flex; align-items: center; justify-content: center; 
-            gap: 15px; font-weight: 900; text-transform: uppercase; transition: 0.4s;
-            backdrop-filter: blur(10px); border-top: 3px solid transparent;
+        /* BARRA DE AÇÕES FUNCIONAL (Referência PVP-MU) */
+        .action-container { display: flex; width: 100%; max-width: 1200px; margin: 0 auto; gap: 4px; }
+        .action-card { 
+            flex: 1; height: 100px; display: flex; align-items: center; justify-content: center; 
+            gap: 20px; cursor: pointer; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(15px); border-top: 4px solid transparent; background: rgba(0,0,0,0.6);
         }
-        .cta-btn:hover { transform: translateY(-5px); filter: brightness(1.2); }
+        .action-card:hover { transform: translateY(-8px); background: rgba(0,0,0,0.8); }
         
-        .btn-dl { background: rgba(40, 167, 69, 0.6); border-color: var(--green); }
-        .btn-reg { background: rgba(204, 0, 0, 0.6); border-color: var(--red); }
-        .btn-shop { background: rgba(255, 184, 0, 0.6); border-color: var(--gold); }
+        .card-dl { border-color: var(--green); }
+        .card-reg { border-color: var(--red); }
+        .card-shop { border-color: var(--gold); }
 
-        /* WIDGETS LATERAIS (ESTILO STELLAR) */
-        .stats-widget { 
-            background: var(--glass); border: 1px solid rgba(255, 184, 0, 0.1); 
-            border-radius: 4px; padding: 25px; width: 320px; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-        }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px currentColor; }
-
-        /* BANNER JOIN SERVER */
-        .join-banner { 
-            background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); 
-            border-left: 4px solid var(--gold); padding: 30px; max-width: 500px; 
+        /* WIDGET DE ESTATÍSTICAS (Arquitetura Profissional) */
+        .stats-box { 
+            background: rgba(10, 10, 10, 0.9); border: 1px solid rgba(255, 184, 0, 0.1); 
+            padding: 30px; width: 350px; box-shadow: 0 25px 50px rgba(0,0,0,0.9);
         }
 
-        .page-content { display: none; opacity: 0; transition: 0.8s ease-in-out; }
-        .page-content.active { display: block; opacity: 1; }
+        .page-content { display: none; opacity: 0; transform: scale(0.98); transition: 0.8s ease-in-out; }
+        .page-content.active { display: block; opacity: 1; transform: scale(1); }
     </style>
 </head>
 <body>
 
     <div class="hero-bg"></div>
 
-    <header class="p-12">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="heading-font">
-                <h1 class="text-6xl font-black tracking-tighter text-white">MEU<span class="text-[#FFB800]">MU</span></h1>
-                <p class="text-xs text-[#FFB800] tracking-[0.5em] font-bold">PREMIUM SEASON 19</p>
-            </div>
-            
-            <nav class="hidden md:flex gap-10 text-[11px] font-black uppercase tracking-widest text-gray-400">
-                <button onclick="showPage('home')" class="hover:text-white transition">Início</button>
-                <button onclick="showPage('rank')" class="hover:text-white transition">Rankings</button>
-                <button onclick="showPage('events')" class="hover:text-white transition">Eventos</button>
-                <button onclick="showPage('download')" class="hover:text-white transition">Downloads</button>
-            </nav>
+    <header class="p-12 flex justify-between items-center max-w-7xl mx-auto">
+        <div class="heading-font">
+            <h1 class="text-6xl font-black tracking-tighter">MEU<span class="text-[#FFB800]">MU</span></h1>
+            <p class="text-[10px] text-[#FFB800] tracking-[0.6em] font-black uppercase italic">Season 19 Online</p>
         </div>
+        <nav class="flex gap-8 text-[11px] font-black uppercase tracking-widest text-gray-500">
+            <button onclick="showPage('home')" class="hover:text-white transition">Início</button>
+            <button onclick="showPage('rank')" class="hover:text-white transition">Rankings</button>
+            <button onclick="showPage('download')" class="hover:text-white transition">Downloads</button>
+        </nav>
     </header>
 
-    <main class="min-h-screen flex flex-col justify-end pb-32 px-12">
-        
+    <main class="min-h-screen flex flex-col justify-end pb-24 px-12">
         <section id="home" class="page-content active w-full">
-            <div class="max-w-7xl mx-auto flex flex-col gap-16">
+            <div class="max-w-7xl mx-auto space-y-16">
                 
-                <div class="cta-container">
-                    <div onclick="showPage('download')" class="cta-btn btn-dl cursor-pointer">
-                        <span class="text-3xl">🛡️</span>
-                        <div class="text-left">
-                            <p class="text-lg leading-tight">DOWNLOAD</p>
-                            <p class="text-[9px] text-gray-200">GAME CLIENT 2.5GB</p>
-                        </div>
+                <div class="action-container">
+                    <div onclick="showPage('download')" class="action-card card-dl">
+                        <span class="text-4xl">📥</span>
+                        <div class="text-left"><p class="font-black text-lg leading-none">DOWNLOAD</p><p class="text-[9px] text-green-500 font-bold mt-1">CLIENTE COMPLETO</p></div>
                     </div>
-                    <div onclick="showPage('dashboard')" class="cta-btn btn-reg cursor-pointer">
-                        <span class="text-3xl">✒️</span>
-                        <div class="text-left">
-                            <p class="text-lg leading-tight">REGISTRO</p>
-                            <p class="text-[9px] text-gray-200">CRIAÇÃO DE CONTA GRÁTIS</p>
-                        </div>
+                    <div onclick="showPage('dashboard')" class="action-card card-reg">
+                        <span class="text-4xl">🛡️</span>
+                        <div class="text-left"><p class="font-black text-lg leading-none">REGISTRO</p><p class="text-[9px] text-red-500 font-bold mt-1">CRIE SUA CONTA</p></div>
                     </div>
-                    <div class="cta-btn btn-shop cursor-pointer">
-                        <span class="text-3xl">💰</span>
-                        <div class="text-left">
-                            <p class="text-lg leading-tight">WEB SHOP</p>
-                            <p class="text-[9px] text-gray-200">DONATION & CRÉDITOS</p>
-                        </div>
+                    <div class="action-card card-shop">
+                        <span class="text-4xl">💎</span>
+                        <div class="text-left"><p class="font-black text-lg leading-none">LOJA VIRTUAL</p><p class="text-[9px] text-yellow-500 font-bold mt-1">ITENS ESPECIAIS</p></div>
                     </div>
                 </div>
 
-                <div class="flex flex-col lg:flex-row justify-between items-end gap-12">
-                    <div class="join-banner">
-                        <h2 class="heading-font text-5xl font-black uppercase mb-4">Novo Servidor<br><span class="text-[#FFB800]">Inicie Hoje!</span></h2>
-                        <p class="text-gray-400 text-sm italic mb-6">Uma lenda renasce no continente. Explore a Season 19 com sistemas exclusivos e PVP equilibrado.</p>
-                        <button onclick="showPage('dashboard')" class="bg-[#FFB800] text-black px-10 py-3 font-black uppercase text-xs rounded hover:brightness-125 transition">Painel do Jogador</button>
+                <div class="flex flex-col lg:flex-row justify-between items-end gap-10">
+                    <div class="max-w-xl border-l-4 border-[#FFB800] pl-8 py-4">
+                        <h2 class="heading-font text-5xl font-black uppercase leading-none mb-4">Novo Servidor<br><span class="text-[#FFB800]">Inicie a Batalha</span></h2>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Explore o continente com sistemas de jogo avançados, eventos automáticos e uma economia 100% equilibrada.</p>
+                        <button onclick="showPage('dashboard')" class="bg-[#FFB800] text-black px-12 py-4 font-black uppercase text-xs hover:bg-white transition shadow-2xl">Área do Jogador</button>
                     </div>
 
-                    <div class="stats-widget">
-                        <div class="flex gap-6 mb-6 border-b border-white/5 pb-2 text-[10px] font-black uppercase tracking-widest">
-                            <span class="text-[#FFB800] border-b-2 border-[#FFB800] pb-2 cursor-pointer">Server Status</span>
-                            <span class="text-gray-500 hover:text-white cursor-pointer transition">Top Players</span>
+                    <div class="stats-box">
+                        <div class="flex justify-between border-b border-white/5 pb-4 mb-6 font-black text-[10px] tracking-widest text-gray-500">
+                            <span class="text-[#FFB800]">STATUS DO SERVIDOR</span>
+                            <span class="hover:text-white cursor-pointer transition">RANKINGS</span>
                         </div>
                         <div class="space-y-4">
                             <div class="flex justify-between items-center text-xs">
-                                <span class="font-bold text-gray-400 uppercase"><span class="status-dot text-green-500 bg-green-500"></span> Online X50</span>
-                                <span class="text-[#FFB800] font-black">1.250</span>
+                                <span class="font-bold uppercase flex items-center gap-2"><i class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></i> Online X50</span>
+                                <span class="text-[#FFB800] font-black">1.402</span>
                             </div>
                             <div class="flex justify-between items-center text-xs">
-                                <span class="font-bold text-gray-400 uppercase"><span class="status-dot text-red-600 bg-red-600"></span> Online X100</span>
-                                <span class="text-gray-600 font-black">0</span>
+                                <span class="font-bold uppercase flex items-center gap-2"><i class="w-2 h-2 rounded-full bg-red-600"></i> Online X100</span>
+                                <span class="text-gray-600 font-black">OFFLINE</span>
                             </div>
-                            <div class="flex justify-between items-center text-xs pt-2 border-t border-white/5">
-                                <span class="font-bold text-gray-400 uppercase">Total Contas</span>
-                                <span class="text-white font-black">2.350</span>
+                            <div class="flex justify-between items-center text-xs pt-4 border-t border-white/5">
+                                <span class="font-bold text-gray-400 uppercase">Contas Criadas</span>
+                                <span class="text-white font-black">12.540</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
+        <section id="dashboard" class="page-content w-full flex justify-center">
+            <div class="stats-box w-full max-w-md text-center">
+                <h2 class="heading-font text-2xl font-black uppercase italic mb-8">Acessar Painel</h2>
+                <form class="space-y-4 text-left">
+                    <input type="text" placeholder="USUÁRIO" class="w-full bg-black border border-white/10 p-4 rounded focus:border-[#FFB800] outline-none text-[10px] font-bold">
+                    <input type="password" placeholder="SENHA" class="w-full bg-black border border-white/10 p-4 rounded focus:border-[#FFB800] outline-none text-[10px] font-bold">
+                    <button class="bg-[#FFB800] text-black w-full py-4 font-black uppercase text-xs tracking-widest">Login</button>
+                </form>
+            </div>
+        </section>
     </main>
 
     <script>
