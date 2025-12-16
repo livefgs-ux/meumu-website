@@ -8,110 +8,111 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
-        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: 0.3s; }
-        .event-card { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 12px; transition: 0.3s; }
-        .event-card:hover { border-color: rgba(255, 184, 0, 0.4); transform: translateY(-5px); }
-        
-        /* Cores dos Horários */
-        .time-badge { background: rgba(255, 255, 255, 0.05); color: #666; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 800; }
-        .time-next { background: rgba(255, 184, 0, 0.15); color: #FFB800; border: 1px solid rgba(255, 184, 0, 0.3); box-shadow: 0 0 10px rgba(255, 184, 0, 0.1); }
+        .event-card { background: rgba(15, 15, 15, 0.8); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; transition: 0.3s; }
+        .timer-box { background: rgba(255, 184, 0, 0.05); border-top: 1px solid rgba(255, 184, 0, 0.1); border-radius: 0 0 12px 12px; }
+        .time-item { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 4px; padding: 4px 8px; font-size: 10px; color: #888; font-weight: 800; }
+        .time-active { border-color: #FFB800; color: #FFB800; background: rgba(255, 184, 0, 0.1); box-shadow: 0 0 10px rgba(255, 184, 0, 0.1); }
+        .gold-text { color: #FFB800; }
     </style>
 </head>
 <body>
-    <div class="max-w-6xl mx-auto px-6">
-        <nav class="flex justify-between items-center py-8">
+    <div class="max-w-6xl mx-auto px-6 py-10">
+        <nav class="flex justify-between items-center mb-12">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
                 <div>
                     <h1 class="text-xl font-black uppercase tracking-tighter leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
-                    <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mt-1">Season 19-2-3</p>
+                    <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] mt-1 uppercase">Season 19-2-3</p>
                 </div>
             </div>
-            <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-400">
-                <a href="index.html" class="hover:text-white transition flex items-center gap-2 underline decoration-[#FFB800] decoration-2">🏠 Início</a>
-                <a href="ranking.html" class="hover:text-white transition flex items-center gap-2">🏆 Rankings</a>
-                <a href="downloads.html" class="hover:text-white transition flex items-center gap-2">📥 Downloads</a>
-                <a href="events.html" class="text-[#FFB800] flex items-center gap-2">⚔️ Eventos</a>
+            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                <a href="index.html" class="hover:text-white flex items-center gap-2">🏠 Início</a>
+                <a href="ranking.html" class="hover:text-white flex items-center gap-2">🏆 Rankings</a>
+                <a href="downloads.html" class="hover:text-white flex items-center gap-2">📥 Downloads</a>
+                <a href="events.html" class="text-[#FFB800] flex items-center gap-2 underline decoration-2">⚔️ Eventos</a>
             </div>
-            <a href="login.html" class="btn-primary px-8 py-2.5 rounded text-black font-black text-xs uppercase tracking-tighter">👤 Entrar</a>
         </nav>
 
-        <header class="py-12 text-center">
-            <h2 class="text-5xl font-black uppercase italic tracking-tighter">Cronograma de <span class="text-[#FFB800]">Eventos</span></h2>
-            <p class="text-gray-500 text-[10px] mt-4 uppercase font-bold tracking-[0.4em]">Prepare-se para a batalha nos horários marcados</p>
-        </header>
+        <div class="bg-white/5 border border-white/10 rounded-lg p-4 flex justify-center items-center gap-4 mb-8">
+            <span class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">🕒 Horário do Servidor</span>
+            <span id="server-clock" class="text-xl font-black">00:00:00</span>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
-            
-            <div class="event-card p-6 flex flex-col gap-4">
-                <div class="flex justify-between items-start">
-                    <h3 class="text-xl font-black uppercase italic tracking-tighter">Blood Castle</h3>
-                    <span class="text-[9px] bg-[#FFB800] text-black px-2 py-1 rounded font-black uppercase">Todo dia</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="event-card">
+                <div class="p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center border border-red-500/20">⚔️</div>
+                    <div>
+                        <h3 class="font-black uppercase italic">Blood Castle</h3>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase">A cada 2 horas</p>
+                    </div>
                 </div>
-                <p class="text-xs text-gray-500 leading-relaxed">Proteja a estátua e recupere a arma sagrada para ganhar recompensas épicas.</p>
-                
-                <div class="mt-4">
-                    <p class="text-[9px] font-black uppercase text-gray-400 mb-3 tracking-widest">🕒 Próximos Horários:</p>
-                    <div class="flex flex-wrap gap-2" id="blood-castle-times">
-                        <span class="time-badge" data-time="00:00">00:00</span>
-                        <span class="time-badge" data-time="02:00">02:00</span>
-                        <span class="time-badge" data-time="04:00">04:00</span>
-                        <span class="time-badge" data-time="06:00">06:00</span>
-                        <span class="time-badge" data-time="08:00">08:00</span>
-                        <span class="time-badge" data-time="10:00">10:00</span>
-                        </div>
+                <div class="timer-box p-4 flex justify-between items-center">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">Próximo evento em:</span>
+                    <span class="text-lg font-black text-red-500 tracking-tighter">01:45:12</span>
                 </div>
             </div>
 
-            <div class="event-card p-6 flex flex-col gap-4">
-                <div class="flex justify-between items-start">
-                    <h3 class="text-xl font-black uppercase italic tracking-tighter">Chaos Castle</h3>
-                    <span class="text-[9px] bg-white/10 text-gray-400 px-2 py-1 rounded font-black uppercase">PVP</span>
+            <div class="event-card">
+                <div class="p-6 flex items-center gap-4">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center border border-purple-500/20">🛡️</div>
+                    <div>
+                        <h3 class="font-black uppercase italic">Chaos Castle</h3>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase">A cada 3 horas</p>
+                    </div>
                 </div>
-                <p class="text-xs text-gray-500 leading-relaxed">O último sobrevivente leva a glória e itens de joalheria raros.</p>
-                
-                <div class="mt-4">
-                    <p class="text-[9px] font-black uppercase text-gray-400 mb-3 tracking-widest">🕒 Próximos Horários:</p>
-                    <div class="flex flex-wrap gap-2" id="chaos-castle-times">
-                        <span class="time-badge" data-time="01:00">01:00</span>
-                        <span class="time-badge" data-time="03:00">03:00</span>
-                        <span class="time-badge" data-time="05:00">05:00</span>
-                        <span class="time-badge" data-time="07:00">07:00</span>
-                        <span class="time-badge" data-time="20:00">20:00</span>
+                <div class="timer-box p-4 flex justify-between items-center">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">Próximo evento em:</span>
+                    <span class="text-lg font-black text-purple-500 tracking-tighter">02:10:45</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-8">
+            <h4 class="text-lg font-black uppercase italic mb-8 border-b border-white/5 pb-4">📅 Programação Completa</h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div>
+                    <p class="text-[10px] font-black uppercase text-gray-500 mb-4 tracking-widest">Blood Castle</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="time-item">00:00</span>
+                        <span class="time-item">02:00</span>
+                        <span class="time-item">04:00</span>
+                        <span class="time-item time-active">06:00</span>
+                        <span class="time-item">08:00</span>
+                        <span class="time-item">10:00</span>
+                        <span class="time-item">12:00</span>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-[10px] font-black uppercase text-gray-500 mb-4 tracking-widest">Chaos Castle</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="time-item">01:00</span>
+                        <span class="time-item">04:00</span>
+                        <span class="time-item time-active">07:00</span>
+                        <span class="time-item">10:00</span>
+                        <span class="time-item">13:00</span>
                     </div>
                 </div>
             </div>
 
+            <div class="mt-12 bg-[#FFB800]/5 border border-[#FFB800]/20 p-4 rounded-lg">
+                <p class="text-[10px] font-bold text-[#FFB800] uppercase tracking-widest">
+                    💡 Dica: Todos os horários seguem o horário de Brasília (BRT). Prepare-se com antecedência!
+                </p>
+            </div>
         </div>
     </div>
 
     <script>
-        function updateNextEvent() {
+        function updateClock() {
             const now = new Date();
-            const currentHour = now.getHours();
-            const currentMin = now.getMinutes();
-            const currentTimeInMinutes = (currentHour * 60) + currentMin;
-
-            document.querySelectorAll('.time-badge').forEach(badge => {
-                const [h, m] = badge.getAttribute('data-time').split(':').map(Number);
-                const eventTimeInMinutes = (h * 60) + m;
-
-                // Remove a classe de destaque de todos
-                badge.classList.remove('time-next');
-
-                // Lógica simples: se o horário do evento é maior que o atual, ele é o próximo
-                // Nota: Esta lógica é básica para o exemplo, em produção você checaria o mais próximo
-                if (eventTimeInMinutes > currentTimeInMinutes) {
-                    // Aqui pintaríamos apenas o primeiro encontrado
-                }
-            });
-
-            // Exemplo manual de destaque (Simulando que o das 10h é o próximo)
-            // Para ficar real, você pode adicionar a classe 'time-next' via CMS ou lógica JS completa
-            document.querySelector('[data-time="20:00"]').classList.add('time-next');
+            const time = now.toLocaleTimeString('pt-BR');
+            document.getElementById('server-clock').innerText = time;
         }
-
-        updateNextEvent();
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>
