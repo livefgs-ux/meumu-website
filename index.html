@@ -1,107 +1,116 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-product-locale="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <title>MeuMU Online | Season 19-2-3</title>
-    <link rel="preload" id="figma_preload_user_state" href="/api/user/state?team_id=1582661033679320043&amp;file_key=KWrpr6Ne7P0FllFUPKSKH1&amp;fuid=1582661031483099783" as="fetch" crossorigin="anonymous"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuMU Online | Season 19 Part 2-3</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style nonce="ESAFsK1ckbHI4JohNCmGmw==">
-        /* APLICANDO NOSSA PALETA AO CORPO DO FIGMA */
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
         :root {
-            --color-bg: #050505 !important;
-            --color-bg-secondary: rgba(255, 184, 0, 0.05) !important;
-            --color-border: rgba(255, 184, 0, 0.2) !important;
-            --color-bg-brand: #FFB800 !important;
-            --fallback-color-bg: #050505 !important;
+            --gold: #FFB800;
+            --dark-bg: #050505;
+            --card-bg: #0A0A0A;
+            --border: rgba(255, 184, 0, 0.15);
         }
 
-        body { 
-            background-color: #050505 !important; 
-            color: #ffffff !important;
-        }
-
-        /* Estilizando o Sidebar original do Figma com nosso design */
-        .fb-sidebar {
-            background-color: #0A0A0A !important;
-            border-right: 1px solid var(--color-border) !important;
-        }
-
-        /* Estilizando os esqueletos (skeletons) de carregamento com nosso dourado */
-        .fb-rectangle-16, .fb-rectangle-24, .fb-circle-16, .fb-circle-24 {
-            background-color: rgba(255, 184, 0, 0.1) !important;
-        }
-
-        /* Destaque para a Logo MeuMU Online */
-        .mu-logo-text {
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
             font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.05em;
+            overflow-x: hidden;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFB800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 184, 0, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: #000;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 184, 0, 0.4);
         }
     </style>
 </head>
+<body>
 
-<body class="feature_flag_unified_index_v3_modal_z ...">
+    <nav class="glass-nav fixed top-0 w-full z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-black text-black text-xl">M</div>
+                <div>
+                    <h1 class="font-black text-xl tracking-tighter leading-none">MEUMU <span class="text-[#FFB800]">ONLINE</span></h1>
+                    <p class="text-[8px] tracking-[0.3em] font-bold text-gray-500 uppercase">Season 19 Part 2-3</p>
+                </div>
+            </div>
 
-    <div class="navbar" style="height: 64px; width: 100%; position: fixed; top: 0; background-color: #0A0A0A; border-bottom: 1px solid rgba(255,184,0,0.2); z-index: 1000; display: flex; align-items: center; padding: 0 24px; justify-content: space-between;">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl shadow-[0_0_15px_rgba(255,184,0,0.4)]">M</div>
-            <div>
-                <h1 class="mu-logo-text text-lg leading-none">MeuMU <span class="text-[#FFB800]">Online</span></h1>
-                <p class="text-[8px] font-bold text-gray-500 tracking-[0.3em] uppercase">Season 19-2-3</p>
+            <div class="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-widest text-gray-400">
+                <a href="index.html" class="text-white border-b-2 border-[#FFB800] pb-1">Início</a>
+                <a href="downloads.html" class="hover:text-white transition">Downloads</a>
+                <a href="ranking.html" class="hover:text-white transition">Rankings</a>
+                <a href="cadastro.html" class="hover:text-white transition">Cadastro</a>
+                <a href="loja.html" class="hover:text-white transition">Loja</a>
+            </div>
+
+            <a href="login.html" class="btn-primary px-6 py-2 rounded font-black text-[10px] uppercase">Painel da Conta</a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="hero-glow"></div>
+        <div class="text-center max-w-4xl">
+            <span class="text-[#FFB800] font-black text-[10px] tracking-[0.5em] uppercase mb-4 block">Bem-vindo ao Novo Mundo</span>
+            <h2 class="text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-none mb-6">
+                A LENDA <br> <span class="gold-gradient-text">RECOMEÇA</span>
+            </h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+                Experiência Hard clássica com os sistemas mais modernos da Season 19. Junte-se a milhares de jogadores.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="cadastro.html" class="btn-primary px-10 py-4 rounded font-black uppercase italic tracking-wider">Criar Conta Agora</a>
+                <a href="downloads.html" class="bg-white/5 hover:bg-white/10 border border-white/10 px-10 py-4 rounded font-black uppercase italic tracking-wider transition">Baixar Client</a>
             </div>
         </div>
-        
-        <div class="flex gap-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
-            <a href="index.html" class="text-[#FFB800]">Dashboard</a>
-            <a href="#" class="hover:text-white transition">Rankings</a>
-            <a href="#" class="hover:text-white transition">Downloads</a>
-        </div>
-    </div>
+    </section>
 
-    <div class='file-browser-loading-page-container' style="margin-top: 64px;">
-        <div id="filebrowser-loading-page" class="fb-page-layout">
-            
-            <div class="fb-flex-row">
-                <div id="filebrowser-loading-sidebar" class="fb-sidebar fb-width-240">
-                    <div class="fb-sidebar-account-and-notifications p-4">
-                        <div class="fb-rectangle-16 fb-width-full mb-2"></div>
-                        <span class="text-[10px] font-black text-[#FFB800] uppercase italic">Top Guerreiro: GodOfWar</span>
-                    </div>
-                    <div class="fb-divider"></div>
-                    <div class="fb-sidebar-row"><div class="fb-circle-16"></div><div class="fb-rectangle-16 fb-width-100"></div></div>
-                    <div class="fb-sidebar-row"><div class="fb-circle-16"></div><div class="fb-rectangle-16 fb-width-80"></div></div>
-                </div>
-
-                <div class="fb-page">
-                    <div class="fb-toolbar-48 flex items-center px-8 border-b border-white/5">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-gray-500 italic">Servidor: Online / EXP: 500x / Drop: 70%</span>
-                    </div>
-
-                    <div class="fb-page-content p-8">
-                        <div id="loading-content-pane">
-                            <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-8">Bem-vindo ao <span class="text-[#FFB800]">MeuMU Online</span></h2>
-                            
-                            <div class="fb-tile-grid">
-                                <div class="fb-card glass-card">
-                                    <div class="fb-file-thumbnail" style="background: url('https://images8.alphacoders.com/645/645091.jpg') center; background-size: cover; opacity: 0.3;"></div>
-                                    <div class="fb-file-card-footer">
-                                        <div class="fb-file-card-footer-text-container">
-                                            <div class="text-[10px] font-black text-[#FFB800]">PRÓXIMO EVENTO</div>
-                                            <div class="text-white text-xs font-bold">Blood Castle em 00:45:00</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="fixed bottom-0 w-full py-4 px-6 border-t border-white/5 bg-black/50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center text-[10px] font-bold tracking-widest uppercase text-gray-500">
+            <div class="flex gap-6">
+                <span>Versão: <span class="text-white">1.19.2.3</span></span>
+                <span>Exp: <span class="text-[#FFB800]">500x</span></span>
+                <span>Drop: <span class="text-white">30%</span></span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span>Servidor <span class="text-white">Online</span></span>
             </div>
         </div>
     </div>
 
-    <script nonce="ESAFsK1ckbHI4JohNCmGmw==" src="https://www.figma.com/webpack-artifacts/assets/runtime~figma_app-a3d225ec88f408d8.min.js.br" defer crossorigin="anonymous"></script>
-    </body>
+</body>
 </html>
