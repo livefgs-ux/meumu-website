@@ -8,60 +8,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .hero-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(to right, #050505 30%, transparent 70%), url('https://images8.alphacoders.com/645/645091.jpg'); background-size: cover; background-position: center right; opacity: 0.6; }
+        
+        /* Background fixo padrão */
+        .hero-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(to right, #050505 30%, transparent 70%), 
+                        url('https://images8.alphacoders.com/645/645091.jpg');
+            background-size: cover; background-position: center right; opacity: 0.6;
+        }
+        
         .glass-card { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 16px; }
-        tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+        
+        /* Estilo para as tabelas */
+        .rank-table th { color: #FFB800; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .rank-table td { padding: 12px; font-size: 11px; font-weight: 700; border-bottom: 1px solid rgba(255, 255, 255, 0.02); }
+        .rank-row:hover { background: rgba(255, 184, 0, 0.05); }
     </style>
 </head>
 <body>
 
     <div class="hero-bg"></div>
 
-    <aside class="fixed top-32 left-8 z-50 hidden xl:block w-72 glass-card p-6 shadow-2xl">
-        <h3 class="text-white font-black uppercase italic text-base mb-6 leading-tight">Top <br><span class="text-[#FFB800]">Guerreiros</span></h3>
+    <aside class="fixed top-32 left-8 z-50 hidden xl:block w-72 glass-card p-6">
+        <h3 class="text-white font-black uppercase italic text-base mb-6">Top <br><span class="text-[#FFB800]">Guerreiros</span></h3>
         <div class="space-y-4">
             <div class="flex items-center justify-between border-b border-white/5 pb-2">
-                <div class="flex items-center gap-3 text-white">
-                    <span class="text-xs font-black text-[#FFB800] italic">01</span>
-                    <p class="text-[11px] font-black">GodOfWar</p>
-                </div>
-                <span class="text-[9px] text-gray-500 font-bold uppercase">540 Resets</span>
+                <div class="flex items-center gap-3"><span class="text-xs font-black text-[#FFB800] italic">01</span><p class="text-[11px] font-black">GodOfWar</p></div>
+                <span class="text-[9px] text-gray-500 font-bold">540 Resets</span>
             </div>
         </div>
-        <a href="ranking.html" class="block w-full mt-6 py-2 bg-white/5 border border-white/10 rounded text-center text-[9px] font-black uppercase text-gray-400 hover:text-white transition">Ranking Completo</a>
     </aside>
 
-    <aside class="fixed top-32 right-8 z-50 hidden xl:block w-72 glass-card p-6 shadow-2xl">
+    <aside class="fixed top-32 right-8 z-50 hidden xl:block w-72 glass-card p-6">
         <div class="flex justify-between items-center mb-4">
-            <h3 class="text-white font-black uppercase italic text-base leading-tight">Status do <br>Servidor</h3>
+            <h3 class="text-white font-black uppercase italic text-base">Status</h3>
             <span class="text-[#00FF66] font-bold text-[10px] uppercase animate-pulse">● Online</span>
         </div>
-        <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden mb-6">
-            <div class="h-full bg-gradient-to-r from-[#00FF66] to-[#FFB800] w-[85%]"></div>
-        </div>
-        <div class="space-y-2 mb-6 text-[10px] font-black uppercase">
+        <div class="space-y-2 text-[10px] font-black uppercase">
             <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">Versão</span><span class="text-white">Season 19</span></div>
             <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">EXP Rate</span><span class="text-white">500x</span></div>
             <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">Drop Rate</span><span class="text-white">70%</span></div>
             <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">Players</span><span class="text-white">1,250</span></div>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-center text-[9px] font-black uppercase">
-            <a href="#" class="bg-[#5865F2]/10 border border-[#5865F2]/20 py-2 rounded text-[#5865F2]">Discord</a>
-            <a href="#" class="bg-[#25D366]/10 border border-[#25D366]/30 py-2 rounded text-[#25D366]">WhatsApp</a>
         </div>
     </aside>
 
     <main class="max-w-4xl mx-auto px-6 py-10 relative z-10">
         
         <nav class="flex justify-between items-center mb-16">
-            <a href="index.html" class="flex items-center gap-3 group transition">
-                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl group-hover:scale-105 transition">M</div>
-                <div>
-                    <h1 class="text-xl font-black uppercase tracking-tighter leading-none text-white">MeuMU <span class="text-[#FFB800]">Online</span></h1>
-                    <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] mt-1 uppercase">Season 19-2-3</p>
-                </div>
+            <a href="index.html" class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
+                <h1 class="text-xl font-black uppercase tracking-tighter leading-none">MeuMU <span class="text-[#FFB800]">Online</span></h1>
             </a>
-            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
                 <a href="index.html" class="hover:text-white transition">🏠 Início</a>
                 <a href="ranking.html" class="text-[#FFB800] underline decoration-2 underline-offset-8">🏆 Rankings</a>
                 <a href="downloads.html" class="hover:text-white transition">📥 Downloads</a>
@@ -70,42 +68,70 @@
             <a href="login.html" class="bg-[#FFB800] text-black px-8 py-2.5 rounded font-black text-xs uppercase">Entrar</a>
         </nav>
 
-        <div class="bg-white/5 border border-white/10 rounded-xl p-6 flex flex-col items-center mb-16">
-            <span class="text-[10px] font-black uppercase text-[#FFB800] tracking-[0.4em] mb-2">Horário do Servidor</span>
-            <div id="server-clock" class="text-5xl font-black italic tracking-tighter">00:00:00</div>
+        <div class="mb-12">
+            <h2 class="text-5xl font-black italic uppercase tracking-tighter mb-2">Hall da <span class="text-[#FFB800]">Glória</span></h2>
+            <p class="text-gray-500 text-xs font-bold uppercase tracking-widest">Os guerreiros mais poderosos do continente</p>
         </div>
 
-        <div class="text-center mb-10">
-            <h2 class="text-5xl font-black italic uppercase tracking-tighter mb-4 text-white">TOP <span class="text-[#FFB800]">RANKINGS</span></h2>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="glass-card overflow-hidden">
+                <div class="p-4 bg-white/5 border-b border-white/10 flex items-center gap-3">
+                    <span class="text-[#FFB800]">🔥</span>
+                    <h3 class="font-black text-xs uppercase italic">Top Level</h3>
+                </div>
+                <table class="w-full rank-table">
+                    <thead><tr><th class="text-left">#</th><th class="text-left">Nome</th><th class="text-right">Level</th></tr></thead>
+                    <tbody>
+                        <tr class="rank-row"><td>01</td><td>GodOfWar</td><td class="text-right">400</td></tr>
+                        <tr class="rank-row"><td>02</td><td>DarkKnight</td><td class="text-right">398</td></tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="glass-card overflow-hidden">
-            <table class="w-full text-left border-collapse text-[10px] uppercase font-black">
-                <thead>
-                    <tr class="bg-white/5 text-[#FFB800] tracking-widest">
-                        <th class="p-6">Posição</th>
-                        <th class="p-6">Personagem</th>
-                        <th class="p-6 text-right">Resets</th>
-                    </tr>
-                </thead>
-                <tbody class="text-white">
-                    <tr class="border-b border-white/5 hover:bg-[#FFB800]/5 transition">
-                        <td class="p-6 text-[#FFB800]">#1</td>
-                        <td class="p-6 text-lg tracking-tighter italic font-black">GodOfWar</td>
-                        <td class="p-6 text-right text-lg">540</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="glass-card overflow-hidden">
+                <div class="p-4 bg-white/5 border-b border-white/10 flex items-center gap-3">
+                    <span class="text-[#FFB800]">🛡️</span>
+                    <h3 class="font-black text-xs uppercase italic">Top Guild</h3>
+                </div>
+                <table class="w-full rank-table">
+                    <thead><tr><th class="text-left">#</th><th class="text-left">Guild</th><th class="text-right">Score</th></tr></thead>
+                    <tbody>
+                        <tr class="rank-row"><td>01</td><td>Templarios</td><td class="text-right">1500</td></tr>
+                        <tr class="rank-row"><td>02</td><td>Blood_War</td><td class="text-right">1200</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="glass-card overflow-hidden">
+                <div class="p-4 bg-white/5 border-b border-white/10 flex items-center gap-3">
+                    <span class="text-red-500">💀</span>
+                    <h3 class="font-black text-xs uppercase italic">Top PK</h3>
+                </div>
+                <table class="w-full rank-table">
+                    <thead><tr><th class="text-left">#</th><th class="text-left">Nome</th><th class="text-right">Kills</th></tr></thead>
+                    <tbody>
+                        <tr class="rank-row"><td>01</td><td>Killer_Master</td><td class="text-right">240</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="glass-card overflow-hidden">
+                <div class="p-4 bg-white/5 border-b border-white/10 flex items-center gap-3">
+                    <span class="text-[#FFB800]">🏰</span>
+                    <h3 class="font-black text-xs uppercase italic">Top Chaos Castle</h3>
+                </div>
+                <table class="w-full rank-table">
+                    <thead><tr><th class="text-left">#</th><th class="text-left">Nome</th><th class="text-right">Wins</th></tr></thead>
+                    <tbody>
+                        <tr class="rank-row"><td>01</td><td>Hero_S6</td><td class="text-right">45</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
     </main>
 
-    <script>
-        function updateClock() {
-            const time = new Date().toLocaleTimeString('pt-BR', { hour12: false });
-            document.getElementById('server-clock').innerText = time;
-        }
-        setInterval(updateClock, 1000); updateClock();
-    </script>
 </body>
 </html>
