@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads | MU Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
+        .gold-glow { text-shadow: 0 0 15px rgba(255, 184, 0, 0.4); }
+        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: all 0.3s ease; }
+        .status-panel { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="max-w-6xl mx-auto px-6">
+        <nav class="flex justify-between items-center py-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
+                <h1 class="text-xl font-black">MU <span class="text-[#FFB800]">ONLINE</span></h1>
+            </div>
+            <div class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest text-gray-400">
+                <a href="index.html" class="hover:text-white transition">Início</a>
+                <a href="ranking.html" class="hover:text-white transition">Rankings</a>
+                <a href="downloads.html" class="text-[#FFB800]">Downloads</a>
+                <a href="#" class="hover:text-white transition">Eventos</a>
+            </div>
+            <button class="btn-primary px-8 py-2.5 rounded text-black font-bold text-xs uppercase">Entrar</button>
+        </nav>
+
+        <main class="py-20 text-center">
+            <h2 class="text-5xl font-black mb-12 uppercase italic">Área de <span class="text-[#FFB800] gold-glow">Downloads</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div class="status-panel p-10">
+                    <h3 class="text-2xl font-black mb-4">Client Completo</h3>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed">Instalação completa com som, músicas e todos os recursos necessários para a melhor experiência.</p>
+                    <ul class="text-xs text-gray-500 mb-8 space-y-2">
+                        <li>• Tamanho: 1.2 GB</li>
+                        <li>• Versão: Season 6 Ep 3</li>
+                    </ul>
+                    <button class="btn-primary w-full py-4 rounded font-black uppercase text-black">Baixar Via Mega</button>
+                </div>
+
+                <div class="status-panel p-10">
+                    <h3 class="text-2xl font-black mb-4">Link Alternativo</h3>
+                    <p class="text-gray-400 mb-8 text-sm leading-relaxed">Use este link caso tenha problemas com a velocidade de download em outros servidores.</p>
+                    <ul class="text-xs text-gray-500 mb-8 space-y-2">
+                        <li>• Hospedagem: Google Drive</li>
+                        <li>• Requer: WinRAR</li>
+                    </ul>
+                    <button class="btn-primary w-full py-4 rounded font-black uppercase text-black">Baixar Via Drive</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
