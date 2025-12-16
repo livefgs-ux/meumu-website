@@ -19,25 +19,35 @@
         <nav class="flex justify-between items-center py-8">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
-                <h1 class="text-xl font-black uppercase tracking-tighter">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
+                <div>
+                    <h1 class="text-xl font-black uppercase tracking-tighter leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
+                    <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mt-1">Season 19-2-3</p>
+                </div>
             </div>
-            <div class="flex items-center gap-6">
-                <div class="text-right hidden sm:block">
-                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Seja bem-vindo</p>
+            
+            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                <a href="index.html" class="hover:text-white transition flex items-center gap-2">🏠 Início</a>
+                <a href="downloads.html" class="hover:text-white transition flex items-center gap-2">📥 Downloads</a>
+                <a href="eventos.html" class="hover:text-white transition flex items-center gap-2">⚔️ Eventos</a>
+            </div>
+
+            <div class="flex items-center gap-6 border-l border-white/10 pl-6">
+                <div class="text-right">
+                    <p class="text-[9px] text-gray-500 font-bold uppercase">Bem-vindo</p>
                     <p class="text-xs font-black">Buddy!</p>
                 </div>
-                <a href="index.html" class="text-xs font-bold text-red-500 uppercase border border-red-500/20 px-4 py-2 rounded hover:bg-red-500/10 transition">Sair</a>
+                <a href="index.html" class="text-[10px] font-black text-red-500 uppercase border border-red-500/20 px-3 py-1.5 rounded hover:bg-red-500/10 transition">🚪 Sair</a>
             </div>
         </nav>
 
         <main class="py-10">
-            <header class="mb-12 flex justify-between items-end">
+            <header class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                 <div>
                     <h2 class="text-4xl font-black uppercase italic tracking-tighter">Seu <span class="text-[#FFB800] gold-glow">Painel</span></h2>
                     <p class="text-gray-500 text-[10px] mt-2 uppercase font-bold tracking-[0.3em]">Gerencie seus guerreiros e conquistas</p>
                 </div>
-                <div class="bg-white/5 p-4 rounded-lg border border-white/10 text-right">
-                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">WCoins Disponíveis</p>
+                <div class="bg-white/5 p-4 rounded-lg border border-white/10 text-right min-w-[150px]">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">💰 WCoins</p>
                     <p class="text-xl font-black text-[#FFB800]">5,200</p>
                 </div>
             </header>
@@ -46,31 +56,31 @@
                 <div class="lg:col-span-8 space-y-6">
                     <div class="dash-card p-8">
                         <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-                            <h3 class="font-black uppercase text-sm tracking-widest">Meus Personagens</h3>
+                            <h3 class="font-black uppercase text-sm tracking-widest flex items-center gap-2">👤 Meus Personagens</h3>
                             <button class="text-[10px] text-[#FFB800] font-bold uppercase hover:underline">Distribuir Pontos</button>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-white/5 p-6 rounded-lg border border-white/5 hover:border-[#FFB800]/30 transition group cursor-pointer">
+                            <div class="bg-white/5 p-6 rounded-lg border border-white/5 hover:border-[#FFB800]/30 transition group">
                                 <div class="flex justify-between items-start mb-4">
                                     <div>
                                         <p class="text-lg font-black group-hover:text-[#FFB800]">Soul_Master_Boss</p>
-                                        <p class="text-[10px] text-gray-500 uppercase font-bold">Grand Master</p>
+                                        <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Grand Master</p>
                                     </div>
                                     <span class="text-xs font-black text-[#FFB800] bg-[#FFB800]/10 px-2 py-1 rounded">Lv. 400</span>
                                 </div>
-                                <div class="space-y-2 mb-6">
-                                    <div class="flex justify-between text-[10px] uppercase font-bold text-gray-500">
-                                        <span>Progresso de Reset</span>
+                                <div class="space-y-2 mb-6 text-[10px] uppercase font-bold">
+                                    <div class="flex justify-between text-gray-500">
+                                        <span>Experiência</span>
                                         <span>75%</span>
                                     </div>
-                                    <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+                                    <div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
                                         <div class="progress-bar w-[75%]"></div>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center pt-4 border-t border-white/5">
                                     <span class="text-[10px] text-gray-400 font-bold uppercase italic">150 Resets</span>
-                                    <button class="bg-[#FFB800] text-black text-[10px] font-black px-4 py-2 rounded uppercase tracking-tighter shadow-lg shadow-[#FFB800]/10">Selecionar</button>
+                                    <button class="bg-[#FFB800] text-black text-[10px] font-black px-4 py-2 rounded uppercase tracking-tighter">Gerenciar</button>
                                 </div>
                             </div>
                         </div>
@@ -79,20 +89,20 @@
 
                 <div class="lg:col-span-4 space-y-6">
                     <div class="dash-card p-8">
-                        <h4 class="font-black uppercase text-sm mb-6 border-b border-white/5 pb-4">Status da Conta</h4>
+                        <h4 class="font-black uppercase text-sm mb-6 border-b border-white/5 pb-4 flex items-center gap-2">⚙️ Status da Conta</h4>
                         <div class="space-y-4">
-                            <div class="flex justify-between text-xs font-bold">
-                                <span class="text-gray-500 uppercase">Status VIP</span>
-                                <span class="text-green-500 uppercase tracking-tighter">VIP Gold Ativo</span>
+                            <div class="flex justify-between text-[10px] font-bold uppercase">
+                                <span class="text-gray-500">Status VIP</span>
+                                <span class="text-green-500">VIP Gold Ativo</span>
                             </div>
-                            <div class="flex justify-between text-xs font-bold">
-                                <span class="text-gray-500 uppercase">Último Login</span>
-                                <span class="text-gray-300">16/12/2025</span>
+                            <div class="flex justify-between text-[10px] font-bold uppercase">
+                                <span class="text-gray-500">Personagens</span>
+                                <span class="text-gray-300">01 / 05</span>
                             </div>
                         </div>
-                        <div class="mt-8 pt-6 border-t border-white/5">
-                            <button class="w-full py-3 bg-white/5 border border-white/10 rounded text-[10px] font-black uppercase text-gray-400 hover:text-white hover:bg-white/10 transition mb-3 tracking-widest">Alterar Senha</button>
-                            <button class="w-full py-3 bg-red-500/10 border border-red-500/20 rounded text-[10px] font-black uppercase text-red-500 hover:bg-red-500/20 transition tracking-widest">Logs de Acesso</button>
+                        <div class="mt-8 pt-6 border-t border-white/5 space-y-3">
+                            <button class="w-full py-3 bg-white/5 border border-white/10 rounded text-[10px] font-black uppercase text-gray-400 hover:text-white transition tracking-widest">🔑 Alterar Senha</button>
+                            <button class="w-full py-3 bg-red-500/10 border border-red-500/20 rounded text-[10px] font-black uppercase text-red-500 hover:bg-red-500/20 transition tracking-widest">🛡️ Logs de Acesso</button>
                         </div>
                     </div>
                 </div>
