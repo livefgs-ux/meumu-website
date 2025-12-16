@@ -3,40 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuMU Online | Season 19</title>
+    <title>MeuMU Online | Season 19-2-3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .hero-section {
-            position: relative; min-height: 100vh;
+        
+        /* [ESTILO] Background e Partículas */
+        .hero-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: linear-gradient(to right, #050505 30%, transparent 70%), 
-                        linear-gradient(to top, #050505 5%, transparent 30%),
-                        url('https://images8.alphacoders.com/645/645091.jpg'); /* Fundo com a Elfa */
-            background-size: cover; background-position: center right;
+                        url('https://images8.alphacoders.com/645/645091.jpg');
+            background-size: cover; background-position: center right; opacity: 0.6;
         }
         .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; animation: rise 10s infinite ease-in; }
         @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-100vh) scale(0.2); opacity: 0; } }
-        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: 0.3s; }
+
+        /* [ESTILO] Cards e Botões */
+        .glass-card { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 16px; }
+        .btn-gold { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); color: black; font-weight: 900; transition: 0.3s; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255, 184, 0, 0.2); }
     </style>
 </head>
 <body>
 
-    <aside class="fixed top-32 left-8 z-50 hidden xl:block w-72 bg-[#0A0A0A]/90 backdrop-blur-md border border-[#FFB800]/20 rounded-2xl p-6 shadow-2xl">
-        <h3 class="text-white font-black uppercase italic text-base leading-tight mb-6">Top <br><span class="text-[#FFB800]">Guerreiros</span></h3>
+    <div class="hero-bg"></div>
+    <div class="fixed inset-0 pointer-events-none" id="particles"></div>
+
+    <aside class="fixed top-32 left-8 z-50 hidden xl:block w-72 glass-card p-6 shadow-2xl">
+        <h3 class="text-white font-black uppercase italic text-base mb-6">Top <br><span class="text-[#FFB800]">Guerreiros</span></h3>
         <div class="space-y-4">
             <div class="flex items-center justify-between border-b border-white/5 pb-2">
                 <div class="flex items-center gap-3">
                     <span class="text-xs font-black text-[#FFB800] italic">01</span>
-                    <p class="text-[11px] font-black text-white">Soul_Master</p>
+                    <p class="text-[11px] font-black text-white">GodOfWar</p>
                 </div>
-                <span class="text-[9px] text-gray-500 font-bold uppercase">350 Resets</span>
+                <span class="text-[9px] text-gray-500 font-bold uppercase">540 Resets</span>
             </div>
-            </div>
+        </div>
         <a href="ranking.html" class="block w-full mt-6 py-2 bg-white/5 border border-white/10 rounded text-center text-[9px] font-black uppercase text-gray-400 hover:text-white transition">Ranking Completo</a>
     </aside>
 
-    <aside class="fixed top-32 right-8 z-50 hidden xl:block w-72 bg-[#0A0A0A]/90 backdrop-blur-md border border-[#FFB800]/20 rounded-2xl p-6 shadow-2xl">
+    <aside class="fixed top-32 right-8 z-50 hidden xl:block w-72 glass-card p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-white font-black uppercase italic text-base leading-tight">Status do <br>Servidor</h3>
             <span class="text-[#00FF66] font-bold text-[10px] uppercase animate-pulse">● Online</span>
@@ -45,29 +53,28 @@
             <div class="h-full bg-gradient-to-r from-[#00FF66] to-[#FFB800] w-[85%]"></div>
         </div>
         <div class="space-y-2 mb-6">
-            <div class="flex justify-between p-2 bg-white/5 rounded text-[10px] font-black uppercase">
-                <span class="text-gray-500">Versão</span><span class="text-white">Season 19</span>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded text-[10px] font-black uppercase">
+                <span class="text-gray-500 italic">Versão</span><span class="text-white">Season 19</span>
             </div>
-            <div class="flex justify-between p-2 bg-white/5 rounded text-[10px] font-black uppercase">
-                <span class="text-gray-500">EXP Rate</span><span class="text-white">500x</span>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded text-[10px] font-black uppercase">
+                <span class="text-gray-500 italic">EXP Rate</span><span class="text-white">500x</span>
             </div>
-            <div class="flex justify-between p-2 bg-white/5 rounded text-[10px] font-black uppercase">
-                <span class="text-gray-500">Drop Rate</span><span class="text-white">70%</span>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded text-[10px] font-black uppercase">
+                <span class="text-gray-500 italic">Drop Rate</span><span class="text-white">70%</span>
             </div>
-            <div class="flex justify-between p-2 bg-white/5 rounded text-[10px] font-black uppercase">
-                <span class="text-gray-500">Players Online</span><span class="text-white">1,250</span>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded text-[10px] font-black uppercase">
+                <span class="text-gray-500 italic">Players Online</span><span class="text-white">1,250</span>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
             <a href="#" class="bg-[#5865F2]/10 border border-[#5865F2]/20 py-2 rounded text-[9px] font-black text-[#5865F2] uppercase text-center">Discord</a>
-            <a href="#" class="bg-[#25D366]/10 border border-[#25D366]/30 py-2 rounded text-[9px] font-black text-[#25D366] uppercase text-center">WhatsApp</a>
+            <a href="#" class="bg-[#25D366]/10 border border-[#25D366]/20 py-2 rounded text-[9px] font-black text-[#25D366] uppercase text-center">WhatsApp</a>
         </div>
     </aside>
 
-    <section class="hero-section">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none" id="particles"></div>
-
-        <nav class="flex justify-between items-center py-8 max-w-6xl mx-auto px-6 relative z-10">
+    <main class="max-w-4xl mx-auto px-6 py-10 relative z-10">
+        
+        <nav class="flex justify-between items-center mb-16">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
                 <div>
@@ -75,35 +82,61 @@
                     <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] mt-1 uppercase">Season 19-2-3</p>
                 </div>
             </div>
-            <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-widest text-gray-400">
-                <a href="index.html" class="text-[#FFB800]">Início</a>
-                <a href="ranking.html" class="hover:text-white transition">Rankings</a>
-                <a href="downloads.html" class="hover:text-white transition">Downloads</a>
-                <a href="events.html" class="hover:text-white transition">Eventos</a>
+            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                <a href="index.html" class="text-[#FFB800] underline decoration-2 underline-offset-8">🏠 Início</a>
+                <a href="ranking.html" class="hover:text-white transition">🏆 Rankings</a>
+                <a href="downloads.html" class="hover:text-white transition">📥 Downloads</a>
+                <a href="events.html" class="hover:text-white transition">⚔️ Eventos</a>
             </div>
-            <a href="login.html" class="btn-primary px-8 py-2.5 rounded text-black font-black text-xs uppercase tracking-widest">Entrar</a>
+            <a href="login.html" class="btn-gold px-8 py-2.5 rounded text-xs uppercase">Entrar</a>
         </nav>
 
-        <div class="max-w-6xl mx-auto px-6 mt-40 relative z-10">
-            <div class="max-w-2xl">
-                <h2 class="text-7xl font-black mb-6 italic uppercase tracking-tighter leading-none">O Destino de um <br><span class="text-[#FFB800]">Guerreiro</span></h2>
-                <p class="text-gray-400 text-lg mb-10 leading-relaxed font-medium">Junte-se à batalha épica no MeuMU Online. <br>A Season 19 espera por você com novos desafios.</p>
-                <div class="flex gap-4">
-                    <a href="downloads.html" class="btn-primary px-12 py-5 rounded font-black uppercase text-black tracking-widest text-xs">Jogar Agora</a>
-                    <a href="events.html" class="bg-white/5 border border-white/10 hover:bg-white/10 px-12 py-5 rounded font-black uppercase text-xs tracking-widest transition">Cronograma</a>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 flex flex-col items-center mb-10">
+            <span class="text-[10px] font-black uppercase text-[#FFB800] tracking-[0.4em] mb-2">Horário do Servidor</span>
+            <div id="server-clock" class="text-5xl font-black italic tracking-tighter">00:00:00</div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="glass-card overflow-hidden">
+                <div class="p-6 border-b border-white/5 flex justify-between items-center">
+                    <h3 class="font-black uppercase italic text-lg">Servidor <span class="text-[#FFB800]">PvP</span></h3>
+                    <span class="text-[9px] bg-[#00FF66] text-black px-2 py-0.5 rounded font-black">X500</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 text-xs leading-relaxed mb-6">A experiência definitiva para quem busca glória e combate intenso entre guilds.</p>
+                    <a href="downloads.html" class="btn-gold w-full block py-3 text-center rounded text-xs uppercase tracking-widest">Baixar Agora</a>
+                </div>
+            </div>
+
+            <div class="glass-card overflow-hidden">
+                <div class="p-6 border-b border-white/5 flex justify-between items-center">
+                    <h3 class="font-black uppercase italic text-lg">Servidor <span class="text-[#FFB800]">Non-PvP</span></h3>
+                    <span class="text-[9px] bg-blue-500 text-white px-2 py-0.5 rounded font-black">X100</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-gray-400 text-xs leading-relaxed mb-6">Focado em evolução constante e farm de itens raros sem interrupções de combate.</p>
+                    <a href="downloads.html" class="bg-white/5 border border-white/10 hover:bg-white/10 w-full block py-3 text-center rounded text-xs uppercase tracking-widest transition">Ver Detalhes</a>
                 </div>
             </div>
         </div>
 
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
-            <div class="w-6 h-10 border-2 border-[#FFB800]/40 rounded-xl relative">
-                <div class="w-1 h-2 bg-[#FFB800] rounded-full absolute left-1/2 top-2 transform -translate-x-1/2 animate-bounce"></div>
-            </div>
-            <span class="text-[9px] font-bold text-gray-600 uppercase tracking-widest">Scroll</span>
+        <div class="bg-[#FFB800]/5 border border-[#FFB800]/20 p-5 rounded-xl text-center">
+            <p class="text-[10px] font-bold text-[#FFB800] uppercase tracking-[0.2em]">
+                💡 Junte-se à nossa comunidade no Discord para receber atualizações em tempo real!
+            </p>
         </div>
-    </section>
+
+    </main>
 
     <script>
+        // Relógio
+        function updateClock() {
+            const time = new Date().toLocaleTimeString('pt-BR', { hour12: false });
+            document.getElementById('server-clock').innerText = time;
+        }
+        setInterval(updateClock, 1000); updateClock();
+
+        // Partículas
         const pContainer = document.getElementById('particles');
         for (let i = 0; i < 40; i++) {
             const p = document.createElement('div');
