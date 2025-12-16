@@ -32,7 +32,48 @@
                 <a href="events.html" class="text-[#FFB800] flex items-center gap-2 underline decoration-2">⚔️ Eventos</a>
             </div>
         </nav>
+<aside class="fixed top-32 right-8 z-50 hidden xl:block">
+    <div class="w-72 bg-[#0A0A0A]/90 backdrop-blur-md border border-[#FFB800]/20 rounded-2xl p-6 shadow-2xl">
+        
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-white font-black uppercase italic tracking-tighter text-base leading-tight">Status do <br>Servidor</h3>
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 bg-[#00FF66] rounded-full animate-pulse shadow-[0_0_10px_#00FF66]"></span>
+                <span class="text-[#00FF66] font-bold text-[10px] uppercase tracking-widest">Online</span>
+            </div>
+        </div>
 
+        <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden mb-6">
+            <div class="h-full bg-gradient-to-r from-[#00FF66] to-[#FFB800] w-[85%] shadow-[0_0_10px_rgba(255,184,0,0.3)]"></div>
+        </div>
+
+        <div class="space-y-2 mb-8">
+            <div class="flex justify-between items-center bg-white/5 border border-white/5 p-2.5 rounded-lg">
+                <span class="text-gray-400 text-[9px] font-black uppercase tracking-widest">Versão</span>
+                <span class="text-white font-black text-xs uppercase italic">Season 19</span>
+            </div>
+            <div class="flex justify-between items-center bg-white/5 border border-white/5 p-2.5 rounded-lg">
+                <span class="text-gray-400 text-[9px] font-black uppercase tracking-widest">EXP Rate</span>
+                <span class="text-white font-black text-xs uppercase italic">500x</span>
+            </div>
+            <div class="flex justify-between items-center bg-white/5 border border-white/5 p-2.5 rounded-lg">
+                <span class="text-gray-400 text-[9px] font-black uppercase tracking-widest">Drop Rate</span>
+                <span class="text-white font-black text-xs uppercase italic">70%</span>
+            </div>
+            <div class="flex justify-between items-center bg-white/5 border border-white/5 p-2.5 rounded-lg">
+                <span class="text-gray-400 text-[9px] font-black uppercase tracking-widest">Players</span>
+                <span class="text-white font-black text-xs uppercase italic">1,250</span>
+            </div>
+        </div>
+
+        <div class="border-t border-white/10 pt-4">
+            <div class="grid grid-cols-1 gap-2">
+                <a href="#" class="bg-[#5865F2]/10 border border-[#5865F2]/20 py-2 rounded text-[9px] font-black text-[#5865F2] uppercase text-center hover:bg-[#5865F2]/20 transition">Discord</a>
+                <a href="#" class="bg-[#25D366]/10 border border-[#25D366]/20 py-2 rounded text-[9px] font-black text-[#25D366] uppercase text-center hover:bg-[#25D366]/20 transition">WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</aside>
         <div class="bg-white/5 border border-white/10 rounded-lg p-4 flex justify-center items-center gap-4 mb-8">
             <span class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">🕒 Horário do Servidor</span>
             <span id="server-clock" class="text-xl font-black">00:00:00</span>
