@@ -11,7 +11,7 @@
     <style>
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow: hidden; margin: 0; }
         
-        /* [EDITAR FUNDO] Altere o URL da imagem abaixo para mudar o guerreiro de fundo */
+        /* [EDITAR FUNDO] */
         .hero-bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
             background: radial-gradient(circle at center, transparent 10%, #050505 95%),
@@ -19,18 +19,33 @@
             background-size: cover; background-position: center; opacity: 0.7; 
         }
 
-        /* [DESIGN] Estilo de Vidro e Botão Dourado */
+        /* [DESIGN] Painéis Premium */
         .glass-panel { background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255, 184, 0, 0.2); border-radius: 20px; }
-        .btn-gold { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); color: black; font-weight: 900; transition: 0.3s; }
-        .btn-gold:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 184, 0, 0.4); }
+        .btn-gold { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); color: black; font-weight: 900; transition: 0.4s ease; }
+        .btn-gold:hover { box-shadow: 0 0 25px rgba(255, 184, 0, 0.3); transform: translateY(-1px); }
 
-        /* [ANIMAÇÃO SPA] Transição entre telas */
-        .page-content { display: none; opacity: 0; transform: scale(0.98); filter: blur(10px); transition: all 0.6s ease; width: 100%; }
-        .page-content.active { display: block; opacity: 1; transform: scale(1); filter: blur(0px); }
+        /* ==========================================
+           [SPA ANIMAÇÃO] - TRANSIÇÃO LEVE E SUAVE
+           ========================================== */
+        .page-content { 
+            display: none; 
+            opacity: 0; 
+            filter: blur(4px); /* Blur reduzido para leveza */
+            transform: translateY(5px); /* Deslizamento mínimo */
+            transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out, transform 0.8s ease-in-out; 
+            width: 100%; 
+        }
+
+        .page-content.active { 
+            display: block; 
+            opacity: 1; 
+            filter: blur(0px); 
+            transform: translateY(0); 
+        }
 
         /* [EFEITO] Pontinhos Dourados */
         .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; animation: rise 10s infinite ease-in; }
-        @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-100vh) scale(0.2); opacity: 0; } }
+        @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-100vh) scale(0.2); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -44,7 +59,7 @@
                 <button class="flex items-center gap-1 hover:text-[#FFB800] transition"><img src="https://meumu.com/img/flags/us.gif" class="w-4"> EN</button>
                 <button class="flex items-center gap-1 hover:text-[#FFB800] transition"><img src="https://meumu.com/img/flags/br.gif" class="w-4"> BR</button>
             </div>
-            <div class="text-[#FFB800] italic animate-pulse">🛡️ Proteção Anti-Hack Ativa</div>
+            <div class="text-[#FFB800] italic">🛡️ Proteção Anti-Hack Ativa</div>
         </div>
     </div>
 
@@ -53,7 +68,7 @@
             <button onclick="showPage('home')" class="text-[11px] font-black uppercase text-gray-400 hover:text-white transition">🏠 Início</button>
             <button onclick="showPage('rank')" class="text-[11px] font-black uppercase text-gray-400 hover:text-white transition">🏆 Rankings</button>
             
-            <button onclick="showPage('home')" class="btn-gold px-8 py-2 rounded-lg text-[11px] uppercase shadow-2xl">
+            <button onclick="showPage('home')" class="btn-gold px-8 py-2 rounded-lg text-[11px] uppercase">
                 👤 Dashboard
             </button>
             
@@ -73,10 +88,8 @@
                         <p class="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em] mt-2 italic">Season 19-2-3</p>
                     </div>
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed mb-8">Bem-vindo ao servidor definitivo. Aqui a tua lenda ganha vida com sistemas clássicos e a estabilidade da Season 19.</p>
-                <div class="flex gap-4">
-                    <button onclick="showPage('download')" class="btn-gold px-8 py-4 rounded-xl text-xs uppercase tracking-widest">Jogar Agora</button>
-                </div>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">Bem-vindo ao servidor definitivo. Aqui a tua lenda ganha vida.</p>
+                <button onclick="showPage('download')" class="btn-gold w-fit px-12 py-4 rounded-xl text-xs uppercase tracking-widest">Jogar Agora</button>
             </div>
 
             <div class="glass-panel p-12 border-white/10 text-center">
@@ -89,29 +102,25 @@
             </div>
         </section>
 
-        <section id="rank" class="page-content w-full h-[60vh]">
-            <div class="glass-panel p-10 h-full text-center">
+        <section id="rank" class="page-content w-full">
+            <div class="glass-panel p-10 text-center">
                 <h2 class="text-4xl font-black italic uppercase text-white mb-8 italic">Hall da <span class="text-[#FFB800]">Fama</span></h2>
-                <p class="text-gray-500 uppercase font-black text-xs tracking-widest">Carregando dados dos guerreiros...</p>
+                <p class="text-gray-500 uppercase font-black text-xs">Carregando dados...</p>
             </div>
         </section>
 
         <section id="download" class="page-content w-full">
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-panel p-10 text-center border-white/5 hover:border-[#FFB800] transition">
-                    <h3 class="text-2xl font-black uppercase mb-4 italic">Cliente <span class="text-[#FFB800]">Full</span></h3>
-                    <a href="#" class="btn-gold block w-full py-4 rounded-xl text-xs uppercase">Download (Mega)</a>
-                </div>
+            <div class="max-w-4xl mx-auto glass-panel p-10 text-center border-white/5">
+                <h3 class="text-2xl font-black uppercase mb-4 italic">Cliente <span class="text-[#FFB800]">Full S19</span></h3>
+                <a href="#" class="btn-gold inline-block px-12 py-4 rounded-xl text-xs uppercase">Baixar Agora</a>
             </div>
         </section>
 
         <section id="events" class="page-content w-full">
-            <div class="glass-panel overflow-hidden border-white/5">
+            <div class="glass-panel overflow-hidden">
                 <table class="w-full text-left text-[11px] font-black uppercase">
                     <thead class="bg-[#FFB800] text-black"><tr><th class="p-6">Evento</th><th class="p-6">Horário</th></tr></thead>
-                    <tbody class="text-gray-300">
-                        <tr class="border-t border-white/10"><td class="p-6">Blood Castle</td><td class="p-6">24/7 (2 em 2h)</td></tr>
-                    </tbody>
+                    <tbody class="text-gray-300"><tr class="border-t border-white/10"><td class="p-6">Blood Castle</td><td class="p-6">24/7</td></tr></tbody>
                 </table>
             </div>
         </section>
@@ -119,33 +128,38 @@
     </main>
 
     <footer class="fixed bottom-0 w-full z-[100] bg-black/95 border-t border-white/5 py-4 px-8 flex justify-between items-center text-[10px] font-black text-gray-600 uppercase italic">
-        
-        <p>
-            &copy; 2025 
-            <span class="text-[#FFB800] ml-1">MeuMU Online</span> 
-            | Desenvolvido por <span class="text-white not-italic ml-1">SeuNome</span>
-        </p>
-
+        <p>&copy; 2025 <span class="text-[#FFB800]">MeuMU Online</span> | Desenvolvido por <span class="text-white not-italic ml-1">SeuNome</span></p>
         <div class="flex gap-10">
-            <a href="#" class="hover:text-white transition flex items-center gap-1">📜 Regras</a>
-            <a href="#" class="hover:text-white transition flex items-center gap-1">🛡️ Termos</a>
-            <a href="https://wa.me/seunumerosaqui" class="hover:text-[#25D366] transition flex items-center gap-1">💬 Suporte</a>
-            <a href="https://discord.gg/convite" class="hover:text-[#5865F2] transition flex items-center gap-1">🎨 Discord</a>
+            <a href="#" class="hover:text-white transition">📜 Regras</a>
+            <a href="#" class="hover:text-white transition">🛡️ Termos</a>
+            <a href="#" class="hover:text-[#25D366] transition">💬 Suporte</a>
+            <a href="#" class="hover:text-[#5865F2] transition">🎨 Discord</a>
         </div>
     </footer>
 
     <script>
-        // Lógica de Troca de Páginas (SPA)
+        // MOTOR SPA ATUALIZADO PARA TRANSIÇÃO MAIS LEVE
         function showPage(pageId) {
             const sections = document.querySelectorAll('.page-content');
-            sections.forEach(s => s.classList.remove('active')); // Esconde todas
+            
+            // 1. Remove o active (inicia o fade out suave)
+            sections.forEach(s => s.style.opacity = '0');
+            
             setTimeout(() => {
+                sections.forEach(s => s.classList.remove('active'));
+                
                 const target = document.getElementById(pageId);
-                if(target) target.classList.add('active'); // Mostra a selecionada
-            }, 50); 
+                if(target) {
+                    target.classList.add('active');
+                    // Pequeno delay para o navegador processar o display:block antes da animação
+                    setTimeout(() => {
+                        target.style.opacity = '1';
+                    }, 50);
+                }
+            }, 400); // Tempo de espera para fechar a página anterior
         }
 
-        // Gerador de Partículas Douradas
+        // PARTÍCULAS
         const pContainer = document.getElementById('particles-container');
         for (let i = 0; i < 30; i++) {
             const p = document.createElement('div');
@@ -154,7 +168,6 @@
             p.style.width = size; p.style.height = size;
             p.style.left = Math.random() * 100 + '%';
             p.style.animationDuration = Math.random() * 5 + 7 + 's';
-            p.style.animationDelay = Math.random() * 8 + 's';
             pContainer.appendChild(p);
         }
     </script>
