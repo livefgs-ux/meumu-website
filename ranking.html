@@ -3,141 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rankings Premium | MeuMU Online</title>
+    <title>Rankings | MeuMU Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .hero-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at top right, rgba(255, 184, 0, 0.05), transparent), #050505; }
         
-        /* Containers de Vidro */
-        .glass-card { background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; }
+        /* [PADRÃO] Background Fixo Igual ao Index */
+        .hero-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(to right, #050505 30%, transparent 70%), 
+                        url('https://images8.alphacoders.com/645/645091.jpg');
+            background-size: cover; background-position: center right; opacity: 0.6;
+        }
+
+        /* [PADRÃO] Estilo Glass-Card */
+        .glass-card { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 16px; }
+
+        /* [DESIGN RANKING] Abas e Filtros */
+        .tab-btn { padding: 10px 20px; font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; transition: 0.3s; border-radius: 6px; color: #666; }
+        .tab-btn.active { background: #FFB800; color: black; }
         
-        /* Abas Superiores */
-        .tab-btn { padding: 12px 24px; font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em; transition: 0.3s; border-radius: 6px; border: 1px solid transparent; color: #666; }
-        .tab-btn.active { background: white; color: black; border-color: white; }
-        .tab-btn:hover:not(.active) { background: rgba(255, 255, 255, 0.05); color: #fff; }
+        .race-filter { width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.1); transition: 0.3s; cursor: pointer; filter: grayscale(1); opacity: 0.5; }
+        .race-filter.active, .race-filter:hover { border-color: #FFB800; filter: grayscale(0); opacity: 1; transform: scale(1.1); }
 
-        /* Filtros de Raça (Círculos) */
-        .race-filter { width: 45px; height: 45px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.1); display: flex; items-center; justify-center; transition: 0.3s; cursor: pointer; filter: grayscale(1); opacity: 0.6; }
-        .race-filter:hover, .race-filter.active { border-color: #FFB800; filter: grayscale(0); opacity: 1; transform: scale(1.1); box-shadow: 0 0 15px rgba(255, 184, 0, 0.2); }
-        .race-label { font-size: 9px; font-weight: 800; text-transform: uppercase; margin-top: 8px; color: #555; transition: 0.3s; }
-        .race-item:hover .race-label, .race-item.active .race-label { color: #FFB800; }
-
-        /* Linhas do Ranking Estilizadas */
-        .rank-row { background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 8px; border-radius: 8px; transition: 0.3s; }
+        .rank-row { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 8px; border-radius: 12px; transition: 0.2s; }
         .rank-row:hover { border-color: rgba(255, 184, 0, 0.3); background: rgba(255, 184, 0, 0.03); }
-        .rank-gold { border-left: 4px solid #FFB800; background: linear-gradient(90deg, rgba(255, 184, 0, 0.1), transparent); }
-        .rank-silver { border-left: 4px solid #94a3b8; }
-        .rank-bronze { border-left: 4px solid #b45309; }
+        .rank-1 { border-left: 4px solid #FFB800; background: linear-gradient(90deg, rgba(255, 184, 0, 0.1), transparent); }
     </style>
 </head>
 <body>
 
     <div class="hero-bg"></div>
 
-    <aside class="fixed top-32 left-8 w-64 hidden xl:block opacity-20"><div class="glass-card h-96"></div></aside>
-    <aside class="fixed top-32 right-8 w-64 hidden xl:block opacity-20"><div class="glass-card h-96"></div></aside>
-
-    <main class="max-w-4xl mx-auto px-6 py-10 relative">
-        
-        <nav class="flex justify-between items-center mb-16">
-            <a href="index.html" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl group-hover:scale-105 transition">M</div>
-                <h1 class="text-xl font-black uppercase tracking-tighter leading-none text-white">MeuMU <span class="text-[#FFB800]">Online</span></h1>
-            </a>
-            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                <a href="index.html" class="hover:text-white transition">Início</a>
-                <a href="ranking.html" class="text-[#FFB800] underline decoration-2 underline-offset-8">Rankings</a>
-                <a href="downloads.html" class="hover:text-white transition">Downloads</a>
-                <a href="events.html" class="hover:text-white transition">Eventos</a>
+    <aside class="fixed top-32 left-8 z-50 hidden xl:block w-72 glass-card p-6 shadow-2xl">
+        <h3 class="text-white font-black uppercase italic text-base mb-6 leading-tight">Top <br><span class="text-[#FFB800]">Guerreiros</span></h3>
+        <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                <div class="flex items-center gap-3"><span class="text-xs font-black text-[#FFB800] italic">01</span><p class="text-[11px] font-black">GodOfWar</p></div>
+                <span class="text-[9px] text-gray-500 font-bold uppercase">540 Resets</span>
             </div>
+        </div>
+        <a href="ranking.html" class="block w-full mt-6 py-2 bg-white/5 border border-white/10 rounded text-center text-[9px] font-black uppercase text-gray-400 hover:text-white transition">Ranking Completo</a>
+    </aside>
+
+    <aside class="fixed top-32 right-8 z-50 hidden xl:block w-72 glass-card p-6 shadow-2xl">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-white font-black uppercase italic text-base leading-tight">Status do <br>Servidor</h3>
+            <span class="text-[#00FF66] font-bold text-[10px] uppercase animate-pulse">● Online</span>
+        </div>
+        <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden mb-6">
+            <div class="h-full bg-gradient-to-r from-[#00FF66] to-[#FFB800] w-[85%]"></div>
+        </div>
+        <div class="space-y-2 mb-6 text-[10px] font-black uppercase">
+            <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">Versão</span><span class="text-white">Season 19</span></div>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">EXP Rate</span><span class="text-white">500x</span></div>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">Drop Rate</span><span class="text-white">70%</span></div>
+            <div class="flex justify-between p-2.5 bg-white/5 rounded"><span class="text-gray-500 italic">Players</span><span class="text-white">1,250</span></div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-center text-[9px] font-black uppercase">
+            <a href="#" class="bg-[#5865F2]/10 border border-[#5865F2]/20 py-2 rounded text-[#5865F2]">Discord</a>
+            <a href="#" class="bg-[#25D366]/10 border border-[#25D366]/30 py-2 rounded text-[#25D366]">WhatsApp</a>
+        </div>
+    </aside>
+
+    <main class="max-w-4xl mx-auto px-6 py-10 relative z-10">
+        
+        <nav class="flex justify-between items-center mb-20">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl group-hover:scale-105 transition shadow-[0_0_15px_rgba(255,184,0,0.4)]">M</div>
+                <div>
+                    <h1 class="text-xl font-black uppercase tracking-tighter leading-none text-white">MeuMU <span class="text-[#FFB800]">Online</span></h1>
+                    <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] mt-1 uppercase">Season 19-2-3</p>
+                </div>
+            </a>
+            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="index.html" class="hover:text-white transition">🏠 Início</a>
+                <a href="ranking.html" class="text-[#FFB800] underline decoration-2 underline-offset-8">🏆 Rankings</a>
+                <a href="downloads.html" class="hover:text-white transition">📥 Downloads</a>
+                <a href="events.html" class="hover:text-white transition">⚔️ Eventos</a>
+            </div>
+            <a href="login.html" class="bg-[#FFB800] text-black px-8 py-2.5 rounded font-black text-xs uppercase shadow-lg shadow-[#FFB800]/20 hover:-translate-y-0.5 transition">Entrar</a>
         </nav>
 
-        <div class="flex flex-wrap gap-2 mb-12 bg-white/5 p-1 rounded-lg border border-white/5">
+        <div class="flex flex-wrap justify-center gap-2 mb-10 bg-white/5 p-1 rounded-xl border border-white/5">
             <button class="tab-btn active">Top Level</button>
             <button class="tab-btn">Top Killers</button>
             <button class="tab-btn">Top Guilds</button>
-            <button class="tab-btn">Top Gens</button>
             <button class="tab-btn">Top Master Level</button>
         </div>
 
-        <div class="flex justify-center gap-6 mb-16">
-            <div class="race-item active flex flex-col items-center">
-                <div class="race-filter active"><img src="https://muonline.webzen.com/common/img/character/all.png" class="w-6 opacity-80" alt="All"></div>
-                <span class="race-label">All</span>
+        <div class="flex justify-center gap-5 mb-14">
+            <div class="flex flex-col items-center gap-2">
+                <div class="race-filter active flex items-center justify-center bg-white/5"><img src="https://muonline.webzen.com/common/img/character/all.png" class="w-5"></div>
+                <span class="text-[8px] font-black uppercase text-[#FFB800]">All</span>
             </div>
-            <div class="race-item flex flex-col items-center">
-                <div class="race-filter"><img src="https://muonline.webzen.com/common/img/character/dw.png" class="w-6" alt="Wizards"></div>
-                <span class="race-label">Wizards</span>
+            <div class="flex flex-col items-center gap-2">
+                <div class="race-filter flex items-center justify-center bg-white/5"><img src="https://muonline.webzen.com/common/img/character/dw.png" class="w-5"></div>
+                <span class="text-[8px] font-black uppercase text-gray-600">DW</span>
             </div>
-            <div class="race-item flex flex-col items-center">
-                <div class="race-filter"><img src="https://muonline.webzen.com/common/img/character/dk.png" class="w-6" alt="Knights"></div>
-                <span class="race-label">Knights</span>
+            <div class="flex flex-col items-center gap-2">
+                <div class="race-filter flex items-center justify-center bg-white/5"><img src="https://muonline.webzen.com/common/img/character/dk.png" class="w-5"></div>
+                <span class="text-[8px] font-black uppercase text-gray-600">DK</span>
             </div>
-            <div class="race-item flex flex-col items-center">
-                <div class="race-filter"><img src="https://muonline.webzen.com/common/img/character/elf.png" class="w-6" alt="Elves"></div>
-                <span class="race-label">Elves</span>
+            <div class="flex flex-col items-center gap-2">
+                <div class="race-filter flex items-center justify-center bg-white/5"><img src="https://muonline.webzen.com/common/img/character/elf.png" class="w-5"></div>
+                <span class="text-[8px] font-black uppercase text-gray-600">ELF</span>
             </div>
-            <div class="race-item flex flex-col items-center">
-                <div class="race-filter"><img src="https://muonline.webzen.com/common/img/character/mg.png" class="w-6" alt="Gladiators"></div>
-                <span class="race-label">Gladiators</span>
-            </div>
-            </div>
+        </div>
 
         <div class="space-y-3">
-            <div class="rank-row rank-gold flex items-center justify-between p-5">
+            <div class="rank-row rank-1 flex items-center justify-between p-5">
                 <div class="flex items-center gap-6">
-                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-black text-[#FFB800] italic text-lg shadow-inner">#1</div>
+                    <span class="text-2xl font-black italic text-[#FFB800]">#1</span>
                     <div>
-                        <h4 class="font-black text-white text-lg tracking-tighter">ImmortalKing</h4>
+                        <h4 class="text-lg font-black text-white italic tracking-tighter uppercase">ImmortalKing</h4>
                         <p class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Dark Knight</p>
                     </div>
                 </div>
                 <div class="text-right">
-                    <p class="text-xl font-black text-[#FFB800] tracking-tighter leading-none">250</p>
-                    <span class="text-[9px] font-bold text-gray-600 uppercase">Resets</span>
-                </div>
-            </div>
-
-            <div class="rank-row rank-silver flex items-center justify-between p-5">
-                <div class="flex items-center gap-6">
-                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-black text-gray-400 italic text-lg shadow-inner">#2</div>
-                    <div>
-                        <h4 class="font-black text-white text-lg tracking-tighter">MagicMaster</h4>
-                        <p class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Soul Master</p>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <p class="text-xl font-black text-gray-300 tracking-tighter leading-none">245</p>
-                    <span class="text-[9px] font-bold text-gray-600 uppercase">Resets</span>
-                </div>
-            </div>
-
-            <div class="rank-row rank-bronze flex items-center justify-between p-5">
-                <div class="flex items-center gap-6">
-                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-black text-amber-700 italic text-lg shadow-inner">#3</div>
-                    <div>
-                        <h4 class="font-black text-white text-lg tracking-tighter">SwiftArrow</h4>
-                        <p class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Muse Elf</p>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <p class="text-xl font-black text-amber-600 tracking-tighter leading-none">240</p>
+                    <p class="text-2xl font-black text-[#FFB800] tracking-tighter">250</p>
                     <span class="text-[9px] font-bold text-gray-600 uppercase">Resets</span>
                 </div>
             </div>
 
             <div class="rank-row flex items-center justify-between p-5">
                 <div class="flex items-center gap-6">
-                    <div class="w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center font-black text-gray-600 italic text-lg shadow-inner">#4</div>
+                    <span class="text-2xl font-black italic text-gray-700">#2</span>
                     <div>
-                        <h4 class="font-black text-white text-lg tracking-tighter">DarkLord99</h4>
-                        <p class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Dark Lord</p>
+                        <h4 class="text-lg font-black text-white italic tracking-tighter uppercase">MagicMaster</h4>
+                        <p class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Soul Master</p>
                     </div>
                 </div>
                 <div class="text-right">
-                    <p class="text-xl font-black text-gray-400 tracking-tighter leading-none">235</p>
+                    <p class="text-2xl font-black text-gray-400 tracking-tighter">245</p>
                     <span class="text-[9px] font-bold text-gray-600 uppercase">Resets</span>
                 </div>
             </div>
