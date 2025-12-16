@@ -3,56 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuMU Online | Início</title>
+    <title>MeuMU Online | Season 19-2-3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
-        .hero-bg { background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images8.alphacoders.com/645/645091.jpg'); background-size: cover; background-position: center; min-height: 100vh; }
-        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: 0.3s; }
-        .status-panel { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 12px; }
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* Seção Principal com a Elfa */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Substitua a URL abaixo pela imagem da sua Elfa preferida */
+            background: linear-gradient(to right, #050505 30%, transparent 70%), 
+                        linear-gradient(to top, #050505 5%, transparent 30%),
+                        url('https://images8.alphacoders.com/645/645091.jpg'); 
+            background-size: cover;
+            background-position: center right;
+        }
+
+        /* Sistema de Partículas Animadas */
+        .particles-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; pointer-events: none;
+            z-index: 1;
+        }
+        .particle {
+            position: absolute;
+            bottom: -10px;
+            background: #FFB800;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise 10s infinite ease-in;
+        }
+        @keyframes rise {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) scale(0.2); opacity: 0; }
+        }
+
+        /* Indicador de Mouse Scroll */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        .mouse-body {
+            width: 22px; height: 36px;
+            border: 2px solid rgba(255, 184, 0, 0.4);
+            border-radius: 12px;
+            position: relative;
+        }
+        .mouse-wheel {
+            width: 4px; height: 8px;
+            background: #FFB800;
+            border-radius: 2px;
+            position: absolute;
+            left: 50%; top: 6px;
+            transform: translateX(-50%);
+            animation: mouse-anim 2s infinite;
+        }
+        @keyframes mouse-anim {
+            0% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, 14px); }
+        }
+
+        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 184, 0, 0.2); }
     </style>
 </head>
 <body>
-    <div class="hero-bg">
-        <div class="max-w-6xl mx-auto px-6">
-           <nav class="flex justify-between items-center py-8">
-    <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
-        <div>
-            <h1 class="text-xl font-black uppercase tracking-tighter leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
-            <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mt-1">Season 19-2-3</p>
-        </div>
-    </div>
-    
-    <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-400">
-        <a href="index.html" class="hover:text-[#FFB800] transition flex items-center gap-2">🏠 Início</a>
-        <a href="ranking.html" class="hover:text-[#FFB800] transition flex items-center gap-2">🏆 Rankings</a>
-        <a href="downloads.html" class="hover:text-[#FFB800] transition flex items-center gap-2">📥 Downloads</a>
-        <a href="events.html" class="hover:text-[#FFB800] transition flex items-center gap-2">⚔️ Eventos</a>
-    </div>
 
-    <a href="login.html" class="btn-primary px-8 py-2.5 rounded text-black font-black text-xs uppercase tracking-tighter">
-        👤 Entrar
-    </a>
-</nav>
-            <main class="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-16 pb-20 items-center">
-                <div class="lg:col-span-7">
-                    <h2 class="text-8xl font-black mb-6 leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h2>
-                    <p class="text-xl text-gray-300 mb-10">Entre na lenda. Domine os reinos. Torne-se imortal.</p>
-                    <div class="flex gap-4"><a href="downloads.html" class="btn-primary px-10 py-4 rounded font-black uppercase text-black">Baixar Agora</a></div>
-                </div>
-                <div class="lg:col-span-5">
-                    <div class="status-panel p-8">
-                        <h4 class="font-black text-sm uppercase tracking-widest mb-6">Status do Servidor</h4>
-                        <div class="space-y-4 text-sm">
-                            <div class="flex justify-between border-b border-white/5 pb-3"><span class="text-gray-500">Versão</span><span class="font-black">Season 6</span></div>
-                            <div class="flex justify-between"><span class="text-gray-500">Online</span><span class="text-green-500 font-black">1'205</span></div>
-                        </div>
+    <section class="hero-section">
+        <div class="particles-container" id="particles"></div>
+
+        <div class="max-w-6xl mx-auto px-6 w-full relative z-10">
+            <nav class="flex justify-between items-center py-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl shadow-[0_0_15px_rgba(255,184,0,0.4)]">M</div>
+                    <div>
+                        <h1 class="text-xl font-black uppercase tracking-tighter leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
+                        <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mt-1">Season 19-2-3</p>
                     </div>
                 </div>
-            </main>
+                <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-400">
+                    <a href="index.html" class="text-[#FFB800] flex items-center gap-2 font-black">🏠 Início</a>
+                    <a href="ranking.html" class="hover:text-white transition flex items-center gap-2">🏆 Rankings</a>
+                    <a href="downloads.html" class="hover:text-white transition flex items-center gap-2">📥 Downloads</a>
+                    <a href="events.html" class="hover:text-white transition flex items-center gap-2">⚔️ Eventos</a>
+                </div>
+                <a href="login.html" class="btn-primary px-8 py-2.5 rounded text-black font-black text-xs uppercase tracking-widest">
+                    👤 Entrar
+                </a>
+            </nav>
+
+            <div class="mt-40 max-w-2xl">
+                <div class="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded mb-4">
+                    <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#FFB800]">Servidor Online</span>
+                </div>
+                <h2 class="text-7xl font-black mb-6 leading-none italic uppercase tracking-tighter">O Destino de um <br><span class="text-[#FFB800]">Guerreiro</span></h2>
+                <p class="text-gray-400 text-lg mb-10 leading-relaxed font-medium">
+                    A jornada épica recomeça na Season 19. <br>
+                    Prepare seu arco, afie sua espada e domine o continente.
+                </p>
+                <div class="flex gap-4">
+                    <a href="downloads.html" class="btn-primary px-12 py-5 rounded font-black uppercase text-black tracking-widest text-xs shadow-xl">JOGAR AGORA</a>
+                    <a href="events.html" class="bg-white/5 border border-white/10 hover:bg-white/10 px-12 py-5 rounded font-black uppercase transition text-xs flex items-center tracking-widest">CRONOGRAMA</a>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse-body">
+                <div class="mouse-wheel"></div>
+            </div>
+            <span class="text-[9px] font-bold text-gray-600 uppercase tracking-[0.3em]">Role para baixo</span>
+        </div>
+    </section>
+
+    <script>
+        // Criação dinâmica das partículas
+        const pContainer = document.getElementById('particles');
+        const pCount = 40; // Quantidade de partículas
+
+        for (let i = 0; i < pCount; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            
+            // Posição e tamanho aleatórios
+            const size = Math.random() * 3 + 1 + 'px';
+            p.style.width = size;
+            p.style.height = size;
+            p.style.left = Math.random() * 100 + '%';
+            
+            // Velocidade e atraso aleatórios
+            p.style.animationDuration = Math.random() * 5 + 7 + 's';
+            p.style.animationDelay = Math.random() * 8 + 's';
+            
+            pContainer.appendChild(p);
+        }
+    </script>
 </body>
 </html>
