@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rankings | MU Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: all 0.3s ease; }
+        .status-panel { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 12px; }
+    </style>
+</head>
+<body>
+    <div class="max-w-6xl mx-auto px-6">
+        <nav class="flex justify-between items-center py-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
+                <h1 class="text-xl font-black">MU <span class="text-[#FFB800]">ONLINE</span></h1>
+            </div>
+            <div class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest text-gray-400">
+                <a href="index.html" class="hover:text-white transition">Início</a>
+                <a href="ranking.html" class="text-[#FFB800]">Rankings</a>
+                <a href="downloads.html" class="hover:text-white transition">Downloads</a>
+                <a href="#" class="hover:text-white transition">Eventos</a>
+            </div>
+            <button class="btn-primary px-8 py-2.5 rounded text-black font-bold text-xs uppercase">Entrar</button>
+        </nav>
+
+        <main class="py-20">
+            <h2 class="text-4xl font-black mb-16 text-center uppercase italic">Hall da <span class="text-[#FFB800]">Fama</span></h2>
+            
+            <div class="status-panel overflow-hidden">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-[#FFB800]/10 text-[#FFB800] uppercase text-[10px] tracking-widest">
+                        <tr>
+                            <th class="p-5">Posição</th>
+                            <th class="p-5">Personagem</th>
+                            <th class="p-5">Classe</th>
+                            <th class="p-5 text-right">Resets</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="p-5 font-black">#1</td>
+                            <td class="p-5 font-bold">GodOfWar</td>
+                            <td class="p-5 text-gray-400 text-xs uppercase font-bold tracking-widest">Dark Knight</td>
+                            <td class="p-5 text-right font-black text-[#FFB800]">540</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="p-5 font-black text-gray-500">#2</td>
+                            <td class="p-5 font-bold">DarkLord_</td>
+                            <td class="p-5 text-gray-400 text-xs uppercase font-bold tracking-widest">Dark Lord</td>
+                            <td class="p-5 text-right font-black">512</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
