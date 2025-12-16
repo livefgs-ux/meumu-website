@@ -3,155 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuMu Online | Epic Season 19-2-3</title>
+    <title>MeuMU Online | Início</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        html { scroll-behavior: smooth; }
-        body {
-            background-color: #050505;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-        }
-        .hero-bg {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%), 
-                        url('https://images8.alphacoders.com/645/645091.jpg');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-        }
-        .gold-glow { text-shadow: 0 0 15px rgba(255, 184, 0, 0.4); }
-        .btn-primary {
-            background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 184, 0, 0.4); }
-        .status-panel {
-            background: rgba(15, 15, 15, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 184, 0, 0.1);
-            border-radius: 12px;
-        }
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
+        .hero-bg { background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url('https://images8.alphacoders.com/645/645091.jpg'); background-size: cover; background-position: center; min-height: 100vh; }
+        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: 0.3s; }
+        .status-panel { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 12px; }
     </style>
 </head>
 <body>
-
     <div class="hero-bg">
         <div class="max-w-6xl mx-auto px-6">
-            
             <nav class="flex justify-between items-center py-8">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
-                    <h1 class="text-xl font-black tracking-tighter">MeuMu <span class="text-[#FFB800]">ONLINE</span></h1>
+                    <h1 class="text-xl font-black">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
                 </div>
-                
                 <div class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest text-gray-400">
-                    <a href="#" class="text-[#FFB800]">Início</a>
-                    <a href="login.html"class="hover:text-white transition">login</a>
-                    <a href="ranking.html"class="hover:text-white transition">Rankings</a>
+                    <a href="index.html" class="text-[#FFB800]">Início</a>
+                    <a href="ranking.html" class="hover:text-white transition">Rankings</a>
                     <a href="downloads.html" class="hover:text-white transition">Downloads</a>
                     <a href="eventos.html" class="hover:text-white transition">Eventos</a>
-                    <a href="#" class="hover:text-white transition">Eventos</a>
                 </div>
-
-                <button class="btn-primary px-8 py-2.5 rounded text-black font-bold text-xs uppercase tracking-tighter">Entrar</button>
+                <a href="login.html" class="btn-primary px-8 py-2.5 rounded text-black font-bold text-xs uppercase">Entrar</a>
             </nav>
-
             <main class="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-16 pb-20 items-center">
-                
-                <div class="lg:col-span-7 text-center lg:text-left">
-                    <p class="text-[#FFB800] text-xs font-bold tracking-[0.4em] mb-4 uppercase">✦ Season 19-2-3 - Épico ✦</p>
-                    <h2 class="text-7xl lg:text-8xl font-black mb-6 leading-none">MU <span class="text-[#FFB800] gold-glow">ONLINE</span></h2>
-                    <p class="text-xl text-gray-300 mb-10 max-w-lg mx-auto lg:mx-0">Entre na lenda. Domine os reinos. Torne-se imortal.</p>
-                    
-                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start" id="downloads">
-                        <button class="btn-primary px-10 py-4 rounded font-black uppercase text-black">Baixar Agora</button>
-                        <button class="border border-white/10 px-10 py-4 rounded font-black uppercase hover:bg-white/5 transition">Ver Eventos</button>
-                    </div>
-
-                    <div class="flex gap-8 mt-16 justify-center lg:justify-start">
-                        <div class="text-center">
-                            <p class="text-2xl font-black text-[#FFB800]">1,247</p>
-                            <p class="text-[10px] text-gray-500 uppercase font-bold">Online</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-2xl font-black text-[#FFB800]">500x</p>
-                            <p class="text-[10px] text-gray-500 uppercase font-bold">Exp</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-2xl font-black text-[#FFB800]">70%</p>
-                            <p class="text-[10px] text-gray-500 uppercase font-bold">Drop</p>
-                        </div>
-                    </div>
+                <div class="lg:col-span-7">
+                    <h2 class="text-8xl font-black mb-6 leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h2>
+                    <p class="text-xl text-gray-300 mb-10">Entre na lenda. Domine os reinos. Torne-se imortal.</p>
+                    <div class="flex gap-4"><a href="downloads.html" class="btn-primary px-10 py-4 rounded font-black uppercase text-black">Baixar Agora</a></div>
                 </div>
-
                 <div class="lg:col-span-5">
                     <div class="status-panel p-8">
-                        <div class="flex justify-between items-center mb-6">
-                            <h4 class="font-black text-sm uppercase tracking-widest text-sm">Status do Servidor</h4>
-                            <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                <span class="text-[10px] font-black text-green-500 uppercase">Online</span>
-                            </div>
-                        </div>
-                        <div class="space-y-5">
-                            <div class="flex justify-between border-b border-white/5 pb-3">
-                                <span class="text-gray-500 font-bold text-xs uppercase">Versão</span>
-                                <span class="font-black text-sm">Season 6</span>
-                            </div>
-                            <div class="flex justify-between border-b border-white/5 pb-3">
-                                <span class="text-gray-500 font-bold text-xs uppercase">Exp Rate</span>
-                                <span class="font-black text-sm">500x</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-gray-500 font-bold text-xs uppercase">Players Online</span>
-                                <span class="font-black text-sm">1'205</span>
-                            </div>
+                        <h4 class="font-black text-sm uppercase tracking-widest mb-6">Status do Servidor</h4>
+                        <div class="space-y-4 text-sm">
+                            <div class="flex justify-between border-b border-white/5 pb-3"><span class="text-gray-500">Versão</span><span class="font-black">Season 6</span></div>
+                            <div class="flex justify-between"><span class="text-gray-500">Online</span><span class="text-green-500 font-black">1'205</span></div>
                         </div>
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
-
-    <section id="ranking" class="max-w-6xl mx-auto px-6 py-24">
-        <div class="text-center mb-16">
-            <h3 class="text-[#FFB800] font-bold text-xs tracking-[0.5em] uppercase mb-2">Hall da Fama</h3>
-            <h2 class="text-4xl font-black italic uppercase">Top <span class="text-[#FFB800]">Rankings</span></h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="status-panel p-8">
-                <h4 class="font-black uppercase mb-8 border-b border-[#FFB800]/20 pb-4 flex items-center gap-3">
-                    <span class="text-[#FFB800]">🏆</span> Top Resets
-                </h4>
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center bg-white/5 p-4 rounded border-l-2 border-[#FFB800]">
-                        <span class="font-bold text-sm">1. GodOfWar</span>
-                        <span class="text-[#FFB800] font-black text-xs uppercase">540 Resets</span>
-                    </div>
-                    <div class="flex justify-between items-center bg-white/5 p-4 rounded border-l-2 border-gray-700">
-                        <span class="font-bold text-sm text-gray-400">2. DarkLord_</span>
-                        <span class="text-gray-500 font-black text-xs uppercase">512 Resets</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="status-panel p-8">
-                <h4 class="font-black uppercase mb-8 border-b border-[#FFB800]/20 pb-4 flex items-center gap-3">
-                    <span class="text-[#FFB800]">🛡️</span> Top Guilds
-                </h4>
-                <div class="space-y-4">
-                    <div class="flex justify-between items-center bg-white/5 p-4 rounded border-l-2 border-[#FFB800]">
-                        <span class="font-bold text-sm text-gray-200 uppercase tracking-tighter">Eternals</span>
-                        <span class="text-gray-500 font-bold text-[10px] uppercase">Líder: Artas</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 </body>
 </html>
