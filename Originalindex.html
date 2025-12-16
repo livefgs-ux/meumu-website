@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuMU | TEST PROFESSIONAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #FFB800; --gold-dark: #B58C2B; --dark-bg: #030303; }
+        
+        body { background-color: var(--dark-bg); color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* [ARTE] BACKGROUND COM PROFUNDIDADE TÉCNICA */
+        .hero-bg { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+            background: linear-gradient(to bottom, rgba(3,3,3,0.5) 0%, rgba(3,3,3,0.95) 100%),
+                        url('https://images8.alphacoders.com/645/645091.jpg'); 
+            background-size: cover; background-position: center 20%; transform: scale(1.1); filter: saturate(1.2) contrast(1.1);
+        }
+
+        /* [UI] GLASSMORPHISM PROFISSIONAL (Ref. TemplStock) */
+        .glass-panel { 
+            background: linear-gradient(160deg, rgba(20,20,20,0.85) 0%, rgba(10,10,10,0.95) 100%);
+            backdrop-filter: blur(25px); 
+            border: 1px solid rgba(255, 184, 0, 0.15); 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative; overflow: hidden;
+        }
+        .glass-panel::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,184,0,0.05), transparent);
+            transition: 0.8s;
+        }
+        .glass-panel:hover::before { left: 200%; }
+
+        /* [TIPO] Títulos estilo "Syncopate" para agressividade */
+        .heading-font { font-family: 'Syncopate', sans-serif; letter-spacing: -1px; }
+
+        /* [BOUTÃO] Efeito de Metal Liquido */
+        .btn-premium {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: #000; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 1px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 20px rgba(255, 184, 0, 0.2);
+        }
+        .btn-premium:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 30px rgba(255, 184, 0, 0.4); }
+
+        /* [SPA] Transição de Opacidade e Blur */
+        .page-content { display: none; opacity: 0; filter: blur(10px); transition: all 0.7s ease-in-out; }
+        .page-content.active { display: block; opacity: 1; filter: blur(0px); }
+
+        .active-page { color: var(--gold) !important; text-transform: uppercase !important; border-bottom: 2px solid var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div class="hero-bg"></div>
+
+    <nav class="fixed top-0 w-full z-[100] px-10 py-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="heading-font text-2xl font-bold tracking-tighter">MEU<span class="text-[#FFB800]">MU</span></div>
+            
+            <div class="glass-panel px-8 py-3 rounded-full flex gap-8 items-center border-white/5">
+                <button onclick="showPage('home')" id="nav-home" class="text-[10px] font-bold text-gray-400 hover:text-white transition uppercase tracking-widest active-page">Início</button>
+                <button onclick="showPage('rank')" id="nav-rank" class="text-[10px] font-bold text-gray-400 hover:text-white transition uppercase tracking-widest">Rankings</button>
+                <button onclick="showPage('dashboard')" id="nav-dashboard" class="btn-premium px-6 py-2 rounded-full text-[9px]">👤 Dashboard</button>
+                <button onclick="showPage('events')" id="nav-events" class="text-[10px] font-bold text-gray-400 hover:text-white transition uppercase tracking-widest">Eventos</button>
+                <button onclick="showPage('download')" id="nav-download" class="text-[10px] font-bold text-gray-400 hover:text-white transition uppercase tracking-widest">Downloads</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="h-screen flex items-center justify-center pt-20 px-10">
+        
+        <section id="home" class="page-content active w-full max-w-5xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="space-y-6">
+                    <h4 class="text-[#FFB800] text-xs font-black tracking-[0.5em] uppercase">Season 19 Part 2-3</h4>
+                    <h1 class="heading-font text-6xl font-black leading-none">A LENDA<br><span class="text-white/20" style="-webkit-text-stroke: 1px var(--gold);">RENASCE</span></h1>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">Domine o continente com o servidor mais estável do Brasil. Drops dinâmicos e PVP equilibrado.</p>
+                    <button onclick="showPage('download')" class="btn-premium px-10 py-4 rounded-lg text-xs">Começar Jornada</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="page-content w-full flex justify-center">
+            <div class="glass-panel p-10 rounded-[30px] w-full max-w-md border-white/5 shadow-2xl">
+                <div class="text-center mb-10">
+                    <div class="text-4xl mb-4">🛡️</div>
+                    <h2 class="heading-font text-2xl font-bold uppercase italic">Acessar Conta</h2>
+                    <div class="h-1 w-10 bg-[#FFB800] mx-auto mt-2"></div>
+                </div>
+                <form class="space-y-5">
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-black text-gray-500 uppercase tracking-widest">Login de Usuário</label>
+                        <input type="text" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-[#FFB800] transition outline-none text-xs font-bold">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[9px] font-black text-gray-500 uppercase tracking-widest">Senha de Segurança</label>
+                        <input type="password" class="w-full bg-white/5 border border-white/10 p-4 rounded-xl focus:border-[#FFB800] transition outline-none text-xs font-bold">
+                    </div>
+                    <button class="btn-premium w-full py-4 rounded-xl text-xs mt-4">Entrar no Jogo</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function showPage(pageId) {
+            const sections = document.querySelectorAll('.page-content');
+            const navButtons = document.querySelectorAll('nav button');
+            
+            sections.forEach(s => { s.style.opacity = '0'; s.style.filter = 'blur(10px)'; });
+            navButtons.forEach(btn => btn.classList.remove('active-page'));
+
+            setTimeout(() => {
+                sections.forEach(s => s.classList.remove('active'));
+                const target = document.getElementById(pageId);
+                const activeBtn = document.getElementById('nav-' + pageId);
+                
+                if(target) {
+                    target.classList.add('active');
+                    if(activeBtn) activeBtn.classList.add('active-page');
+                    setTimeout(() => { 
+                        target.style.opacity = '1'; 
+                        target.style.filter = 'blur(0px)';
+                    }, 50);
+                }
+            }, 600);
+        }
+    </script>
+</body>
+</html>
