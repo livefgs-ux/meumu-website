@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | MU Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: 0.3s; }
+        .dash-card { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 12px; }
+        .gold-glow { text-shadow: 0 0 10px rgba(255, 184, 0, 0.3); }
+        .progress-bar { background: linear-gradient(90deg, #FFB800 0%, #B58C2B 100%); height: 4px; border-radius: 2px; }
+    </style>
+</head>
+<body>
+    <div class="max-w-6xl mx-auto px-6">
+        <nav class="flex justify-between items-center py-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
+                <h1 class="text-xl font-black uppercase tracking-tighter">MU <span class="text-[#FFB800]">ONLINE</span></h1>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="text-right hidden sm:block">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Seja bem-vindo</p>
+                    <p class="text-xs font-black">Buddy!</p>
+                </div>
+                <a href="index.html" class="text-xs font-bold text-red-500 uppercase border border-red-500/20 px-4 py-2 rounded hover:bg-red-500/10 transition">Sair</a>
+            </div>
+        </nav>
+
+        <main class="py-10">
+            <header class="mb-12 flex justify-between items-end">
+                <div>
+                    <h2 class="text-4xl font-black uppercase italic tracking-tighter">Seu <span class="text-[#FFB800] gold-glow">Painel</span></h2>
+                    <p class="text-gray-500 text-[10px] mt-2 uppercase font-bold tracking-[0.3em]">Gerencie seus guerreiros e conquistas</p>
+                </div>
+                <div class="bg-white/5 p-4 rounded-lg border border-white/10 text-right">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">WCoins Disponíveis</p>
+                    <p class="text-xl font-black text-[#FFB800]">5,200</p>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="dash-card p-8">
+                        <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
+                            <h3 class="font-black uppercase text-sm tracking-widest">Meus Personagens</h3>
+                            <button class="text-[10px] text-[#FFB800] font-bold uppercase hover:underline">Distribuir Pontos</button>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white/5 p-6 rounded-lg border border-white/5 hover:border-[#FFB800]/30 transition group cursor-pointer">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <p class="text-lg font-black group-hover:text-[#FFB800]">Soul_Master_Boss</p>
+                                        <p class="text-[10px] text-gray-500 uppercase font-bold">Grand Master</p>
+                                    </div>
+                                    <span class="text-xs font-black text-[#FFB800] bg-[#FFB800]/10 px-2 py-1 rounded">Lv. 400</span>
+                                </div>
+                                <div class="space-y-2 mb-6">
+                                    <div class="flex justify-between text-[10px] uppercase font-bold text-gray-500">
+                                        <span>Progresso de Reset</span>
+                                        <span>75%</span>
+                                    </div>
+                                    <div class="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+                                        <div class="progress-bar w-[75%]"></div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                                    <span class="text-[10px] text-gray-400 font-bold uppercase italic">150 Resets</span>
+                                    <button class="bg-[#FFB800] text-black text-[10px] font-black px-4 py-2 rounded uppercase tracking-tighter shadow-lg shadow-[#FFB800]/10">Selecionar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="dash-card p-8">
+                        <h4 class="font-black uppercase text-sm mb-6 border-b border-white/5 pb-4">Status da Conta</h4>
+                        <div class="space-y-4">
+                            <div class="flex justify-between text-xs font-bold">
+                                <span class="text-gray-500 uppercase">Status VIP</span>
+                                <span class="text-green-500 uppercase tracking-tighter">VIP Gold Ativo</span>
+                            </div>
+                            <div class="flex justify-between text-xs font-bold">
+                                <span class="text-gray-500 uppercase">Último Login</span>
+                                <span class="text-gray-300">16/12/2025</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-white/5">
+                            <button class="w-full py-3 bg-white/5 border border-white/10 rounded text-[10px] font-black uppercase text-gray-400 hover:text-white hover:bg-white/10 transition mb-3 tracking-widest">Alterar Senha</button>
+                            <button class="w-full py-3 bg-red-500/10 border border-red-500/20 rounded text-[10px] font-black uppercase text-red-500 hover:bg-red-500/20 transition tracking-widest">Logs de Acesso</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
