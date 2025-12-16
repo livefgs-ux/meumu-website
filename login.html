@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | MU Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: all 0.3s ease; }
+        .login-card { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 16px; }
+        .input-field { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; transition: 0.3s; }
+        .input-field:focus { border-color: #FFB800; outline: none; background: rgba(255,255,255,0.08); }
+    </style>
+</head>
+<body>
+    <div class="max-w-6xl mx-auto px-6">
+        <nav class="flex justify-between items-center py-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
+                <h1 class="text-xl font-black uppercase tracking-tighter">MU <span class="text-[#FFB800]">ONLINE</span></h1>
+            </div>
+            <div class="hidden md:flex gap-10 text-xs font-bold uppercase tracking-widest text-gray-400">
+                <a href="index.html" class="hover:text-white transition">Início</a>
+                <a href="ranking.html" class="hover:text-white transition">Rankings</a>
+                <a href="downloads.html" class="hover:text-white transition">Downloads</a>
+                <a href="eventos.html" class="hover:text-white transition">Eventos</a>
+            </div>
+            <a href="login.html" class="btn-primary px-8 py-2.5 rounded text-black font-bold text-xs uppercase tracking-tighter text-center">Entrar</a>
+        </nav>
+
+        <main class="flex justify-center items-center py-12">
+            <div class="login-card p-10 w-full max-w-md shadow-2xl">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black uppercase italic tracking-tighter">Welcome <span class="text-[#FFB800]">Buddy!</span></h2>
+                    <p class="text-gray-500 text-xs mt-2 uppercase font-bold tracking-widest">Acesse sua conta medieval</p>
+                </div>
+
+                <form class="space-y-6">
+                    <div>
+                        <label class="text-[10px] font-black uppercase text-gray-500 tracking-widest block mb-2">Usuário</label>
+                        <input type="text" class="input-field w-full p-4 text-sm" placeholder="Digite seu login...">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-black uppercase text-gray-500 tracking-widest block mb-2">Senha</label>
+                        <input type="password" class="input-field w-full p-4 text-sm" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-4 rounded font-black uppercase text-black tracking-widest text-xs mt-4">Entrar no Reino</button>
+                </form>
+
+                <div class="mt-8 text-center">
+                    <p class="text-xs text-gray-500 font-bold">Ainda não tem conta? <a href="#" class="text-[#FFB800] hover:underline">Cadastre-se aqui</a></p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
