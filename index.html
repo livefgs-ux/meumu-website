@@ -8,41 +8,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* [ESTILO GERAL] */
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
         
-        /* BACKGROUND RECONSTITUÍDO DA IMAGEM */
+        /* RECONSTITUIÇÃO DA IMAGEM: ELFA FOGO E GELO */
         .hero-bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            background: radial-gradient(circle at 70% 50%, transparent 10%, #050505 90%),
-                        url('https://r.jina.ai/i/05786417774149029969d799f8d5e828'); /* Link da imagem da Elfa */
-            background-size: cover; background-position: center right; opacity: 0.85; 
+            background: radial-gradient(circle at 60% 50%, transparent 0%, #050505 85%),
+                        url('https://files.oaiusercontent.com/file-AnAEv7f2P8Mv5NfWpPrYj5?se=2025-12-17T12%3A52%3A49Z&sp=r&sv=24.4.1&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D123.jpg&sig=vN6kL2u%2B%2BJ8U8B6N0O7w3A1R4T7G5u3%2F7I4%3D'); 
+            background-size: cover; 
+            background-position: center; 
+            opacity: 0.9; 
         }
 
-        .glass-panel { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255, 184, 0, 0.15); border-radius: 20px; }
+        .glass-panel { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 184, 0, 0.15); border-radius: 20px; }
         .btn-gold { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); color: black; font-weight: 900; transition: 0.4s ease; }
 
         .nav-link-btn { text-transform: none; transition: all 0.3s ease; }
         .nav-link-btn:hover { text-transform: uppercase; color: white; }
         .nav-link-btn.active-page { text-transform: uppercase !important; color: #FFB800 !important; }
 
-        .page-content { 
-            display: none; opacity: 0; filter: blur(4px); transform: translateY(5px);
-            transition: opacity 0.8s ease-in-out, filter 0.8s ease-in-out, transform 0.8s ease-in-out; 
-            width: 100%; 
-        }
-        .page-content.active { display: block; opacity: 1; filter: blur(0px); transform: translateY(0); }
-
-        .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; animation: rise 10s infinite ease-in; }
-        @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-100vh) scale(0.2); opacity: 0; } }
+        .page-content { display: none; opacity: 0; filter: blur(4px); transition: 0.8s ease-in-out; width: 100%; }
+        .page-content.active { display: block; opacity: 1; filter: blur(0px); }
     </style>
 </head>
 <body>
 
     <div class="hero-bg"></div>
-    <div id="particles-container" class="fixed inset-0 pointer-events-none"></div>
 
-<div class="fixed top-0 w-full z-[110] bg-black/95 border-b border-white/5 py-1.5 px-8 shadow-2xl">
+<div class="fixed top-0 w-full z-[110] bg-black/95 border-b border-white/5 py-1.5 px-8">
         <div class="max-w-7xl mx-auto flex justify-between items-center font-black uppercase tracking-widest text-[10px]">
             
             <div class="flex gap-4 items-center">
@@ -65,9 +58,7 @@
         <div class="max-w-5xl mx-auto glass-panel border-white/5 py-3 px-10 flex justify-between items-center shadow-2xl">
             <button onclick="showPage('home')" id="nav-home" class="nav-link-btn active-page text-[11px] font-black text-gray-400 flex items-center gap-2">🏠 Início</button>
             <button onclick="showPage('rank')" id="nav-rank" class="nav-link-btn text-[11px] font-black text-gray-400 flex items-center gap-2">🏆 Rankings</button>
-            
-            <button onclick="showPage('dashboard')" id="nav-dashboard" class="btn-gold px-8 py-2 rounded-lg text-[11px] uppercase shadow-2xl transition hover:scale-105">👤 Dashboard</button>
-            
+            <button onclick="showPage('dashboard')" id="nav-dashboard" class="btn-gold px-8 py-2 rounded-lg text-[11px] uppercase shadow-2xl">👤 Dashboard</button>
             <button onclick="showPage('events')" id="nav-events" class="nav-link-btn text-[11px] font-black text-gray-400 flex items-center gap-2">⚔️ Eventos</button>
             <button onclick="showPage('download')" id="nav-download" class="nav-link-btn text-[11px] font-black text-gray-400 flex items-center gap-2">📥 Downloads</button>
         </div>
@@ -91,23 +82,16 @@
 
         <section id="dashboard" class="page-content w-full flex justify-center">
             <div class="glass-panel p-12 border-white/10 text-center max-w-md w-full">
-                <h2 class="text-2xl font-black uppercase italic mb-8">Área do Jogador</h2>
+                <h2 class="text-2xl font-black uppercase italic mb-8 tracking-tighter">Área do Jogador</h2>
                 <form class="space-y-4 text-left">
-                    <input type="text" placeholder="USUÁRIO" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl outline-none focus:border-[#FFB800] text-[10px] font-bold">
-                    <button class="btn-gold w-full py-4 rounded-xl text-xs tracking-widest uppercase">Entrar</button>
+                    <input type="text" placeholder="USUÁRIO" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl outline-none focus:border-[#FFB800] text-[10px] font-bold uppercase transition">
+                    <input type="password" placeholder="SENHA" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl outline-none focus:border-[#FFB800] text-[10px] font-bold uppercase transition">
+                    <button class="btn-gold w-full py-4 rounded-xl text-xs tracking-widest mt-2 uppercase">Entrar</button>
                 </form>
             </div>
         </section>
 
-        <section id="rank" class="page-content w-full"><div class="glass-panel p-10 text-center"><h2 class="text-4xl font-black italic uppercase">Rankings</h2></div></section>
-        <section id="events" class="page-content w-full text-center"><div class="glass-panel p-10"><h2 class="text-4xl font-black italic uppercase">Eventos</h2></div></section>
-        <section id="download" class="page-content w-full text-center"><div class="glass-panel p-10"><h2 class="text-4xl font-black italic uppercase">Downloads</h2></div></section>
-
     </main>
-
-    <footer class="fixed bottom-0 w-full z-[110] bg-black/95 border-t border-white/5 py-4 px-8 flex justify-between items-center text-[10px] font-black text-gray-600 uppercase italic">
-        <p>&copy; 2025 <span class="text-[#FFB800]">MeuMU Online</span> | Desenvolvido por <span class="text-white not-italic">SeuNome</span></p>
-    </footer>
 
     <script>
         function showPage(pageId) {
