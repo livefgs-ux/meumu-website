@@ -3,111 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | MeuMU Online</title>
+    <title>MeuMU ONLINE | Portal Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
-        .btn-primary { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); transition: 0.3s; }
-        .dash-card { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255, 184, 0, 0.1); border-radius: 12px; }
-        .gold-glow { text-shadow: 0 0 10px rgba(255, 184, 0, 0.3); }
-        .progress-bar { background: linear-gradient(90deg, #FFB800 0%, #B58C2B 100%); height: 4px; border-radius: 2px; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+    body { background-color: #020202; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
+    
+    .hero-bg { 
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
+        background: linear-gradient(to right, rgba(2,2,2,0.9) 15%, transparent 65%),
+                    url('https://r.jina.ai/i/05786417774149029969d799f8d5e828');
+        background-size: cover; background-position: center; opacity: 1; 
+    }
+
+    .btn-base { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 0.375rem; font-size: 0.875rem; transition: all 0.3s; outline: none; border: none; cursor: pointer; }
+    .btn-default { background: #FFB800; color: black; font-weight: 900; }
+    .btn-outline { border: 1px solid rgba(255, 184, 0, 0.4); background: rgba(10, 10, 10, 0.5); color: white; }
+    .btn-ghost { color: #888; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; }
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.05); color: white; }
+
+    .card-base { background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; display: flex; flex-direction: column; gap: 1.5rem; transition: 0.4s ease; }
+    .card-header { display: grid; grid-template-rows: auto auto; gap: 0.375rem; padding: 1.5rem 1.5rem 0; }
+    .card-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.25rem; line-height: 1; }
+    .card-description { color: #666; font-size: 0.875rem; font-weight: 500; }
+    .card-content { padding: 0 1.5rem; }
+    .card-footer { padding: 0 1.5rem 1.5rem; display: flex; align-items: center; }
+
+    .page-content { display: none; opacity: 0; filter: blur(10px); transition: 0.8s ease-in-out; width: 100%; }
+    .page-content.active { display: block; opacity: 1; filter: blur(0px); }
+
+    .nav-trigger { display: inline-flex; height: 2.25rem; align-items: center; border-radius: 0.375rem; background: transparent; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: #888; transition: all 0.2s; border: none; cursor: pointer; }
+    .nav-trigger:hover, .nav-trigger.active-tab { color: #FFB800; }
+
+    .char-card { border: 2px solid rgba(255, 184, 0, 0.1); cursor: pointer; transition: 0.3s; }
+    .char-card.selected { border-color: #FFB800; background: rgba(255, 184, 0, 0.1); transform: scale(1.02); }
+
+    .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; animation: rise 10s infinite ease-in; pointer-events: none; }
+    @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 100% { transform: translateY(-100vh); opacity: 0; } }
+</style>
 </head>
 <body>
-    <div class="max-w-6xl mx-auto px-6">
-        <nav class="flex justify-between items-center py-8">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-[#FFB800] rounded flex items-center justify-center font-bold text-black text-xl">M</div>
-                <div>
-                    <h1 class="text-xl font-black uppercase tracking-tighter leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
-                    <p class="text-[9px] font-bold text-gray-500 tracking-[0.2em] uppercase mt-1">Season 19-2-3</p>
-                </div>
-            </div>
-            
-            <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                <a href="index.html" class="hover:text-white transition flex items-center gap-2">🏠 Início</a>
-                <a href="downloads.html" class="hover:text-white transition flex items-center gap-2">📥 Downloads</a>
-                <a href="events.html" class="hover:text-white transition flex items-center gap-2">⚔️ Eventos</a>
-            </div>
 
-            <div class="flex items-center gap-6 border-l border-white/10 pl-6">
-                <div class="text-right">
-                    <p class="text-[9px] text-gray-500 font-bold uppercase">Bem-vindo</p>
-                    <p class="text-xs font-black">Buddy!</p>
-                </div>
-                <a href="index.html" class="text-[10px] font-black text-red-500 uppercase border border-red-500/20 px-3 py-1.5 rounded hover:bg-red-500/10 transition">🚪 Sair</a>
-            </div>
-        </nav>
+    <div class="hero-bg"></div>
+    <div id="particles-container" class="fixed inset-0 pointer-events-none"></div>
 
-        <main class="py-10">
-            <header class="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div>
-                    <h2 class="text-4xl font-black uppercase italic tracking-tighter">Seu <span class="text-[#FFB800] gold-glow">Painel</span></h2>
-                    <p class="text-gray-500 text-[10px] mt-2 uppercase font-bold tracking-[0.3em]">Gerencie seus guerreiros e conquistas</p>
-                </div>
-                <div class="bg-white/5 p-4 rounded-lg border border-white/10 text-right min-w-[150px]">
-                    <p class="text-[10px] text-gray-500 font-bold uppercase mb-1">💰 WCoins</p>
-                    <p class="text-xl font-black text-[#FFB800]">5,200</p>
-                </div>
-            </header>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <div class="lg:col-span-8 space-y-6">
-                    <div class="dash-card p-8">
-                        <div class="flex justify-between items-center mb-8 border-b border-white/5 pb-4">
-                            <h3 class="font-black uppercase text-sm tracking-widest flex items-center gap-2">👤 Meus Personagens</h3>
-                            <button class="text-[10px] text-[#FFB800] font-bold uppercase hover:underline">Distribuir Pontos</button>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-white/5 p-6 rounded-lg border border-white/5 hover:border-[#FFB800]/30 transition group">
-                                <div class="flex justify-between items-start mb-4">
-                                    <div>
-                                        <p class="text-lg font-black group-hover:text-[#FFB800]">Soul_Master_Boss</p>
-                                        <p class="text-[10px] text-gray-500 uppercase font-bold tracking-tighter">Grand Master</p>
-                                    </div>
-                                    <span class="text-xs font-black text-[#FFB800] bg-[#FFB800]/10 px-2 py-1 rounded">Lv. 400</span>
-                                </div>
-                                <div class="space-y-2 mb-6 text-[10px] uppercase font-bold">
-                                    <div class="flex justify-between text-gray-500">
-                                        <span>Experiência</span>
-                                        <span>75%</span>
-                                    </div>
-                                    <div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
-                                        <div class="progress-bar w-[75%]"></div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                                    <span class="text-[10px] text-gray-400 font-bold uppercase italic">150 Resets</span>
-                                    <button class="bg-[#FFB800] text-black text-[10px] font-black px-4 py-2 rounded uppercase tracking-tighter">Gerenciar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="dash-card p-8">
-                        <h4 class="font-black uppercase text-sm mb-6 border-b border-white/5 pb-4 flex items-center gap-2">⚙️ Status da Conta</h4>
-                        <div class="space-y-4">
-                            <div class="flex justify-between text-[10px] font-bold uppercase">
-                                <span class="text-gray-500">Status VIP</span>
-                                <span class="text-green-500">VIP Gold Ativo</span>
-                            </div>
-                            <div class="flex justify-between text-[10px] font-bold uppercase">
-                                <span class="text-gray-500">Personagens</span>
-                                <span class="text-gray-300">01 / 05</span>
-                            </div>
-                        </div>
-                        <div class="mt-8 pt-6 border-t border-white/5 space-y-3">
-                            <button class="w-full py-3 bg-white/5 border border-white/10 rounded text-[10px] font-black uppercase text-gray-400 hover:text-white transition tracking-widest">🔑 Alterar Senha</button>
-                            <button class="w-full py-3 bg-red-500/10 border border-red-500/20 rounded text-[10px] font-black uppercase text-red-500 hover:bg-red-500/20 transition tracking-widest">🛡️ Logs de Acesso</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+<header class="fixed top-0 w-full z-[110] bg-black/95 border-b border-white/5 py-1.5 px-8 shadow-2xl">
+    <div class="max-w-7xl mx-auto flex justify-between items-center font-black uppercase tracking-widest text-[10px]">
+        <div class="flex gap-4 items-center">
+            <button class="flex items-center gap-1.5 text-white hover:text-[#FFB800] transition">EN</button>
+            <button class="flex items-center gap-1.5 text-white hover:text-[#FFB800] transition">BR</button>
+        </div>
+        <div class="flex items-center gap-2 text-[#FFB800] italic">
+            <div class="w-2.5 h-3 bg-blue-500 rounded-full shadow-[0_0_10px_#3b82f6]"></div>
+            Proteção Anti-Hack Ativa
+        </div>
     </div>
+</header>
+<nav class="fixed top-8 w-full z-[100] py-6 px-10 flex justify-center">
+    <div class="flex bg-black/80 backdrop-blur-xl border border-white/10 p-1 rounded-lg">
+        <button onclick="showPage('home')" id="nav-home" class="nav-trigger active-tab">Início</button>
+        <button onclick="showPage('rank')" id="nav-rank" class="nav-trigger">Rankings</button>
+        <button onclick="showPage('dashboard')" id="nav-dashboard" class="bg-[#FFB800] text-black h-8 px-6 mx-1 rounded-md text-[10px] font-black uppercase shadow-lg">Dashboard</button>
+        <button onclick="showPage('events')" id="nav-events" class="nav-trigger">Eventos</button>
+        <button onclick="showPage('download')" id="nav-download" class="nav-trigger">Downloads</button>
+    </div>
+</nav>
+<main class="max-w-7xl mx-auto min-h-screen flex flex-col items-center justify-center relative z-10 pt-32 pb-20 px-6">
+        
+<section id="dashboard" class="page-content w-full">
+    
+    <div id="dash-login" class="max-w-md mx-auto">
+        <div class="card-base p-8 text-center border-yellow-500/30">
+            <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-yellow-500/50 shadow-lg">
+                <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            </div>
+            <h2 class="text-2xl font-black text-white mb-2">Área do Jogador</h2>
+            <p class="text-gray-400 text-sm mb-8">Faça login para gerenciar sua conta</p>
+            <div class="space-y-4 text-left">
+                <div><label class="text-[10px] font-bold text-gray-500 uppercase">Usuário</label><input type="text" value="DarkKnight123" class="w-full bg-black/50 border border-white/10 p-3 rounded mt-1 text-sm outline-none focus:border-[#FFB800]"></div>
+                <div><label class="text-[10px] font-bold text-gray-500 uppercase">Senha</label><input type="password" value="******" class="w-full bg-black/50 border border-white/10 p-3 rounded mt-1 text-sm outline-none focus:border-[#FFB800]"></div>
+                <button onclick="loginDash()" class="btn-base btn-default w-full py-3.5 uppercase font-black text-xs">Entrar no Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dash-panel" class="hidden w-full max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-10">
+            <div>
+                <h2 class="text-3xl font-black text-white">Bem-vindo, <span class="text-[#FFB800]">DarkKnight123</span></h2>
+                <p class="text-gray-400 text-sm mt-1 uppercase tracking-widest">Painel de Controle e Atributos</p>
+            </div>
+            <button onclick="logoutDash()" class="btn-base btn-outline px-6 py-2 text-xs font-black uppercase border-red-500/30 text-red-500 hover:bg-red-500/10">Sair da Conta</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10" id="char-list">
+            </div>
+
+        <div class="card-base p-8">
+            <div class="flex gap-4 border-b border-white/5 pb-4 mb-8">
+                <button onclick="switchDashTab('stats')" id="tab-stats" class="text-sm font-black uppercase text-[#FFB800] border-b-2 border-[#FFB800] pb-2">Atributos</button>
+                <button onclick="switchDashTab('reset')" id="tab-reset" class="text-sm font-black uppercase text-gray-500 pb-2">Sistema de Reset</button>
+            </div>
+
+            <div id="content-stats" class="dash-tab-content">
+                <div class="bg-yellow-500/10 border border-yellow-500/30 p-4 rounded-lg flex justify-between items-center mb-8">
+                    <span class="text-gray-300 font-bold uppercase text-xs">Pontos Disponíveis:</span>
+                    <span class="text-3xl font-black text-[#FFB800]" id="available-points">500</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="stats-grid">
+                    </div>
+                <button onclick="alert('Atributos salvos com sucesso!')" class="btn-base btn-default w-full py-4 mt-8 font-black uppercase text-xs">Aplicar Pontos</button>
+            </div>
+
+            <div id="content-reset" class="dash-tab-content hidden text-center py-10">
+                <h3 class="text-2xl font-black text-white mb-4">Requisitos para Reset</h3>
+                <div class="flex justify-center gap-10 mb-8">
+                    <div class="bg-white/5 p-6 rounded-lg border border-white/10 w-40"><p class="text-gray-500 text-[10px] uppercase font-bold">Nível</p><p class="text-2xl font-black" id="current-level">400</p></div>
+                    <div class="bg-white/5 p-6 rounded-lg border border-white/10 w-40"><p class="text-gray-500 text-[10px] uppercase font-bold">Necessário</p><p class="text-2xl font-black">400</p></div>
+                </div>
+                <button onclick="handleResetAction()" id="reset-btn" class="btn-base btn-default px-20 py-4 font-black uppercase text-xs">Fazer Reset Agora</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="home" class="page-content active w-full">
+    <div class="max-w-xl border-l-4 border-[#FFB800] pl-10 py-4">
+        <h1 class="text-7xl font-black uppercase tracking-tighter leading-none mb-4" style="font-family: 'Cinzel', serif;">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
+        <p class="text-gray-400 font-bold mb-10 tracking-[0.4em] uppercase text-xs">Season 19-2-3 | Premium Experience</p>
+        <div class="flex gap-4">
+            <button onclick="showPage('download')" class="btn-base btn-default px-12 py-4 uppercase text-xs font-black shadow-2xl">Jogar Agora</button>
+            <button onclick="showPage('dashboard')" class="btn-base btn-outline px-12 py-4 uppercase text-xs font-black">Área VIP</button>
+        </div>
+    </div>
+</section>
+</main>
+
+<script>
+    /* DATA MOCK */
+    const characters = [
+        { id: 1, name: 'DarkKnight', class: 'Dark Knight', level: 400, resets: 15, str: 32000, agi: 4000, vit: 5000, ene: 2000, pts: 500 },
+        { id: 2, name: 'SoulMaster', class: 'Soul Master', level: 380, resets: 12, str: 1000, agi: 1000, vit: 3000, ene: 32000, pts: 350 },
+        { id: 3, name: 'MuseElf', class: 'Muse Elf', level: 365, resets: 10, str: 1500, agi: 28000, vit: 2500, ene: 8000, pts: 200 }
+    ];
+
+    let selectedChar = characters[0];
+
+    /* NAVEGAÇÃO */
+    function showPage(pageId) {
+        document.querySelectorAll('.page-content').forEach(s => { s.classList.remove('active'); s.style.opacity = '0'; });
+        document.querySelectorAll('.nav-trigger').forEach(b => b.classList.remove('active-tab'));
+        const target = document.getElementById(pageId);
+        if(target) { target.classList.add('active'); setTimeout(() => target.style.opacity = '1', 50); }
+        if(document.getElementById('nav-'+pageId)) document.getElementById('nav-'+pageId).classList.add('active-tab');
+    }
+
+    /* DASHBOARD LOGIC */
+    function loginDash() {
+        document.getElementById('dash-login').classList.add('hidden');
+        document.getElementById('dash-panel').classList.remove('hidden');
+        renderChars();
+        selectChar(1);
+    }
+
+    function logoutDash() {
+        document.getElementById('dash-login').classList.remove('hidden');
+        document.getElementById('dash-panel').classList.add('hidden');
+    }
+
+    function renderChars() {
+        const container = document.getElementById('char-list');
+        container.innerHTML = characters.map(c => `
+            <div onclick="selectChar(${c.id})" id="char-${c.id}" class="card-base p-6 char-card ${selectedChar.id === c.id ? 'selected' : ''}">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="bg-yellow-500 rounded p-2"><svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></div>
+                    <div class="text-right text-[10px] font-black uppercase text-gray-500">Resets<br><span class="text-lg text-[#FFB800]">${c.resets}</span></div>
+                </div>
+                <h3 class="text-lg font-black text-white">${c.name}</h3>
+                <p class="text-[10px] font-bold text-gray-500 uppercase">${c.class} | LVL ${c.level}</p>
+            </div>
+        `).join('');
+    }
+
+    function selectChar(id) {
+        selectedChar = characters.find(c => c.id === id);
+        renderChars();
+        updateStats();
+    }
+
+    function updateStats() {
+        document.getElementById('available-points').innerText = selectedChar.pts;
+        document.getElementById('current-level').innerText = selectedChar.level;
+        const grid = document.getElementById('stats-grid');
+        const stats = [
+            { label: 'Força', val: selectedChar.str, key: 'str' },
+            { label: 'Agilidade', val: selectedChar.agi, key: 'agi' },
+            { label: 'Vitalidade', val: selectedChar.vit, key: 'vit' },
+            { label: 'Energia', val: selectedChar.ene, key: 'ene' }
+        ];
+        grid.innerHTML = stats.map(s => `
+            <div class="bg-black/40 p-4 rounded-lg border border-white/5 flex justify-between items-center">
+                <div><p class="text-gray-500 text-[10px] font-black uppercase">${s.label}</p><p class="text-white font-black">${s.val}</p></div>
+                <button onclick="addPoint('${s.key}')" class="btn-base btn-outline size-10 text-[#FFB800] border-[#FFB800]/20 font-black">+1</button>
+            </div>
+        `).join('');
+        
+        const btn = document.getElementById('reset-btn');
+        if(selectedChar.level < 400) { btn.classList.add('opacity-50'); btn.innerText = `Nível ${400 - selectedChar.level} para Reset`; }
+        else { btn.classList.remove('opacity-50'); btn.innerText = 'Fazer Reset Agora'; }
+    }
+
+    function addPoint(key) {
+        if(selectedChar.pts > 0) {
+            selectedChar[key]++;
+            selectedChar.pts--;
+            updateStats();
+        }
+    }
+
+    function switchDashTab(tab) {
+        document.querySelectorAll('.dash-tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById('content-'+tab).classList.remove('hidden');
+        document.getElementById('tab-stats').classList.remove('text-[#FFB800]', 'border-[#FFB800]', 'border-b-2');
+        document.getElementById('tab-reset').classList.remove('text-[#FFB800]', 'border-[#FFB800]', 'border-b-2');
+        document.getElementById('tab-'+tab).classList.add('text-[#FFB800]', 'border-[#FFB800]', 'border-b-2');
+    }
+
+    function handleResetAction() {
+        if(selectedChar.level >= 400) {
+            alert(`Reset realizado com sucesso para ${selectedChar.name}! Novo reset: ${selectedChar.resets + 1}`);
+        } else {
+            alert('Nível insuficiente!');
+        }
+    }
+
+    /* PARTÍCULAS */
+    const pContainer = document.getElementById('particles-container');
+    for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div'); p.className = 'particle';
+        p.style.width = p.style.height = Math.random() * 2 + 1 + 'px';
+        p.style.left = Math.random() * 100 + '%'; p.style.animationDuration = Math.random() * 5 + 7 + 's';
+        pContainer.appendChild(p);
+    }
+</script>
 </body>
 </html>
