@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuMU Online | Portal</title>
+    <title>MeuMU Online | Portal Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Cinzel:wght@700&display=swap" rel="stylesheet">
     
     <style>
+        /* [PADRÃO VISUAL] */
         body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
         
-        /* RECONSTITUIÇÃO DA IMAGEM: ELFA FOGO E GELO */
+        /* RECONSTITUIÇÃO DA IMAGEM DE FUNDO */
         .hero-bg { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-            background: radial-gradient(circle at 60% 50%, transparent 0%, #050505 85%),
+            background: radial-gradient(circle at 70% 50%, transparent 10%, #050505 95%),
                         url('https://files.oaiusercontent.com/file-AnAEv7f2P8Mv5NfWpPrYj5?se=2025-12-17T12%3A52%3A49Z&sp=r&sv=24.4.1&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D123.jpg&sig=vN6kL2u%2B%2BJ8U8B6N0O7w3A1R4T7G5u3%2F7I4%3D'); 
-            background-size: cover; 
-            background-position: center; 
-            opacity: 0.9; 
+            background-size: cover; background-position: center right; opacity: 0.8; 
         }
 
-        .glass-panel { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255, 184, 0, 0.15); border-radius: 20px; }
+        .glass-panel { background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(25px); border: 1px solid rgba(255, 184, 0, 0.15); border-radius: 15px; }
         .btn-gold { background: linear-gradient(135deg, #FFB800 0%, #B58C2B 100%); color: black; font-weight: 900; transition: 0.4s ease; }
 
+        /* [ESTILO MENU] */
         .nav-link-btn { text-transform: none; transition: all 0.3s ease; }
         .nav-link-btn:hover { text-transform: uppercase; color: white; }
         .nav-link-btn.active-page { text-transform: uppercase !important; color: #FFB800 !important; }
 
+        /* [ANIMAÇÃO SPA] */
         .page-content { display: none; opacity: 0; filter: blur(4px); transition: 0.8s ease-in-out; width: 100%; }
         .page-content.active { display: block; opacity: 1; filter: blur(0px); }
+
+        /* [PONTINHOS SUBINDO] - Restaurado conforme solicitado */
+        .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; animation: rise 10s infinite ease-in; }
+        @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.4; } 100% { transform: translateY(-100vh) scale(0.2); opacity: 0; } }
+        
+        /* [WIDGETS ESTILO IMAGEM] */
+        .stats-widget { background: rgba(15, 15, 15, 0.95); border: 1px solid rgba(255, 184, 0, 0.1); padding: 20px; width: 300px; border-radius: 8px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; }
     </style>
 </head>
 <body>
 
     <div class="hero-bg"></div>
+    <div id="particles-container" class="fixed inset-0 pointer-events-none"></div>
 
-<div class="fixed top-0 w-full z-[110] bg-black/95 border-b border-white/5 py-1.5 px-8">
+<div class="fixed top-0 w-full z-[110] bg-black/95 border-b border-white/5 py-1.5 px-8 shadow-2xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center font-black uppercase tracking-widest text-[10px]">
             
             <div class="flex gap-4 items-center">
@@ -64,34 +74,46 @@
         </div>
     </nav>
 
-    <main id="main-viewport" class="max-w-6xl mx-auto h-screen flex items-center justify-center relative z-10 pt-24 px-6">
+    <main id="main-viewport" class="max-w-7xl mx-auto h-screen flex items-end justify-between relative z-10 pb-20 px-12">
         
-        <section id="home" class="page-content active w-full">
-            <div class="glass-panel p-12 border-white/10 max-w-2xl mx-auto md:mx-0 flex flex-col justify-center">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-16 h-16 bg-[#FFB800] rounded-2xl flex items-center justify-center font-black text-black text-4xl shadow-2xl">M</div>
-                    <div>
-                        <h1 class="text-3xl font-black uppercase tracking-tighter leading-none">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
-                        <p class="text-[10px] font-black text-gray-500 mt-2 italic uppercase">Season 19 Part 2-3</p>
-                    </div>
+        <section id="home" class="page-content active w-full flex justify-between items-end">
+            <div class="glass-panel p-10 max-w-xl border-l-4 border-[#FFB800]">
+                <h1 class="text-5xl font-black uppercase tracking-tighter leading-none mb-4" style="font-family: 'Cinzel', serif;">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8 font-bold">A lenda renasce. Domine o continente com o novo servidor Season 19.</p>
+                <button onclick="showPage('download')" class="btn-gold px-12 py-4 rounded-xl text-xs uppercase tracking-widest">Jogar Agora</button>
+            </div>
+
+            <div class="stats-widget">
+                <h3 class="text-[10px] font-black text-[#FFB800] uppercase tracking-widest mb-4 border-b border-white/10 pb-2">Status do Servidor</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-[11px] font-bold"><span class="text-gray-400"><i class="status-dot bg-green-500 shadow-[0_0_5px_#22c55e]"></i> Online X50</span> <span class="text-[#FFB800]">207</span></div>
+                    <div class="flex justify-between text-[11px] font-bold"><span class="text-gray-400"><i class="status-dot bg-red-600"></i> Online X100</span> <span class="text-gray-600">0</span></div>
+                    <div class="flex justify-between text-[11px] font-bold border-t border-white/5 pt-2"><span class="text-gray-400">Contas</span> <span class="text-white">2350</span></div>
+                    <div class="flex justify-between text-[11px] font-bold"><span class="text-gray-400">Personagens</span> <span class="text-white">3200</span></div>
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed mb-8 font-bold">A lenda renasce. Domine o continente.</p>
-                <button onclick="showPage('download')" class="btn-gold w-fit px-12 py-4 rounded-xl text-xs uppercase tracking-widest">Jogar Agora</button>
             </div>
         </section>
 
         <section id="dashboard" class="page-content w-full flex justify-center">
-            <div class="glass-panel p-12 border-white/10 text-center max-w-md w-full">
-                <h2 class="text-2xl font-black uppercase italic mb-8 tracking-tighter">Área do Jogador</h2>
+            <div class="glass-panel p-12 text-center max-w-md w-full">
+                <h2 class="text-2xl font-black uppercase italic mb-8">Área do Jogador</h2>
                 <form class="space-y-4 text-left">
                     <input type="text" placeholder="USUÁRIO" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl outline-none focus:border-[#FFB800] text-[10px] font-bold uppercase transition">
                     <input type="password" placeholder="SENHA" class="w-full bg-black/40 border border-white/10 p-4 rounded-xl outline-none focus:border-[#FFB800] text-[10px] font-bold uppercase transition">
-                    <button class="btn-gold w-full py-4 rounded-xl text-xs tracking-widest mt-2 uppercase">Entrar</button>
+                    <button class="btn-gold w-full py-4 rounded-xl text-xs tracking-widest uppercase mt-4">Entrar</button>
                 </form>
             </div>
         </section>
 
+        <section id="rank" class="page-content w-full h-[60vh] flex justify-center"><div class="stats-widget w-full max-w-2xl"><h2 class="text-2xl font-black text-center uppercase mb-6">Top Players</h2></div></section>
+        <section id="events" class="page-content w-full h-[60vh] flex justify-center"><div class="stats-widget w-full max-w-2xl"><h2 class="text-2xl font-black text-center uppercase mb-6">Eventos</h2></div></section>
+        <section id="download" class="page-content w-full h-[60vh] flex justify-center"><div class="stats-widget w-full max-w-2xl"><h2 class="text-2xl font-black text-center uppercase mb-6">Downloads</h2></div></section>
+
     </main>
+
+    <footer class="fixed bottom-0 w-full z-[110] bg-black/95 border-t border-white/5 py-4 px-8 flex justify-between items-center text-[10px] font-black text-gray-600 uppercase italic">
+        <p>&copy; 2025 <span class="text-[#FFB800]">MeuMU Online</span> | Proteção & Performance</p>
+    </footer>
 
     <script>
         function showPage(pageId) {
@@ -109,6 +131,17 @@
                     setTimeout(() => { target.style.opacity = '1'; }, 50);
                 }
             }, 400);
+        }
+
+        // MOTOR DOS PONTINHOS DOURADOS
+        const pContainer = document.getElementById('particles-container');
+        for (let i = 0; i < 35; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.width = p.style.height = Math.random() * 3 + 1 + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = Math.random() * 5 + 7 + 's';
+            pContainer.appendChild(p);
         }
     </script>
 </body>
