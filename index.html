@@ -1,193 +1,276 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeuMU ONLINE | Portal Oficial</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+"use client";
 
-<style>
-    body { background-color: #020202; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
-    
-    .hero-bg { 
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-        background: linear-gradient(to right, #020202 15%, transparent 65%),
-                    url('https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/img/background_elfa.jpg');
-        background-size: cover; background-position: center right; opacity: 0.85; 
-    }
+import * as React from "react";
+import * as MenubarPrimitive from "@radix-ui/react-menubar";
+import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 
-    /* SISTEMA DE COMPONENTES */
-    .btn-base { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 0.375rem; font-size: 0.875rem; transition: all 0.3s; outline: none; border: none; cursor: pointer; }
-    .btn-default { background: #FFB800; color: black; font-weight: 900; }
-    .btn-outline { border: 1px solid rgba(255, 184, 0, 0.2); background: rgba(10, 10, 10, 0.3); color: white; }
-    .btn-ghost { color: #888; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; }
-    .btn-ghost:hover { background: rgba(255, 255, 255, 0.05); color: white; }
+import { cn } from "./utils";
 
-    /* ESTILO CARD (REFERENCIA SHADCN) */
-    .card-base { background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; display: flex; flex-direction: column; gap: 1.5rem; transition: 0.4s ease; }
-    .card-header { display: grid; grid-template-rows: auto auto; gap: 0.375rem; padding: 1.5rem 1.5rem 0; }
-    .card-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.25rem; line-height: 1; }
-    .card-description { color: #666; font-size: 0.875rem; font-weight: 500; }
-    .card-content { padding: 0 1.5rem; }
-    .card-footer { padding: 0 1.5rem 1.5rem; display: flex; align-items: center; }
+function Menubar({
+  className,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Root>) {
+  return (
+    <MenubarPrimitive.Root
+      data-slot="menubar"
+      className={cn(
+        "bg-background flex h-9 items-center gap-1 rounded-md border p-1 shadow-xs",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
-    .page-content { display: none; opacity: 0; filter: blur(10px); transition: 0.8s ease-in-out; width: 100%; }
-    .page-content.active { display: block; opacity: 1; filter: blur(0px); }
+function MenubarMenu({
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Menu>) {
+  return <MenubarPrimitive.Menu data-slot="menubar-menu" {...props} />;
+}
 
-    .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; animation: rise 10s infinite ease-in; pointer-events: none; }
-    @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 100% { transform: translateY(-100vh); opacity: 0; } }
-    .custom-scroll::-webkit-scrollbar { width: 4px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #FFB800; border-radius: 10px; }
-</style>
-</head>
-<body>
+function MenubarGroup({
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Group>) {
+  return <MenubarPrimitive.Group data-slot="menubar-group" {...props} />;
+}
 
-    <div class="hero-bg"></div>
-    <div id="particles-container" class="fixed inset-0 pointer-events-none"></div>
+function MenubarPortal({
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Portal>) {
+  return <MenubarPrimitive.Portal data-slot="menubar-portal" {...props} />;
+}
 
-<header class="fixed top-0 w-full z-[110] bg-black/95 border-b border-white/5 py-1.5 px-8 shadow-2xl">
-    <div class="max-w-7xl mx-auto flex justify-between items-center font-black uppercase tracking-widest text-[10px]">
-        <div class="flex gap-4 items-center">
-            <button class="flex items-center gap-1.5 text-white hover:text-[#FFB800] transition">
-                <img src="https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/img/flags/us.gif" class="w-4" alt="EN"> EN
-            </button>
-            <button class="flex items-center gap-1.5 text-white hover:text-[#FFB800] transition">
-                <img src="https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/img/flags/br.gif" class="w-4" alt="BR"> BR
-            </button>
-        </div>
-        <div class="flex items-center gap-2">
-            <div class="w-2.5 h-3 bg-blue-500 rounded-full shadow-[0_0_10px_#3b82f6]"></div>
-            <span class="text-[#FFB800] italic">Proteção Anti-Hack Ativa</span>
-        </div>
-    </div>
-</header>
-<nav class="fixed top-8 w-full z-[100] py-6 px-10">
-    <div class="max-w-5xl mx-auto card-base p-0 py-3 px-10 flex flex-row justify-between items-center shadow-2xl h-16">
-        <button onclick="showPage('home')" id="nav-home" class="btn-base btn-ghost px-4 py-2 text-[11px] text-[#FFB800]">🏠 Início</button>
-        <button onclick="showPage('rank')" id="nav-rank" class="btn-base btn-ghost px-4 py-2 text-[11px]">🏆 Rankings</button>
-        <button onclick="showPage('dashboard')" class="btn-base btn-default px-8 py-2.5 uppercase text-[11px] shadow-lg">👤 Dashboard</button>
-        <button onclick="showPage('events')" id="nav-events" class="btn-base btn-ghost px-4 py-2 text-[11px]">⚔️ Eventos</button>
-        <button onclick="showPage('download')" id="nav-download" class="btn-base btn-ghost px-4 py-2 text-[11px]">📥 Downloads</button>
-    </div>
-</nav>
-<main class="max-w-7xl mx-auto h-screen flex items-center justify-center relative z-10 pt-24 px-12">
-        
-<section id="home" class="page-content active w-full">
-    <div class="flex justify-between items-end w-full">
-        <div class="max-w-xl border-l-4 border-[#FFB800] pl-10 py-4">
-            <h1 class="text-6xl font-black uppercase tracking-tighter leading-none mb-4" style="font-family: 'Cinzel', serif;">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
-            <p class="text-gray-400 font-bold mb-10 tracking-[0.3em] uppercase text-xs">Season 19-2-3 | Rebirth of a Legend</p>
-            <div class="flex gap-4">
-                <button onclick="showPage('download')" class="btn-base btn-default px-12 py-4 uppercase text-xs">Jogar Agora</button>
-                <button onclick="showPage('dashboard')" class="btn-base btn-outline px-12 py-4 uppercase text-xs">Registrar</button>
-            </div>
-        </div>
+function MenubarRadioGroup({
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.RadioGroup>) {
+  return (
+    <MenubarPrimitive.RadioGroup data-slot="menubar-radio-group" {...props} />
+  );
+}
 
-        <div class="card-base w-[320px]">
-            <div class="card-header border-b border-white/5 pb-4">
-                <h4 class="card-title text-[10px] text-[#FFB800] uppercase tracking-widest">Acesso Restrito</h4>
-                <p class="card-description text-[8px] uppercase tracking-tighter">Gerencie sua jornada</p>
-            </div>
-            <div class="card-content">
-                <input type="text" placeholder="USUÁRIO" class="w-full bg-black/50 border border-white/10 p-2.5 rounded text-[10px] mb-2 outline-none focus:border-[#FFB800]">
-                <input type="password" placeholder="SENHA" class="w-full bg-black/50 border border-white/10 p-2.5 rounded text-[10px] outline-none focus:border-[#FFB800]">
-            </div>
-            <div class="card-footer">
-                <button class="w-full btn-base btn-default py-3 text-[10px] uppercase font-black">Entrar no Jogo</button>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="rank" class="page-content w-full flex flex-col items-center">
-    <div class="card-base w-full max-w-4xl p-0 shadow-2xl overflow-hidden">
-        <div class="card-header flex flex-row justify-between items-center border-b border-white/5 pb-6">
-            <div>
-                <h4 class="card-title text-2xl uppercase tracking-tighter">Top <span class="text-[#FFB800]">Guerreiros</span></h4>
-                <p class="card-description uppercase tracking-widest text-[9px]">Elite do servidor</p>
-            </div>
-            <div class="flex gap-2">
-                <button class="btn-base btn-default px-4 py-1.5 text-[10px] uppercase">Ranking Geral</button>
-            </div>
-        </div>
-        <div class="card-content overflow-y-auto max-h-[350px] custom-scroll py-6">
-            <table class="w-full text-left border-collapse">
-                <thead class="sticky top-0 bg-[#020202] z-10 text-[10px] font-black text-gray-500 uppercase border-b border-white/10">
-                    <tr><th class="py-3 px-4">Pos</th><th class="py-3 px-4">Personagem</th><th class="py-3 px-4 text-center">Nível</th><th class="py-3 px-4 text-right">Resets</th></tr>
-                </thead>
-                <tbody class="text-xs font-bold text-gray-300">
-                    <tr class="border-b border-white/5 hover:bg-white/5 transition"><td class="py-4 px-4 text-[#FFB800]">#01</td><td class="py-4 px-4 text-white uppercase font-black">DarkWarrior_X</td><td class="py-4 px-4 text-center">400</td><td class="py-4 px-4 text-right text-[#FFB800]">250</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
-<section id="download" class="page-content w-full flex flex-col items-center">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl">
-        <div class="card-base shadow-2xl border-t-2 border-[#FFB800]">
-            <div class="card-header">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h4 class="card-title text-[#FFB800]">CLIENTE <span class="text-white">COMPLETO</span></h4>
-                        <p class="card-description uppercase tracking-widest text-[9px]">Instalação Padrão Recomendada</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-content">
-                <div class="space-y-2 text-[10px] font-bold text-gray-400 uppercase">
-                    <div class="flex justify-between border-b border-white/5 pb-1"><span>Tamanho:</span> <span class="text-white">1.8 GB</span></div>
-                    <div class="flex justify-between"><span>Mirror:</span> <span class="text-blue-400">Google Drive</span></div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn-base btn-default w-full py-3.5 uppercase font-black text-xs">Baixar Cliente</button>
-            </div>
-        </div>
-        <div class="card-base shadow-2xl">
-            <div class="card-header">
-                <h4 class="card-title">MIRROR <span class="text-[#FFB800]">SECUNDÁRIO</span></h4>
-                <p class="card-description uppercase tracking-widest text-[9px]">Download via Mega.nz</p>
-            </div>
-            <div class="card-content">
-                <div class="space-y-2 text-[10px] font-bold text-gray-400 uppercase">
-                    <div class="flex justify-between border-b border-white/5 pb-1"><span>Tamanho:</span> <span class="text-white">1.8 GB</span></div>
-                    <div class="flex justify-between"><span>Mirror:</span> <span class="text-red-500">Mega.nz</span></div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <button class="btn-base btn-outline w-full py-3.5 uppercase font-black text-xs">Link Alternativo</button>
-            </div>
-        </div>
-    </div>
-</section>
-</main>
+function MenubarTrigger({
+  className,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Trigger>) {
+  return (
+    <MenubarPrimitive.Trigger
+      data-slot="menubar-trigger"
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground flex items-center rounded-sm px-2 py-1 text-sm font-medium outline-hidden select-none",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
-<script>
-    function showPage(pageId) {
-        const sections = document.querySelectorAll('.page-content');
-        const navButtons = document.querySelectorAll('.btn-ghost');
-        sections.forEach(s => s.style.opacity = '0');
-        navButtons.forEach(btn => btn.classList.remove('text-[#FFB800]'));
-        setTimeout(() => {
-            sections.forEach(s => s.classList.remove('active'));
-            const target = document.getElementById(pageId);
-            const activeBtn = document.getElementById('nav-' + pageId);
-            if(target) {
-                target.classList.add('active');
-                if(activeBtn) activeBtn.classList.add('text-[#FFB800]'); 
-                setTimeout(() => { target.style.opacity = '1'; }, 50);
-            }
-        }, 400);
-    }
-    const pContainer = document.getElementById('particles-container');
-    for (let i = 0; i < 40; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.width = p.style.height = Math.random() * 3 + 1 + 'px';
-        p.style.left = Math.random() * 100 + '%';
-        p.style.animationDuration = Math.random() * 5 + 8 + 's';
-        pContainer.appendChild(p);
-    }
-</script>
-</body>
-</html>
+function MenubarContent({
+  className,
+  align = "start",
+  alignOffset = -4,
+  sideOffset = 8,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Content>) {
+  return (
+    <MenubarPortal>
+      <MenubarPrimitive.Content
+        data-slot="menubar-content"
+        align={align}
+        alignOffset={alignOffset}
+        sideOffset={sideOffset}
+        className={cn(
+          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[12rem] origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border p-1 shadow-md",
+          className,
+        )}
+        {...props}
+      />
+    </MenubarPortal>
+  );
+}
+
+function MenubarItem({
+  className,
+  inset,
+  variant = "default",
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Item> & {
+  inset?: boolean;
+  variant?: "default" | "destructive";
+}) {
+  return (
+    <MenubarPrimitive.Item
+      data-slot="menubar-item"
+      data-inset={inset}
+      data-variant={variant}
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function MenubarCheckboxItem({
+  className,
+  children,
+  checked,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.CheckboxItem>) {
+  return (
+    <MenubarPrimitive.CheckboxItem
+      data-slot="menubar-checkbox-item"
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className,
+      )}
+      checked={checked}
+      {...props}
+    >
+      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
+        <MenubarPrimitive.ItemIndicator>
+          <CheckIcon className="size-4" />
+        </MenubarPrimitive.ItemIndicator>
+      </span>
+      {children}
+    </MenubarPrimitive.CheckboxItem>
+  );
+}
+
+function MenubarRadioItem({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.RadioItem>) {
+  return (
+    <MenubarPrimitive.RadioItem
+      data-slot="menubar-radio-item"
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-xs py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className,
+      )}
+      {...props}
+    >
+      <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
+        <MenubarPrimitive.ItemIndicator>
+          <CircleIcon className="size-2 fill-current" />
+        </MenubarPrimitive.ItemIndicator>
+      </span>
+      {children}
+    </MenubarPrimitive.RadioItem>
+  );
+}
+
+function MenubarLabel({
+  className,
+  inset,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Label> & {
+  inset?: boolean;
+}) {
+  return (
+    <MenubarPrimitive.Label
+      data-slot="menubar-label"
+      data-inset={inset}
+      className={cn(
+        "px-2 py-1.5 text-sm font-medium data-[inset]:pl-8",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function MenubarSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Separator>) {
+  return (
+    <MenubarPrimitive.Separator
+      data-slot="menubar-separator"
+      className={cn("bg-border -mx-1 my-1 h-px", className)}
+      {...props}
+    />
+  );
+}
+
+function MenubarShortcut({
+  className,
+  ...props
+}: React.ComponentProps<"span">) {
+  return (
+    <span
+      data-slot="menubar-shortcut"
+      className={cn(
+        "text-muted-foreground ml-auto text-xs tracking-widest",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function MenubarSub({
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.Sub>) {
+  return <MenubarPrimitive.Sub data-slot="menubar-sub" {...props} />;
+}
+
+function MenubarSubTrigger({
+  className,
+  inset,
+  children,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.SubTrigger> & {
+  inset?: boolean;
+}) {
+  return (
+    <MenubarPrimitive.SubTrigger
+      data-slot="menubar-sub-trigger"
+      data-inset={inset}
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground flex cursor-default items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none data-[inset]:pl-8",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronRightIcon className="ml-auto h-4 w-4" />
+    </MenubarPrimitive.SubTrigger>
+  );
+}
+
+function MenubarSubContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof MenubarPrimitive.SubContent>) {
+  return (
+    <MenubarPrimitive.SubContent
+      data-slot="menubar-sub-content"
+      className={cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-menubar-content-transform-origin) overflow-hidden rounded-md border p-1 shadow-lg",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+export {
+  Menubar,
+  MenubarPortal,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarGroup,
+  MenubarSeparator,
+  MenubarLabel,
+  MenubarItem,
+  MenubarShortcut,
+  MenubarCheckboxItem,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSub,
+  MenubarSubTrigger,
+  MenubarSubContent,
+};
