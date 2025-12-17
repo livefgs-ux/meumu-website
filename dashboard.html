@@ -8,386 +8,386 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
-    body { background-color: #000000; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
+    /* VARIAVEIS GLOBAIS */
+    :root {
+        --primary: #FFB800;
+        --bg-dark: #020202;
+    }
+
+    body { background-color: var(--bg-dark); color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
     
-    /* BACKGROUND FIXO */
+    /* BACKGROUND FIXO (Absolute permitido aqui conforme regra de exceção) */
     .hero-bg { 
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; 
-        background: linear-gradient(to right, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4)),
+        background: linear-gradient(to right, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.4)),
                     url('https://r.jina.ai/i/05786417774149029969d799f8d5e828');
         background-size: cover; background-position: center top; opacity: 1; 
     }
 
-    /* GLASS EFFECT */
-    .glass-effect { background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 184, 0, 0.15); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
-    
-    /* SCROLLBAR DOURADA */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #020202; }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #FFB800, #ca8a04); border-radius: 4px; }
+    /* COMPONENTES DE UI (GLASSMORPHISM) */
+    .glass-panel { 
+        background: rgba(10, 10, 10, 0.75); 
+        backdrop-filter: blur(20px); 
+        border: 1px solid rgba(255, 255, 255, 0.08); 
+        border-radius: 12px;
+        display: flex; 
+        flex-direction: column;
+    }
 
-    /* COMPONENTES GERAIS */
-    .btn-base { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 0.375rem; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.05em; transition: all 0.3s; cursor: pointer; text-transform: uppercase; }
-    .btn-default { background: linear-gradient(to bottom, #FFB800, #eab308); color: black; border: none; box-shadow: 0 0 15px rgba(255, 184, 0, 0.3); }
-    .btn-default:hover { box-shadow: 0 0 25px rgba(255, 184, 0, 0.5); transform: translateY(-1px); }
-    .btn-outline { border: 1px solid rgba(255, 184, 0, 0.3); background: rgba(0,0,0,0.5); color: white; }
-    .btn-outline:hover { border-color: #FFB800; color: #FFB800; background: rgba(255,184,0,0.1); }
+    /* === BUTTON SYSTEM (DIRETRIZES APLICADAS) === */
+    .btn-base {
+        display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+        border-radius: 0.375rem; font-size: 0.875rem; font-weight: 700;
+        transition: all 0.2s ease-in-out; cursor: pointer; outline: none;
+        text-transform: uppercase; letter-spacing: 0.05em;
+    }
 
-    /* NAVEGAÇÃO */
-    .nav-trigger { color: #888; transition: 0.3s; }
-    .nav-trigger:hover, .nav-trigger.active-tab { color: #FFB800; text-shadow: 0 0 10px rgba(255, 184, 0, 0.5); }
+    /* Primary: Main actions (Solid Brand Color) */
+    .btn-primary {
+        background-color: var(--primary);
+        color: #000000;
+        border: 1px solid var(--primary);
+        font-weight: 900;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 4px 15px rgba(255, 184, 0, 0.3); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Secondary: Supporting actions (Outline) */
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--primary);
+        border: 1px solid rgba(255, 184, 0, 0.5);
+    }
+    .btn-secondary:hover { background-color: rgba(255, 184, 0, 0.1); border-color: var(--primary); }
+
+    /* Tertiary: Least important (Text Only/Ghost) */
+    .btn-tertiary {
+        background-color: transparent;
+        color: #888888;
+        border: 1px solid transparent;
+    }
+    .btn-tertiary:hover { color: #ffffff; background-color: rgba(255, 255, 255, 0.05); }
+    .btn-tertiary.active { color: var(--primary); background-color: rgba(255, 184, 0, 0.05); }
 
     /* SPA TRANSITIONS */
-    .page-content { display: none; opacity: 0; filter: blur(10px); transition: 0.5s ease-in-out; width: 100%; }
+    .page-content { display: none; opacity: 0; filter: blur(10px); transition: opacity 0.4s ease, filter 0.4s ease; width: 100%; }
     .page-content.active { display: block; opacity: 1; filter: blur(0px); }
 
-    /* DASHBOARD SPECIFIC */
-    .char-card { transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1); }
-    .char-card:hover { transform: translateY(-5px); border-color: rgba(255,184,0,0.3); }
-    .char-card.selected { background: rgba(255, 184, 0, 0.1); border-color: #FFB800; box-shadow: 0 0 20px rgba(255, 184, 0, 0.1); }
-    
-    .tab-btn { border-bottom: 2px solid transparent; color: #666; transition: 0.3s; }
-    .tab-btn.active { border-color: #FFB800; color: #FFB800; }
-
-    .particle { position: absolute; bottom: -10px; background: #FFB800; border-radius: 50%; opacity: 0; pointer-events: none; animation: rise 10s infinite ease-in; }
-    @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translateY(-100vh); opacity: 0; } }
+    /* UTILS */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 </style>
 </head>
 <body>
 
     <div class="hero-bg"></div>
-    <div id="particles-container" class="fixed inset-0 pointer-events-none z-0"></div>
 
-<header class="fixed top-0 w-full z-50 border-b border-white/5 bg-black/80 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-6 h-10 flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-        <div class="flex gap-4"><span>EN</span><span class="text-white/50">|</span><span>BR</span></div>
-        <div class="text-[#FFB800] flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div> Server Online</div>
-    </div>
-</header>
-
-<nav class="fixed top-14 w-full z-40 flex justify-center">
-    <div class="glass-effect px-2 py-1 rounded-full flex gap-1">
-        <button onclick="showPage('home')" id="nav-home" class="nav-trigger active-tab px-6 py-2 text-xs font-bold uppercase rounded-full">Início</button>
-        <button onclick="showPage('rank')" id="nav-rank" class="nav-trigger px-6 py-2 text-xs font-bold uppercase rounded-full">Rankings</button>
-        <button onclick="showPage('dashboard')" id="nav-dashboard" class="px-6 py-2 text-xs font-bold uppercase bg-[#FFB800] text-black rounded-full shadow-[0_0_15px_rgba(255,184,0,0.4)] hover:shadow-[0_0_25px_rgba(255,184,0,0.6)] transition-all">Dashboard</button>
-        <button onclick="showPage('events')" id="nav-events" class="nav-trigger px-6 py-2 text-xs font-bold uppercase rounded-full">Eventos</button>
-        <button onclick="showPage('download')" id="nav-download" class="nav-trigger px-6 py-2 text-xs font-bold uppercase rounded-full">Downloads</button>
-    </div>
-</nav>
-
-<main class="relative z-10 pt-32 pb-20 px-4 min-h-screen flex flex-col items-center justify-center">
-
-<section id="home" class="page-content active w-full max-w-7xl">
-    <div class="max-w-2xl pl-10 border-l-4 border-[#FFB800] py-4">
-        <h1 class="text-7xl font-black uppercase tracking-tighter leading-[0.9]" style="font-family: 'Cinzel', serif;">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
-        <p class="text-gray-400 font-bold tracking-[0.5em] text-xs mt-4 mb-8">Season 19-2-3 | Rebirth of a Legend</p>
-        <div class="flex gap-4">
-            <button onclick="showPage('download')" class="btn-base btn-default px-10 py-4">Jogar Agora</button>
-            <button onclick="showPage('dashboard')" class="btn-base btn-outline px-10 py-4">Minha Conta</button>
-        </div>
-    </div>
-</section>
-
-<section id="rank" class="page-content w-full max-w-5xl">
-    <div class="glass-effect rounded-xl overflow-hidden p-8">
-        <div class="flex justify-between items-end border-b border-white/10 pb-6 mb-6">
-            <h2 class="text-3xl font-black uppercase" style="font-family: 'Cinzel', serif;">Top <span class="text-[#FFB800]">Players</span></h2>
-            <div class="flex gap-2">
-                <button class="btn-base btn-outline px-4 py-1.5 text-[10px]">PK Kills</button>
-                <button class="btn-base btn-default px-4 py-1.5 text-[10px]">Resets</button>
+    <header class="fixed top-0 w-full z-50 h-12 flex items-center bg-black/90 border-b border-white/5 backdrop-blur">
+        <div class="w-full max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <h1 class="text-lg font-black font-cinzel">MeuMU <span class="text-[#FFB800]">ONLINE</span></h1>
+            </div>
+            <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div> Online
             </div>
         </div>
-        <table class="w-full text-left border-collapse">
-            <thead class="text-xs uppercase text-gray-500 font-black border-b border-white/5">
-                <tr><th class="py-4 px-4">#</th><th class="py-4 px-4">Personagem</th><th class="py-4 px-4 text-center">Classe</th><th class="py-4 px-4 text-right">Resets</th></tr>
-            </thead>
-            <tbody class="text-sm font-bold">
-                <tr class="border-b border-white/5 hover:bg-white/5 transition"><td class="py-4 px-4 text-[#FFB800]">1</td><td class="py-4 px-4">DarkWarrior_X</td><td class="py-4 px-4 text-center text-gray-400">Blade Knight</td><td class="py-4 px-4 text-right text-[#FFB800]">250</td></tr>
-                <tr class="border-b border-white/5 hover:bg-white/5 transition"><td class="py-4 px-4 text-gray-300">2</td><td class="py-4 px-4">Elf_Queen</td><td class="py-4 px-4 text-center text-gray-400">Muse Elf</td><td class="py-4 px-4 text-right">248</td></tr>
-            </tbody>
-        </table>
-    </div>
-</section>
+    </header>
 
-<section id="dashboard" class="page-content w-full max-w-6xl">
-    
-    <div id="dash-login" class="max-w-md mx-auto glass-effect p-8 rounded-xl border border-[#FFB800]/30">
-        <div class="text-center mb-8">
-            <div class="w-16 h-16 bg-gradient-to-br from-[#FFB800] to-yellow-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(255,184,0,0.5)]">
-                <svg class="w-8 h-8 text-black" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <h2 class="text-2xl font-black text-white mb-2">Área do Jogador</h2>
-            <p class="text-gray-400 text-xs">Faça login para acessar sua conta</p>
+    <nav class="fixed top-16 w-full z-40 flex justify-center pointer-events-none">
+        <div class="glass-panel pointer-events-auto flex-row p-1 gap-1 rounded-full border-white/10 shadow-2xl">
+            <button onclick="navigateTo('home')" id="nav-home" class="btn-base btn-tertiary px-6 py-2 rounded-full active">Início</button>
+            <button onclick="navigateTo('rank')" id="nav-rank" class="btn-base btn-tertiary px-6 py-2 rounded-full">Rankings</button>
+            <button onclick="navigateTo('dashboard')" id="nav-dashboard" class="btn-base btn-tertiary px-6 py-2 rounded-full">Dashboard</button>
+            <button onclick="navigateTo('events')" id="nav-events" class="btn-base btn-tertiary px-6 py-2 rounded-full">Eventos</button>
+            <button onclick="navigateTo('download')" id="nav-download" class="btn-base btn-tertiary px-6 py-2 rounded-full">Downloads</button>
         </div>
-        <div class="space-y-4">
-            <div>
-                <label class="text-xs text-gray-300 font-bold uppercase block mb-1">Usuário</label>
-                <input type="text" id="login-user" class="w-full bg-black/50 border border-[#FFB800]/30 text-white p-3 rounded outline-none focus:border-[#FFB800] transition">
-            </div>
-            <div>
-                <label class="text-xs text-gray-300 font-bold uppercase block mb-1">Senha</label>
-                <input type="password" id="login-pass" class="w-full bg-black/50 border border-[#FFB800]/30 text-white p-3 rounded outline-none focus:border-[#FFB800] transition">
-            </div>
-            <button onclick="loginDash()" class="btn-base btn-default w-full py-4 text-xs font-black">Entrar</button>
-        </div>
-        <div class="mt-6 text-center">
-            <a href="#" class="text-[#FFB800] hover:text-[#FFB800]/80 text-xs font-bold">Não tem conta? Cadastre-se</a>
-        </div>
-    </div>
+    </nav>
 
-    <div id="dash-panel" class="hidden">
-        <div class="flex justify-between items-center mb-8">
-            <div>
-                <h2 class="text-3xl text-white font-black">Bem-vindo, <span class="text-[#FFB800]" id="user-name-display">DarkKnight123</span></h2>
-                <p class="text-gray-400 text-sm">Gerencie seus personagens e distribua pontos</p>
-            </div>
-            <button onclick="logoutDash()" class="btn-base btn-outline px-4 py-2 text-xs border-red-500/50 text-red-500 hover:bg-red-500/10">
-                <svg class="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                Sair
-            </button>
-        </div>
+    <main class="relative z-10 pt-40 pb-20 px-6 min-h-screen flex flex-col items-center justify-center max-w-7xl mx-auto w-full">
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8" id="char-list">
+        <section id="home" class="page-content active">
+            <div class="flex flex-col items-start gap-6 max-w-2xl border-l-4 border-[#FFB800] pl-8 py-2">
+                <h1 class="text-7xl font-black uppercase tracking-tighter leading-[0.9] font-cinzel">
+                    Rebirth of <br><span class="text-[#FFB800]">Legend</span>
+                </h1>
+                <p class="text-gray-400 font-medium tracking-[0.2em] text-sm uppercase">Season 19 Part 2-3 | High Experience</p>
+                
+                <div class="flex gap-4 mt-4">
+                    <button onclick="navigateTo('download')" class="btn-base btn-primary px-10 py-3 shadow-[0_0_20px_rgba(255,184,0,0.3)]">
+                        Jogar Agora
+                    </button>
+                    <button onclick="navigateTo('dashboard')" class="btn-base btn-secondary px-10 py-3">
+                        Minha Conta
+                    </button>
+                </div>
             </div>
+        </section>
 
-        <div class="glass-effect rounded-xl overflow-hidden p-8 border-[#FFB800]/30">
-            <div class="flex border-b border-white/10 mb-6 gap-6">
-                <button onclick="switchTab('stats')" id="tab-btn-stats" class="tab-btn active pb-4 text-sm font-bold uppercase tracking-wider">Distribuir Pontos</button>
-                <button onclick="switchTab('reset')" id="tab-btn-reset" class="tab-btn pb-4 text-sm font-bold uppercase tracking-wider">Sistema de Reset</button>
-            </div>
-
-            <div id="tab-content-stats">
-                <div class="mb-8 p-4 bg-[#FFB800]/10 border border-[#FFB800]/30 rounded-lg flex justify-between items-center">
-                    <span class="text-gray-300 font-bold uppercase text-xs">Pontos Disponíveis:</span>
-                    <span class="text-2xl font-black text-[#FFB800]" id="available-points">0</span>
+        <section id="rank" class="page-content">
+            <div class="glass-panel w-full max-w-4xl mx-auto">
+                <div class="flex justify-between items-center p-6 border-b border-white/5">
+                    <h2 class="text-2xl font-black font-cinzel uppercase">Top <span class="text-[#FFB800]">Players</span></h2>
+                    <div class="flex gap-2 bg-black/40 p-1 rounded-lg">
+                        <button class="btn-base btn-tertiary px-3 py-1 text-xs text-[#FFB800] bg-white/5 rounded">Resets</button>
+                        <button class="btn-base btn-tertiary px-3 py-1 text-xs rounded">Master</button>
+                        <button class="btn-base btn-tertiary px-3 py-1 text-xs rounded">Guilds</button>
+                    </div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" id="stats-grid">
-                    </div>
-
-                <button onclick="alert('Pontos aplicados com sucesso!')" class="btn-base btn-default w-full py-4 text-xs font-black">Aplicar Pontos</button>
-            </div>
-
-            <div id="tab-content-reset" class="hidden">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div class="p-4 bg-black/30 rounded-lg border border-[#FFB800]/20">
-                        <div class="text-gray-400 text-xs uppercase font-bold mb-1">Nível Atual</div>
-                        <div class="text-2xl text-[#FFB800] font-black" id="reset-current-level">0</div>
-                    </div>
-                    <div class="p-4 bg-black/30 rounded-lg border border-[#FFB800]/20">
-                        <div class="text-gray-400 text-xs uppercase font-bold mb-1">Resets Totais</div>
-                        <div class="text-2xl text-[#FFB800] font-black" id="reset-total">0</div>
-                    </div>
-                    <div class="p-4 bg-black/30 rounded-lg border border-[#FFB800]/20">
-                        <div class="text-gray-400 text-xs uppercase font-bold mb-1">Nível Necessário</div>
-                        <div class="text-2xl text-white font-black">400</div>
-                    </div>
+                <div class="p-0">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="text-xs font-bold text-gray-500 uppercase bg-black/20">
+                            <tr>
+                                <th class="p-4">Rank</th>
+                                <th class="p-4">Personagem</th>
+                                <th class="p-4 text-center">Classe</th>
+                                <th class="p-4 text-right">Resets</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium divide-y divide-white/5">
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="p-4 text-[#FFB800] font-bold">#1</td>
+                                <td class="p-4 font-bold">DarkWarrior</td>
+                                <td class="p-4 text-center text-gray-400">BK</td>
+                                <td class="p-4 text-right text-[#FFB800] font-bold">250</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="p-4 text-gray-400">#2</td>
+                                <td class="p-4">ElfQueen</td>
+                                <td class="p-4 text-center text-gray-400">ME</td>
+                                <td class="p-4 text-right">248</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="p-6 bg-[#FFB800]/5 border border-[#FFB800]/20 rounded-lg mb-6">
-                    <h4 class="text-white font-bold uppercase text-sm mb-3">Benefícios do Reset:</h4>
-                    <ul class="space-y-2 text-gray-400 text-xs font-bold">
-                        <li>• Ganhe pontos extras de atributos</li>
-                        <li>• Acesse áreas exclusivas de reset</li>
-                        <li>• Desbloqueie novos títulos e conquistas</li>
-                    </ul>
+                <div class="p-4 border-t border-white/5 flex justify-center gap-2">
+                    <button class="btn-base btn-tertiary px-3">Prev</button>
+                    <button class="btn-base btn-secondary w-8 h-8 p-0 rounded">1</button>
+                    <button class="btn-base btn-tertiary w-8 h-8 p-0 rounded">2</button>
+                    <button class="btn-base btn-tertiary px-3">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="page-content">
+            
+            <div id="view-login" class="glass-panel max-w-sm mx-auto p-8 items-center text-center">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#FFB800] to-orange-700 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20">
+                    <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                </div>
+                <h2 class="text-2xl font-black text-white uppercase mb-1">Acesso Restrito</h2>
+                <p class="text-xs text-gray-500 font-bold uppercase mb-8">Gerencie sua conta</p>
+                
+                <div class="w-full flex flex-col gap-4">
+                    <input type="text" placeholder="LOGIN" class="w-full bg-black/40 border border-white/10 p-3 rounded text-sm text-center outline-none focus:border-[#FFB800] transition">
+                    <input type="password" placeholder="SENHA" class="w-full bg-black/40 border border-white/10 p-3 rounded text-sm text-center outline-none focus:border-[#FFB800] transition">
+                    <button onclick="login()" class="btn-base btn-primary w-full py-3">Entrar</button>
+                    <button class="btn-base btn-tertiary text-xs py-2">Esqueci minha senha</button>
+                </div>
+            </div>
+
+            <div id="view-panel" class="hidden w-full max-w-5xl mx-auto flex flex-col gap-6">
+                <div class="flex justify-between items-end pb-4 border-b border-white/10">
+                    <div>
+                        <h2 class="text-3xl font-black text-white uppercase font-cinzel">Painel <span class="text-[#FFB800]">Player</span></h2>
+                        <p class="text-gray-500 text-xs font-bold uppercase">Bem-vindo, DarkKnight123</p>
+                    </div>
+                    <button onclick="logout()" class="btn-base btn-tertiary text-red-500 hover:bg-red-500/10">Sair</button>
                 </div>
 
-                <button onclick="handleReset()" id="btn-do-reset" class="btn-base btn-default w-full py-4 text-xs font-black flex items-center justify-center gap-2">
-                    <svg class="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                    Fazer Reset Agora
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="char-grid">
+                    </div>
 
-<section id="events" class="page-content w-full max-w-5xl">
-    <div class="glass-effect rounded-xl p-8">
-        <h2 class="text-4xl font-black uppercase mb-8 text-center" style="font-family: 'Cinzel', serif;">Eventos <span class="text-[#FFB800]">Globais</span></h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="border border-white/10 rounded-lg p-6 bg-black/40">
-                <div class="flex justify-between mb-2"><h3 class="font-black text-white">Blood Castle</h3><span class="text-green-500 font-bold text-xs">ABERTO</span></div>
-                <div class="w-full bg-white/10 h-1 rounded-full"><div class="bg-green-500 h-1 rounded-full" style="width: 80%"></div></div>
-            </div>
-            <div class="border border-white/10 rounded-lg p-6 bg-black/40">
-                <div class="flex justify-between mb-2"><h3 class="font-black text-white">Devil Square</h3><span class="text-red-500 font-bold text-xs">FECHADO</span></div>
-                <div class="w-full bg-white/10 h-1 rounded-full"><div class="bg-red-500 h-1 rounded-full" style="width: 10%"></div></div>
-            </div>
-        </div>
-    </div>
-</section>
+                <div class="glass-panel p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex gap-4">
+                            <button onclick="switchTab('stats')" id="tab-stats" class="text-sm font-bold uppercase text-[#FFB800] border-b-2 border-[#FFB800] pb-1 transition">Atributos</button>
+                            <button onclick="switchTab('reset')" id="tab-reset" class="text-sm font-bold uppercase text-gray-500 hover:text-white pb-1 transition">Resets</button>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-gray-500 uppercase font-bold">Pontos Livres</span>
+                            <div class="text-2xl font-black text-[#FFB800]" id="pts-display">0</div>
+                        </div>
+                    </div>
 
-<section id="download" class="page-content w-full max-w-6xl">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass-effect p-6 rounded-xl border border-[#FFB800]/30 hover:scale-105 transition">
-            <h3 class="text-xl font-black uppercase text-white mb-2">Cliente Completo</h3>
-            <p class="text-gray-500 text-xs mb-6 font-bold uppercase">Versão 1.04.89 (2.5 GB)</p>
-            <button class="btn-base btn-default w-full py-3 text-[10px]">Baixar Agora</button>
-        </div>
-    </div>
-</section>
+                    <div id="content-stats" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        </div>
 
-</main>
+                    <div id="content-reset" class="hidden flex flex-col items-center justify-center py-8 gap-4">
+                        <div class="text-center">
+                            <p class="text-gray-400 text-sm uppercase">Nível Requerido: <span class="text-white font-bold">400</span></p>
+                            <p class="text-gray-400 text-sm uppercase">Seu Nível: <span class="text-[#FFB800] font-bold" id="reset-lvl">0</span></p>
+                        </div>
+                        <button onclick="doReset()" id="btn-reset" class="btn-base btn-primary px-8 py-3 w-64" disabled>Realizar Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="page-content">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="glass-panel p-6 items-center text-center gap-4 hover:border-[#FFB800]/50 transition duration-300">
+                    <h3 class="text-xl font-black uppercase text-white">Cliente Completo</h3>
+                    <p class="text-gray-500 text-xs font-bold uppercase">Google Drive | 2.5 GB</p>
+                    <button class="btn-base btn-primary w-full py-3">Download</button>
+                </div>
+                <div class="glass-panel p-6 items-center text-center gap-4 hover:border-blue-500/50 transition duration-300">
+                    <h3 class="text-xl font-black uppercase text-white">Launcher</h3>
+                    <p class="text-gray-500 text-xs font-bold uppercase">Auto-Update | 5 MB</p>
+                    <button class="btn-base btn-secondary w-full py-3 border-blue-500 text-blue-500 hover:bg-blue-500/10">Baixar</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="page-content">
+            <div class="glass-panel max-w-4xl mx-auto p-8">
+                <h2 class="text-2xl font-black uppercase mb-6 font-cinzel border-b border-white/10 pb-4">Eventos <span class="text-[#FFB800]">Globais</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-black/40 rounded border border-white/5 p-4 flex justify-between items-center">
+                        <span class="font-bold text-sm uppercase">Blood Castle</span>
+                        <span class="text-[10px] font-black bg-green-500/20 text-green-500 px-2 py-1 rounded">ABERTO</span>
+                    </div>
+                    <div class="bg-black/40 rounded border border-white/5 p-4 flex justify-between items-center">
+                        <span class="font-bold text-sm uppercase">Devil Square</span>
+                        <span class="text-[10px] font-black bg-red-500/20 text-red-500 px-2 py-1 rounded">FECHADO</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
 <script>
-    // 1. DATA MOCK (Do seu código React)
-    const mockUser = {
-        username: 'DarkKnight123',
-        characters: [
-            { id: 1, name: 'DarkKnight', class: 'Dark Knight', level: 400, resets: 15, str: 32000, agi: 4000, vit: 5000, ene: 2000, pts: 500 },
-            { id: 2, name: 'SoulMaster', class: 'Soul Master', level: 380, resets: 12, str: 1000, agi: 1000, vit: 3000, ene: 32000, pts: 350 },
-            { id: 3, name: 'MuseElf', class: 'Muse Elf', level: 365, resets: 10, str: 1500, agi: 28000, vit: 2500, ene: 8000, pts: 200 }
-        ]
+    // --- STATE MANAGEMENT ---
+    const appState = {
+        user: 'DarkKnight123',
+        chars: [
+            { id: 1, name: 'DarkLord_X', class: 'Dark Lord', lvl: 400, rr: 10, str: 1000, agi: 500, vit: 200, ene: 1500, pts: 500 },
+            { id: 2, name: 'ElfBuff', class: 'Muse Elf', lvl: 350, rr: 5, str: 200, agi: 1200, vit: 100, ene: 200, pts: 150 }
+        ],
+        selectedCharId: 1
     };
 
-    let selectedChar = mockUser.characters[0];
+    // --- NAVIGATION ---
+    function navigateTo(pageId) {
+        // Hide all
+        document.querySelectorAll('.page-content').forEach(el => {
+            el.classList.remove('active');
+            setTimeout(() => { if(!el.classList.contains('active')) el.style.display = 'none'; }, 400); // Wait for transition
+        });
+        document.querySelectorAll('#nav-' + pageId).forEach(el => el.classList.remove('active')); // Reset navs
 
-    // 2. NAVEGAÇÃO GERAL
-    function showPage(pageId) {
-        document.querySelectorAll('.page-content').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
-        document.querySelectorAll('.nav-trigger').forEach(b => b.classList.remove('active-tab', 'text-[#FFB800]'));
+        // Show target
         const target = document.getElementById(pageId);
-        if(target) { target.style.display = 'block'; setTimeout(() => { target.classList.add('active'); target.style.opacity = '1'; }, 10); }
-        const btn = document.getElementById('nav-' + pageId);
-        if(btn) btn.classList.add('active-tab', 'text-[#FFB800]');
-    }
-
-    // 3. DASHBOARD LOGIC (Traduzida)
-    function loginDash() {
-        document.getElementById('dash-login').classList.add('hidden');
-        document.getElementById('dash-panel').classList.remove('hidden');
-        document.getElementById('user-name-display').innerText = mockUser.username;
-        renderCharList();
-        updateUI();
-    }
-
-    function logoutDash() {
-        document.getElementById('dash-login').classList.remove('hidden');
-        document.getElementById('dash-panel').classList.add('hidden');
-    }
-
-    function renderCharList() {
-        const container = document.getElementById('char-list');
-        // Ícone de Espada SVG
-        const swordIcon = `<svg class="w-6 h-6 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="M16 16 20 20"/><path d="M19 21 22 18"/></svg>`;
+        const navBtn = document.getElementById('nav-' + pageId);
         
-        container.innerHTML = mockUser.characters.map(c => `
-            <div onclick="selectChar(${c.id})" class="char-card cursor-pointer backdrop-blur-md rounded-xl p-6 ${selectedChar.id === c.id ? 'selected' : 'bg-black/50 border-white/10 hover:border-[#FFB800]/50'}">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-[#FFB800] to-yellow-700 rounded-lg flex items-center justify-center shadow-lg">${swordIcon}</div>
-                    <div class="text-right">
-                        <div class="text-xs text-gray-400 font-bold uppercase">Resets</div>
-                        <div class="text-xl text-[#FFB800] font-black">${c.resets}</div>
-                    </div>
+        // Reset styles for nav buttons
+        document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+        if(navBtn) navBtn.classList.add('active');
+
+        if(target) {
+            target.style.display = 'block';
+            // Force reflow
+            void target.offsetWidth; 
+            target.classList.add('active');
+        }
+    }
+
+    // --- DASHBOARD FUNCTIONS ---
+    function login() {
+        document.getElementById('view-login').classList.add('hidden');
+        document.getElementById('view-panel').classList.remove('hidden');
+        renderChars();
+        updateCharData();
+    }
+
+    function logout() {
+        document.getElementById('view-login').classList.remove('hidden');
+        document.getElementById('view-panel').classList.add('hidden');
+    }
+
+    function renderChars() {
+        const grid = document.getElementById('char-grid');
+        grid.innerHTML = appState.chars.map(c => `
+            <div onclick="selectChar(${c.id})" 
+                 class="cursor-pointer p-4 rounded border transition-all ${appState.selectedCharId === c.id ? 'border-[#FFB800] bg-[#FFB800]/10' : 'border-white/10 bg-black/30 hover:border-white/30'}">
+                <div class="flex justify-between mb-2">
+                    <span class="font-black text-white uppercase">${c.name}</span>
+                    <span class="text-xs font-bold text-[#FFB800]">${c.rr} RR</span>
                 </div>
-                <h3 class="text-xl text-white font-black uppercase mb-1">${c.name}</h3>
-                <p class="text-gray-400 text-xs font-bold uppercase mb-2">${c.class}</p>
-                <div class="flex justify-between items-center text-xs font-bold pt-2 border-t border-white/5">
-                    <span class="text-gray-500">Nível</span>
-                    <span class="text-[#FFB800]">${c.level}</span>
-                </div>
+                <div class="text-[10px] text-gray-500 font-bold uppercase">${c.class}</div>
             </div>
         `).join('');
     }
 
     function selectChar(id) {
-        selectedChar = mockUser.characters.find(c => c.id === id);
-        renderCharList();
-        updateUI();
+        appState.selectedCharId = id;
+        renderChars();
+        updateCharData();
     }
 
-    function switchTab(tabName) {
-        // Esconde todos
-        document.getElementById('tab-content-stats').classList.add('hidden');
-        document.getElementById('tab-content-reset').classList.add('hidden');
-        document.getElementById('tab-btn-stats').classList.remove('active', 'text-[#FFB800]', 'border-[#FFB800]');
-        document.getElementById('tab-btn-reset').classList.remove('active', 'text-[#FFB800]', 'border-[#FFB800]');
-
-        // Mostra selecionado
-        document.getElementById('tab-content-' + tabName).classList.remove('hidden');
-        document.getElementById('tab-btn-' + tabName).classList.add('active', 'text-[#FFB800]', 'border-[#FFB800]');
-    }
-
-    function updateUI() {
-        // Stats Tab
-        document.getElementById('available-points').innerText = selectedChar.pts;
-        const statsGrid = document.getElementById('stats-grid');
+    function updateCharData() {
+        const char = appState.chars.find(c => c.id === appState.selectedCharId);
+        document.getElementById('pts-display').innerText = char.pts;
+        document.getElementById('reset-lvl').innerText = char.lvl;
         
-        // Ícones mapeados para SVG
-        const icons = {
-            str: `<svg class="w-5 h-5 text-[#FFB800]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="M16 16 20 20"/><path d="M19 21 22 18"/></svg>`, // Sword
-            agi: `<svg class="w-5 h-5 text-[#FFB800]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`, // Zap
-            vit: `<svg class="w-5 h-5 text-[#FFB800]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`, // Heart
-            ene: `<svg class="w-5 h-5 text-[#FFB800]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>` // Shield
-        };
-
-        const stats = [
-            { key: 'str', label: 'Força', icon: icons.str },
-            { key: 'agi', label: 'Agilidade', icon: icons.agi },
-            { key: 'vit', label: 'Vitalidade', icon: icons.vit },
-            { key: 'ene', label: 'Energia', icon: icons.ene }
-        ];
-
-        statsGrid.innerHTML = stats.map(s => `
-            <div class="p-4 bg-black/30 rounded-lg border border-[#FFB800]/20 flex flex-col gap-3">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                        ${s.icon}
-                        <span class="text-white font-bold text-xs uppercase">${s.label}</span>
-                    </div>
-                    <span class="text-gray-400 text-xs font-mono">${selectedChar[s.key]}</span>
+        // Stats Rendering
+        const statsMap = { str: 'Força', agi: 'Agilidade', vit: 'Vitalidade', ene: 'Energia' };
+        const statsHTML = Object.entries(statsMap).map(([key, label]) => `
+            <div class="bg-black/40 p-3 rounded border border-white/5 flex justify-between items-center">
+                <div>
+                    <div class="text-[10px] text-gray-500 uppercase font-bold">${label}</div>
+                    <div class="font-mono text-white">${char[key]}</div>
                 </div>
-                <div class="flex items-center gap-2">
-                    <input type="number" readonly value="0" class="w-full bg-black/50 border border-[#FFB800]/30 text-white text-center rounded p-2 text-xs">
-                    <button onclick="addPoint('${s.key}')" class="bg-[#FFB800]/20 hover:bg-[#FFB800]/30 text-[#FFB800] border border-[#FFB800]/50 rounded px-3 py-2 font-black text-xs transition">+1</button>
-                </div>
+                <button onclick="addPoint('${key}')" class="btn-base btn-secondary w-8 h-8 p-0 rounded">+</button>
             </div>
         `).join('');
+        document.getElementById('content-stats').innerHTML = statsHTML;
 
-        // Reset Tab
-        document.getElementById('reset-current-level').innerText = selectedChar.level;
-        document.getElementById('reset-total').innerText = selectedChar.resets;
-        
-        const resetBtn = document.getElementById('btn-do-reset');
-        if (selectedChar.level >= 400) {
-            resetBtn.innerHTML = `<svg class="w-4 h-4" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg> Fazer Reset Agora`;
-            resetBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            resetBtn.disabled = false;
+        // Reset Button Logic
+        const btnReset = document.getElementById('btn-reset');
+        if(char.lvl >= 400) {
+            btnReset.removeAttribute('disabled');
+            btnReset.innerHTML = 'Realizar Reset';
+            btnReset.classList.remove('opacity-50', 'cursor-not-allowed');
         } else {
-            resetBtn.innerHTML = `Nível ${400 - selectedChar.level} para Reset`;
-            resetBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            resetBtn.disabled = true;
+            btnReset.setAttribute('disabled', 'true');
+            btnReset.innerHTML = `Nível ${400 - char.lvl} Restante`;
+            btnReset.classList.add('opacity-50', 'cursor-not-allowed');
         }
     }
 
     function addPoint(stat) {
-        if(selectedChar.pts > 0) {
-            selectedChar[stat]++;
-            selectedChar.pts--;
-            updateUI();
+        const char = appState.chars.find(c => c.id === appState.selectedCharId);
+        if(char.pts > 0) {
+            char[stat]++;
+            char.pts--;
+            updateCharData();
         }
     }
 
-    function handleReset() {
-        if(selectedChar.level >= 400) {
-            alert(`Reset realizado com sucesso para ${selectedChar.name}! Novo reset: ${selectedChar.resets + 1}`);
-            selectedChar.resets++;
-            selectedChar.level = 1; // Reset level logic
-            updateUI();
+    function doReset() {
+        const char = appState.chars.find(c => c.id === appState.selectedCharId);
+        if(char.lvl >= 400) {
+            alert('Reset realizado com sucesso!');
+            char.rr++;
+            char.lvl = 1;
+            updateCharData();
+            renderChars();
         }
     }
 
-    // PARTÍCULAS DE FUNDO
-    const pContainer = document.getElementById('particles-container');
-    for (let i = 0; i < 30; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.width = Math.random() * 3 + 'px';
-        p.style.height = p.style.width;
-        p.style.left = Math.random() * 100 + '%';
-        p.style.animationDuration = Math.random() * 5 + 10 + 's';
-        pContainer.appendChild(p);
+    function switchTab(tab) {
+        document.getElementById('content-stats').classList.add('hidden');
+        document.getElementById('content-reset').classList.add('hidden');
+        document.getElementById('tab-stats').classList.remove('text-[#FFB800]', 'border-[#FFB800]');
+        document.getElementById('tab-reset').classList.remove('text-[#FFB800]', 'border-[#FFB800]');
+        
+        document.getElementById('content-' + tab).classList.remove('hidden');
+        document.getElementById('tab-' + tab).classList.add('text-[#FFB800]', 'border-[#FFB800]');
     }
 </script>
 </body>
